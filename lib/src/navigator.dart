@@ -8,6 +8,7 @@ import 'package:a_wallet/src/presentation/screens/import_wallet/import_wallet_sc
 import 'package:a_wallet/src/presentation/screens/import_wallet_yeti_bot/import_wallet_yeti_bot_screen.dart';
 import 'package:a_wallet/src/presentation/screens/manage_token/manage_token_screen.dart';
 import 'package:a_wallet/src/presentation/screens/re_login/re_login_screen.dart';
+import 'package:a_wallet/src/presentation/screens/scan/scanner_screen.dart';
 import 'package:a_wallet/src/presentation/screens/send/send_screen.dart';
 import 'package:a_wallet/src/presentation/screens/social_login_yeti_bot/social_login_yeti_bot_screen.dart';
 import 'package:a_wallet/src/presentation/screens/splash/spash_screen.dart';
@@ -37,6 +38,8 @@ sealed class RoutePath {
   static const String transactionResult = '$home/transaction_result';
 
   static const String manageToken = '$home/manage_token';
+
+  static const String scan = '$home/scan';
 }
 
 // This class handles navigation within the application.
@@ -144,6 +147,11 @@ sealed class AppNavigator {
       case RoutePath.manageToken:
         return _defaultRoute(
           const ManageTokenScreen(),
+          settings,
+        );
+      case RoutePath.scan:
+        return _defaultRoute(
+          const ScannerScreen(),
           settings,
         );
       default:

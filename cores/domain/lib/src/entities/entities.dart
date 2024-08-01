@@ -7,3 +7,6 @@ export 'balance.dart';
 export 'network.dart';
 export 'nft.dart';
 export 'token.dart';
+export 'address_book.dart';
+export 'bookmark.dart';
+export 'browser.dart';

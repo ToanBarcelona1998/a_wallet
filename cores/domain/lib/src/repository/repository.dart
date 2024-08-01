@@ -7,3 +7,6 @@ export 'token_market_repository.dart';
 export 'balance_repository.dart';
 export 'nft_repository.dart';
 export 'token_repository.dart';
+export 'address_book_repository.dart';
+export 'bookmark_repository.dart';
+export 'browser_management_repository.dart';

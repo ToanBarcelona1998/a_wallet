@@ -6,3 +6,6 @@ export 'balance_dto.dart';
 export 'nft_dto.dart';
 export 'token_dto.dart';
 export 'web3_auth_info_dto.dart';
+export 'browser_dto.dart';
+export 'bookmark_dto.dart';
+export 'address_book_dto.dart';

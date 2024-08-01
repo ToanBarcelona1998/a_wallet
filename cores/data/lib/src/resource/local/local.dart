@@ -6,3 +6,6 @@ export 'local_database_service.dart';
 export 'token_market_database_service.dart';
 export 'balance_database_service.dart';
 export 'token_database_service.dart';
+export 'book_mark_database_service.dart';
+export 'address_book_database_service.dart';
+export 'browser_database_service.dart';
