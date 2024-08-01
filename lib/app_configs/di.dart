@@ -387,7 +387,6 @@ Future<void> initDependency(
       getIt.get<AccountUseCase>(),
       getIt.get<BalanceUseCase>(),
       getIt.get<TokenMarketUseCase>(),
-      appNetworks: getIt.get<List<AppNetwork>>(),
     ),
   );
 

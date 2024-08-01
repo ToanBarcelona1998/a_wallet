@@ -60,28 +60,6 @@ final class SendAccountBalanceSelector
         );
 }
 
-final class SendAppNetworksSelector
-    extends BlocSelector<SendBloc, SendState, List<AppNetwork>> {
-  SendAppNetworksSelector({
-    super.key,
-    required Widget Function(List<AppNetwork>) builder,
-  }) : super(
-          selector: (state) => state.appNetworks,
-          builder: (context, appNetworks) => builder(appNetworks),
-        );
-}
-
-final class SendSelectedNetworkSelector
-    extends BlocSelector<SendBloc, SendState, AppNetwork> {
-  SendSelectedNetworkSelector({
-    super.key,
-    required Widget Function(AppNetwork) builder,
-  }) : super(
-          selector: (state) => state.selectedNetwork,
-          builder: (context, selectedNetwork) => builder(selectedNetwork),
-        );
-}
-
 final class SendSelectedBalanceSelector
     extends BlocSelector<SendBloc, SendState, Balance?> {
   SendSelectedBalanceSelector({

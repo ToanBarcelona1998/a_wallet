@@ -1,3 +1,4 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
@@ -22,6 +23,7 @@ final class SendScreenToWidget extends StatelessWidget {
   final void Function(bool) onChangeSaved;
   final void Function(String,bool) onAddressChanged;
   final TextEditingController recipientController;
+  final AppNetwork appNetwork;
 
   const SendScreenToWidget({
     required this.appTheme,
@@ -31,6 +33,7 @@ final class SendScreenToWidget extends StatelessWidget {
     required this.onScanTap,
     required this.onAddressChanged,
     required this.recipientController,
+    required this.appNetwork,
     super.key,
   });
 
@@ -38,33 +41,29 @@ final class SendScreenToWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SendSelectedNetworkSelector(
-          builder: (network) {
-            return _TextInputSendToWidget(
-              appTheme: appTheme,
-              localization: localization,
-              hintText: localization.translate(
-                LanguageKey.sendScreenToHint,
+        _TextInputSendToWidget(
+          appTheme: appTheme,
+          localization: localization,
+          hintText: localization.translate(
+            LanguageKey.sendScreenToHint,
+          ),
+          onContactTap: onContactTap,
+          onScanTap: onScanTap,
+          onChanged: onAddressChanged,
+          controller: recipientController,
+          constraintManager: ConstraintManager()
+            ..custom(
+              errorMessage: localization.translate(
+                LanguageKey.sendScreenInvalidAddress,
               ),
-              onContactTap: onContactTap,
-              onScanTap: onScanTap,
-              onChanged: onAddressChanged,
-              controller: recipientController,
-              constraintManager: ConstraintManager()
-                ..custom(
-                  errorMessage: localization.translate(
-                    LanguageKey.sendScreenInvalidAddress,
-                  ),
-                  customValid: (address) {
-                    // Change later
-                    return addressInValid(
-                      address: address,
-                      coinType: network.coinType,
-                    );
-                  },
-                ),
-            );
-          }
+              customValid: (address) {
+                // Change later
+                return addressInValid(
+                  address: address,
+                  coinType: appNetwork.coinType,
+                );
+              },
+            ),
         ),
         const SizedBox(
           height: BoxSize.boxSize05,

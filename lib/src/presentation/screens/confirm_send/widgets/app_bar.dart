@@ -1,3 +1,4 @@
+import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,7 +42,7 @@ final class ConfirmSendScreenAppBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              appNetwork.logo,
+              AssetIconPath.icCommonAWallet,
               width: BoxSize.boxSize04,
               height: BoxSize.boxSize04,
             ),

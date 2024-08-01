@@ -7,7 +7,6 @@ import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/observer/home_page_observer.dart';
-import 'package:a_wallet/src/core/utils/app_util.dart';
 import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
 import 'package:a_wallet/src/core/utils/toast.dart';
@@ -102,9 +101,7 @@ class _ConfirmSendScreenState extends State<ConfirmSendScreen>
               TransactionInformationWidget(
                 accountName: widget.account.name,
                 amount: widget.amount,
-                from: widget.appNetwork.getAddress(
-                  widget.account,
-                ),
+                from: widget.account.evmAddress,
                 recipient: widget.recipient,
                 appTheme: appTheme,
                 token: token!,
@@ -164,9 +161,7 @@ class _ConfirmSendScreenState extends State<ConfirmSendScreen>
                 AppNavigator.push(
                   RoutePath.transactionResult,
                   {
-                    'from': widget.appNetwork.getAddress(
-                      widget.account,
-                    ),
+                    'from': widget.account.evmAddress,
                     'to': widget.recipient,
                     'amount': widget.amount,
                     'time': state.timeStamp,

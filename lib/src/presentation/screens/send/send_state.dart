@@ -7,7 +7,6 @@ enum SendStatus{
   loading,
   loaded,
   error,
-  reNetwork,
   reToken,
 }
 
@@ -26,7 +25,5 @@ class SendState with _$SendState {
     @Default('') String amountToSend,
     @Default(false) bool isSaved,
     @Default([]) List<Token> tokens,
-    required List<AppNetwork> appNetworks,
-    required AppNetwork selectedNetwork,
   }) = _SendState;
 }

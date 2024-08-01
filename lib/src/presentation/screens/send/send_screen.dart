@@ -2,11 +2,9 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:a_wallet/app_configs/di.dart';
-import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
-import 'package:a_wallet/src/core/constants/network.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/utils/toast.dart';
 import 'package:a_wallet/src/navigator.dart';
@@ -16,7 +14,6 @@ import 'package:a_wallet/src/presentation/screens/send/widgets/app_bar.dart';
 import 'package:a_wallet/src/presentation/screens/send/widgets/select_token.dart';
 import 'package:a_wallet/src/presentation/widgets/app_loading_widget.dart';
 import 'package:a_wallet/src/presentation/widgets/bottom_sheet_base/app_bottom_sheet_provider.dart';
-import 'package:a_wallet/src/presentation/widgets/select_network_widget.dart';
 import 'send_event.dart';
 import 'widgets/amount_widget.dart';
 import 'widgets/from_widget.dart';
@@ -37,6 +34,7 @@ class SendScreen extends StatefulWidget {
 class _SendScreenState extends State<SendScreen>
     with StateFulBaseScreen, CustomFlutterToast {
   late SendBloc _bloc;
+  final AppNetwork _appNetwork = getIt.get<AppNetwork>();
 
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _recipientController = TextEditingController();
@@ -79,7 +77,6 @@ class _SendScreenState extends State<SendScreen>
                   );
                 case SendStatus.loaded:
                 case SendStatus.none:
-                case SendStatus.reNetwork:
                 case SendStatus.reToken:
                 case SendStatus.error:
                   return SingleChildScrollView(
@@ -102,6 +99,7 @@ class _SendScreenState extends State<SendScreen>
                                 onChangeSaved: _onChangeSaved,
                                 onAddressChanged: _onAddressChanged,
                                 recipientController: _recipientController,
+                                appNetwork: _appNetwork,
                               ),
                               const SizedBox(
                                 height: BoxSize.boxSize07,
@@ -170,11 +168,8 @@ class _SendScreenState extends State<SendScreen>
               break;
             case SendStatus.error:
               break;
-            case SendStatus.reNetwork:
-              _amountController.text = '';
-              _recipientController.text = '';
-              break;
             case SendStatus.reToken:
+              _recipientController.text = '';
               _recipientController.text = '';
               break;
           }
@@ -187,12 +182,7 @@ class _SendScreenState extends State<SendScreen>
             title: SendAppBar(
               appTheme: appTheme,
               localization: localization,
-              onSelectNetwork: (networks, account) => _onChangeNetwork(
-                appTheme,
-                localization,
-                networks,
-                account,
-              ),
+              appNetwork: _appNetwork,
             ),
           ),
           body: child,
@@ -205,35 +195,6 @@ class _SendScreenState extends State<SendScreen>
     _bloc.add(
       const SendOnChangeSavedEvent(),
     );
-  }
-
-  void _onChangeNetwork(
-    AppTheme appTheme,
-    AppLocalizationManager localization,
-    List<AppNetwork> networks,
-    Account? account,
-  ) async {
-    if (account == null) return;
-
-    final network =
-        await AppBottomSheetProvider.showFullScreenDialog<AppNetwork?>(
-      context,
-      child: SelectNetworkAccountWidget(
-        appTheme: appTheme,
-        localization: localization,
-        networks: networks,
-        account: account,
-      ),
-      appTheme: appTheme,
-    );
-
-    if (network != null) {
-      _bloc.add(
-        SendOnChangeNetworkEvent(
-          network,
-        ),
-      );
-    }
   }
 
   void _onAddressChanged(String address, bool isValid) {
@@ -286,13 +247,8 @@ class _SendScreenState extends State<SendScreen>
   void _onSubmit(){
     final state = _bloc.state;
 
-    if(state.selectedNetwork.type != AppNetworkType.evm){
-      showToast('This version does not support sending Cosmos transaction. This notification is for testing purposes only');
-      return;
-    }
-
     AppNavigator.push(RoutePath.confirmSend, {
-      'appNetwork': state.selectedNetwork,
+      'appNetwork': _appNetwork,
       'account': state.account,
       'amount': state.amountToSend,
       'recipient': state.toAddress,

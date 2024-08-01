@@ -191,69 +191,62 @@ class _TextInputAmountWidgetState
                         ),
                         SendTokenMarketsSelector(
                           builder: (tokenMarkets) {
-                            return SendSelectedNetworkSelector(
-                              builder: (network) {
-                                return SendAccountBalanceSelector(
-                                  builder: (accountBalance) {
-                                    return SendTokenTokensSelector(
-                                      builder: (tokens) {
-                                        return SendSelectedBalanceSelector(
-                                          builder: (balance) {
-                                            final token =
-                                                tokens.firstWhereOrNull(
+                            return SendAccountBalanceSelector(
+                              builder: (accountBalance) {
+                                return SendTokenTokensSelector(
+                                  builder: (tokens) {
+                                    return SendSelectedBalanceSelector(
+                                      builder: (balance) {
+                                        final token =
+                                        tokens.firstWhereOrNull(
                                               (t) => t.id == balance?.tokenId,
-                                            );
-                                            return GestureDetector(
-                                              behavior: HitTestBehavior.opaque,
-                                              onTap: () {
-                                                widget.onSelectToken(
-                                                  network.tokenWithType(
-                                                    accountBalance?.balances ??
-                                                        [],
-                                                    tokens,
-                                                  ),
-                                                  balance!,
-                                                  tokenMarkets,
-                                                  tokens,
-                                                );
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  const SizedBox(
-                                                    width: BoxSize.boxSize03,
-                                                  ),
-                                                  NetworkImageWidget(
-                                                    url: token?.logo ??
-                                                        AppLocalConstant
-                                                            .auraLogo,
-                                                    appTheme: theme,
-                                                    width: BoxSize.boxSize05,
-                                                    height: BoxSize.boxSize05,
-                                                  ),
-                                                  const SizedBox(
-                                                    width: BoxSize.boxSize03,
-                                                  ),
-                                                  Text(
-                                                    token?.symbol ?? '',
-                                                    style: AppTypoGraPhy
-                                                        .textSmSemiBold
-                                                        .copyWith(
-                                                      color: theme.textPrimary,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: BoxSize.boxSize03,
-                                                  ),
-                                                  SvgPicture.asset(
-                                                    AssetIconPath
-                                                        .icCommonArrowDown,
-                                                    width: BoxSize.boxSize05,
-                                                    height: BoxSize.boxSize05,
-                                                  ),
-                                                ],
-                                              ),
+                                        );
+                                        return GestureDetector(
+                                          behavior: HitTestBehavior.opaque,
+                                          onTap: () {
+                                            widget.onSelectToken(
+                                              accountBalance?.balances ??
+                                                  [],
+                                              balance!,
+                                              tokenMarkets,
+                                              tokens,
                                             );
                                           },
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: BoxSize.boxSize03,
+                                              ),
+                                              NetworkImageWidget(
+                                                url: token?.logo ??
+                                                    AppLocalConstant
+                                                        .auraLogo,
+                                                appTheme: theme,
+                                                width: BoxSize.boxSize05,
+                                                height: BoxSize.boxSize05,
+                                              ),
+                                              const SizedBox(
+                                                width: BoxSize.boxSize03,
+                                              ),
+                                              Text(
+                                                token?.symbol ?? '',
+                                                style: AppTypoGraPhy
+                                                    .textSmSemiBold
+                                                    .copyWith(
+                                                  color: theme.textPrimary,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: BoxSize.boxSize03,
+                                              ),
+                                              SvgPicture.asset(
+                                                AssetIconPath
+                                                    .icCommonArrowDown,
+                                                width: BoxSize.boxSize05,
+                                                height: BoxSize.boxSize05,
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       },
                                     );

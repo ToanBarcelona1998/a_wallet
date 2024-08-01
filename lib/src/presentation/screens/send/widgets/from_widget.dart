@@ -4,7 +4,6 @@ import 'package:a_wallet/src/application/global/localization/localization_manage
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
-import 'package:a_wallet/src/core/utils/app_util.dart';
 import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:a_wallet/src/presentation/screens/send/send_selector.dart';
 import 'package:a_wallet/src/presentation/widgets/divider_widget.dart';
@@ -45,20 +44,12 @@ final class SendScreenFromWidget extends StatelessWidget {
               ),
               SendFromSelector(
                   builder: (account) {
-                    return SendSelectedNetworkSelector(
-                      builder: (network) {
-                        String sender = '';
-
-                        if(account != null){
-                          sender = network.getAddress(account);
-                        }
-                        return DefaultWalletInfoWidget(
-                          avatarAsset: randomAvatar(),
-                          appTheme: appTheme,
-                          title: account?.name ?? '',
-                          address: sender,
-                        );
-                      }
+                    String sender = account?.evmAddress ?? '';
+                    return DefaultWalletInfoWidget(
+                      avatarAsset: randomAvatar(),
+                      appTheme: appTheme,
+                      title: account?.name ?? '',
+                      address: sender,
                     );
                   }
               ),

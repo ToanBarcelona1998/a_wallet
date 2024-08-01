@@ -17,8 +17,5 @@ class SendEvent with _$SendEvent {
 
   const factory SendEvent.changeSaved() = SendOnChangeSavedEvent;
 
-  const factory SendEvent.onChangeNetwork(AppNetwork network) = SendOnChangeNetworkEvent;
-
-
   const factory SendEvent.onChangeToken(Balance token) = SendOnChangeTokenEvent;
 }

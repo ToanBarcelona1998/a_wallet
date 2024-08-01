@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:a_wallet/src/core/utils/app_util.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
@@ -47,19 +48,6 @@ final class ConfirmSendBloc extends Bloc<ConfirmSendEvent, ConfirmSendState> {
 
   final EvmChainClient _evmChainClient;
 
-  int _getCoinType() {
-    int coinType = TWCoinType.TWCoinTypeEthereum;
-    bool evmActive = state.account.aEvmInfo.isActive;
-
-    bool cosmosActive = state.account.aCosmosInfo.isActive;
-
-    if (!evmActive && cosmosActive) {
-      coinType = TWCoinType.TWCoinTypeCosmos;
-    }
-
-    return coinType;
-  }
-
   void _onInit(
     ConfirmSendOnInitEvent event,
     Emitter<ConfirmSendState> emit,
@@ -70,9 +58,9 @@ final class ConfirmSendBloc extends Bloc<ConfirmSendEvent, ConfirmSendState> {
       );
 
       BigInt gasPrice = token!.type.formatBalanceToInt(
-            config.config.evmInfo.gasPriceStep.average.toString(),
-            customDecimal: token.decimal,
-          );
+        config.config.evmInfo.gasPriceStep.average.toString(),
+        customDecimal: token.decimal,
+      );
 
       emit(
         state.copyWith(
@@ -87,12 +75,11 @@ final class ConfirmSendBloc extends Bloc<ConfirmSendEvent, ConfirmSendState> {
       final AWallet? aWallet = WalletCore.storedManagement.fromSavedJson(
         keyStore?.key ?? '',
         '',
-        coinType: _getCoinType(),
+        coinType: state.appNetwork.coinType,
       );
 
       final BigInt amount = token.type
-              .formatBalanceToInt(state.amount, customDecimal: token.decimal) ??
-          BigInt.zero;
+          .formatBalanceToInt(state.amount, customDecimal: token.decimal);
 
       BigInt gasEstimation = BigInt.zero;
 
@@ -103,7 +90,7 @@ final class ConfirmSendBloc extends Bloc<ConfirmSendEvent, ConfirmSendState> {
           gasPrice = await _evmChainClient.getGasPrice();
 
           emit(state.copyWith(
-            gasPrice: _transformGasPrice(gasPrice,token),
+            gasPrice: _transformGasPrice(gasPrice, token),
           ));
 
           switch (token.type) {
@@ -139,14 +126,16 @@ final class ConfirmSendBloc extends Bloc<ConfirmSendEvent, ConfirmSendState> {
                 recipient: state.recipient,
                 gasPrice: gasPrice,
                 nonce: BigInt.zero,
-                contractAddress: token.contractAddress ?? '',
+                contractAddress: token.contractAddress,
               );
 
               gasEstimation = await _evmChainClient.estimateGas(
                 sender: aWallet.address,
                 recipient: state.recipient,
                 amount: amount,
-                data: hexToBytes(token.contractAddress ?? ''),
+                data: hexToBytes(
+                  token.contractAddress,
+                ),
               );
 
               msg = erc20Tran.writeToJsonMap();
@@ -167,7 +156,7 @@ final class ConfirmSendBloc extends Bloc<ConfirmSendEvent, ConfirmSendState> {
           break;
       }
 
-      gasPrice = _transformGasPrice(gasPrice,token);
+      gasPrice = _transformGasPrice(gasPrice, token);
 
       emit(
         state.copyWith(
@@ -217,11 +206,11 @@ final class ConfirmSendBloc extends Bloc<ConfirmSendEvent, ConfirmSendState> {
     final AWallet? aWallet = WalletCore.storedManagement.fromSavedJson(
       keyStore?.key ?? '',
       '',
-      coinType: _getCoinType(),
+      coinType: state.appNetwork.coinType,
     );
 
     final token = state.tokens.firstWhereOrNull(
-          (t) => t.id == state.balance.tokenId,
+      (t) => t.id == state.balance.tokenId,
     );
 
     try {
@@ -297,7 +286,7 @@ final class ConfirmSendBloc extends Bloc<ConfirmSendEvent, ConfirmSendState> {
     }
   }
 
-  BigInt _transformGasPrice(BigInt gasPrice,Token token) {
+  BigInt _transformGasPrice(BigInt gasPrice, Token token) {
     BigInt lowGasPrice = token.type.formatBalanceToInt(
       config.config.evmInfo.gasPriceStep.low.toString(),
       customDecimal: token.decimal,

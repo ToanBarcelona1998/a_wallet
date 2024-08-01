@@ -17,17 +17,12 @@ final class SendBloc extends Bloc<SendEvent, SendState> {
     this._tokenUseCase,
     this._accountUseCase,
     this._balanceUseCase,
-    this._tokenMarketUseCase, {
-    required List<AppNetwork> appNetworks,
-  }) : super(
-          SendState(
-            appNetworks: appNetworks,
-            selectedNetwork: appNetworks[0],
-          ),
+    this._tokenMarketUseCase,
+  ) : super(
+          const SendState(),
         ) {
     on(_onInit);
     on(_onChangeSaved);
-    on(_onChangeNetwork);
     on(_onChangeAddress);
     on(_onChangeAmount);
     on(_onChangeToken);
@@ -56,14 +51,14 @@ final class SendBloc extends Bloc<SendEvent, SendState> {
         accountId: account!.id,
       );
 
-      Balance ?selectedToken;
+      Balance? selectedToken;
 
-      if(accountBalance != null){
-        for(final balance in accountBalance.balances){
+      if (accountBalance != null) {
+        for (final balance in accountBalance.balances) {
           final token = await _tokenUseCase.get(balance.tokenId);
 
-          if(token != null){
-            if(token.type == TokenType.native){
+          if (token != null) {
+            if (token.type == TokenType.native) {
               selectedToken = balance;
             }
             tokens.add(token);
@@ -110,24 +105,6 @@ final class SendBloc extends Bloc<SendEvent, SendState> {
     );
   }
 
-  void _onChangeNetwork(
-      SendOnChangeNetworkEvent event, Emitter<SendState> emit) {
-    final token = state.tokens.firstWhereOrNull((token)  => token.type == TokenType.native,);
-
-    emit(
-      state.copyWith(
-        selectedNetwork: event.network,
-        toAddress: '',
-        selectedToken: state.accountBalance?.balances.firstWhereOrNull(
-          (b) => b.tokenId == token?.id,
-        ),
-        amountToSend: '',
-        already: false,
-        status: SendStatus.reNetwork,
-      ),
-    );
-  }
-
   void _onChangeAddress(
     SendOnChangeToEvent event,
     Emitter<SendState> emit,
@@ -164,10 +141,11 @@ final class SendBloc extends Bloc<SendEvent, SendState> {
 
   bool _isReady(String address, String amount, Balance? selectedToken) {
     try {
+      if (selectedToken == null) return false;
 
-      if(selectedToken == null) return false;
-
-      final token = state.tokens.firstWhereOrNull((t) => t.id == selectedToken.tokenId,);
+      final token = state.tokens.firstWhereOrNull(
+        (t) => t.id == selectedToken.tokenId,
+      );
 
       double total = double.tryParse(token?.type.formatBalance(
                   selectedToken.balance ?? '',

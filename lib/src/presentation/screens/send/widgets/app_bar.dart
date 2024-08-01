@@ -7,18 +7,17 @@ import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
-import 'package:a_wallet/src/core/utils/app_util.dart';
 import 'package:a_wallet/src/presentation/screens/send/send_selector.dart';
 
 final class SendAppBar extends StatelessWidget {
   final AppTheme appTheme;
   final AppLocalizationManager localization;
-  final void Function(List<AppNetwork>,Account?) onSelectNetwork;
+  final AppNetwork appNetwork;
 
   const SendAppBar({
     required this.appTheme,
     required this.localization,
-    required this.onSelectNetwork,
+    required this.appNetwork,
     super.key,
   });
 
@@ -38,51 +37,37 @@ final class SendAppBar extends StatelessWidget {
         const SizedBox(
           height: BoxSize.boxSize02,
         ),
-        SendAppNetworksSelector(
-          builder: (networks) {
-            return SendSelectedNetworkSelector(
-              builder: (selectedNetwork) {
-                return SendFromSelector(
-                  builder: (account) {
-                    return GestureDetector(
-                      onTap: () {
-                        onSelectNetwork(networks,account);
-                      },
-                      behavior: HitTestBehavior.opaque,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            selectedNetwork.logo,
-                            width: BoxSize.boxSize04,
-                            height: BoxSize.boxSize04,
-                          ),
-                          const SizedBox(
-                            width: BoxSize.boxSize02,
-                          ),
-                          Text(
-                            selectedNetwork.name,
-                            style: AppTypoGraPhy.textXsSemiBold.copyWith(
-                              color: appTheme.textPrimary,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: BoxSize.boxSize02,
-                          ),
-                          SvgPicture.asset(
-                            AssetIconPath.icCommonArrowDown,
-                            width: BoxSize.boxSize04,
-                            height: BoxSize.boxSize04,
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                );
-              },
-            );
-          },
+        SendFromSelector(
+            builder: (account) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    AssetIconPath.icCommonAWallet,
+                    width: BoxSize.boxSize04,
+                    height: BoxSize.boxSize04,
+                  ),
+                  const SizedBox(
+                    width: BoxSize.boxSize02,
+                  ),
+                  Text(
+                    appNetwork.name,
+                    style: AppTypoGraPhy.textXsSemiBold.copyWith(
+                      color: appTheme.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: BoxSize.boxSize02,
+                  ),
+                  SvgPicture.asset(
+                    AssetIconPath.icCommonArrowDown,
+                    width: BoxSize.boxSize04,
+                    height: BoxSize.boxSize04,
+                  ),
+                ],
+              );
+            }
         ),
       ],
     );
