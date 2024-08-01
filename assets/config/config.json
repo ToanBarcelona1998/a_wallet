@@ -1,0 +1,52 @@
+{
+  "APP_NAME": "Pyxis Wallet",
+  "NATIVE_COIN" : {
+    "name" : "Aura Network",
+    "symbol" : "AURA"
+  },
+  "COSMOS_INFO": {
+    "symbol": "AURA",
+    "denom": "uaura",
+    "chainId": "aura_6322-2",
+    "decimals" : 6,
+    "chainName": "Aura COSMOS",
+    "rpc" : "https://grpc.aura.network",
+    "gasPrice": {
+      "low": 0.001,
+      "average": 0.0025,
+      "high": 0.004
+    }
+  },
+  "EVM_INFO" : {
+    "symbol" : "AURA",
+    "denom" : "uaura",
+    "chainId" : 6322,
+    "decimals" : 18,
+    "chainName": "Aura EVM",
+    "rpc" : "https://jsonrpc.aura.network",
+    "gasPrice": {
+      "low": 0.000000001,
+      "average": 0.0000000025,
+      "high": 0.000000004
+    }
+  },
+  "API" : {
+    "v1" : {
+      "url" : "https://api.aurascan.io/api/v1"
+    },
+    "v2" : {
+      "url" : "https://horoscope.aura.network/api",
+      "graphql": "/v2/graphql",
+      "rest": "/v2",
+      "chain": "x-"
+    },
+    "seek_hype" : {
+
+    }
+  },
+  "WEB_3_AUTH" : {
+    "client_id": "BCz90RUtKV5gkiwCJYQY6oeGeyEnsMjPhzShWFs_j82F5iwlt0fhUiQsBMHeV_96VACY00YtCwfwCWL9zv-jV7c",
+    "ios_redirect_url": "app://aura.pyxis.mobile",
+    "android_redirect_url": "app://com.aura.network.pyxis_mobile"
+  }
+}

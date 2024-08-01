@@ -1,0 +1,56 @@
+{
+  "APP_NAME": "Pyxis Wallet",
+  "NATIVE_COIN" : {
+    "name" : "Aura Euphoria testnet",
+    "symbol" : "EAURA"
+  },
+  "COSMOS_INFO": {
+    "symbol": "EAURA",
+    "denom": "ueaura",
+    "chainId": "aura_6321-3",
+    "decimals" : 6,
+    "chainName": "Aura COSMOS Euphoria",
+    "rpc" : "http://grpc.euphoria.aura.network:9090",
+    "gasPrice": {
+      "low": 0.001,
+      "average": 0.0025,
+      "high": 0.004
+    }
+  },
+  "EVM_INFO" : {
+    "symbol" : "EAURA",
+    "denom" : "ueaura",
+    "chainId" : 6321,
+    "decimals" : 18,
+    "chainName": "Aura EVM Euphoria",
+    "rpc" : "https://jsonrpc.euphoria.aura.network",
+    "gasPrice": {
+      "low": 0.000000001,
+      "average": 0.0000000025,
+      "high": 0.000000004
+    }
+  },
+  "API" : {
+    "v1" : {
+      "url" : "https://euphoria-api.aurascan.io/api/v1"
+    },
+    "v2" : {
+      "url" : "https://indexer-v2.staging.aurascan.io/api",
+      "graphql": "/v2/graphql",
+      "rest": "/v2",
+      "chain": "x-"
+    },
+    "seek_hype_evm" : {
+      "url" : "https://indexer.euphoria.seekhype.io"
+    },
+    "seek_hype_cosmos" : {
+      "url" : "https://staging.seekhype.io",
+      "graphql" : "v1/graphql"
+    }
+  },
+  "WEB_3_AUTH" : {
+    "client_id": "BCz90RUtKV5gkiwCJYQY6oeGeyEnsMjPhzShWFs_j82F5iwlt0fhUiQsBMHeV_96VACY00YtCwfwCWL9zv-jV7c",
+    "ios_redirect_url": "app://aura.pyxis.mobile",
+    "android_redirect_url": "app://com.aura.network.pyxis_mobile"
+  }
+}
