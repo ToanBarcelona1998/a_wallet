@@ -162,5 +162,9 @@
   "add_custom_token_screen_decimal" : "Decimals",
   "add_custom_token_screen_decimal_hint" : "Enter a number",
   "add_custom_token_screen_add_to_list" : "Add to list",
-  "add_custom_token_screen_contract_invalid" : "Unable to validate this token"
+  "add_custom_token_screen_contract_invalid" : "Unable to validate this token",
+
+  "scan_screen_app_bar_title" : "Scan QR code",
+  "scan_screen_upload_photo" : "Upload photo",
+  "scan_screen_invalid_qr_code" : "Invalid QR code"
 }

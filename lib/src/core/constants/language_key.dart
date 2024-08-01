@@ -190,4 +190,10 @@ sealed class LanguageKey {
   static const addCustomTokenScreenDecimalHint = 'add_custom_token_screen_decimal_hint';
   static const addCustomTokenScreenAddToList = 'add_custom_token_screen_add_to_list';
   static const addCustomTokenScreenContractInValid = 'add_custom_token_screen_contract_invalid';
+
+
+  // Scan screen
+  static const scanScreenAppBarTitle = 'scan_screen_app_bar_title';
+  static const scanScreenUploadPhoto = 'scan_screen_upload_photo';
+  static const scanScreenInvalidQrcode = 'scan_screen_invalid_qr_code';
 }
