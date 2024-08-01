@@ -1,4 +1,3 @@
-import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:a_wallet/app_configs/di.dart';
@@ -38,8 +37,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with StateFulBaseScreen, SingleTickerProviderStateMixin {
-  final List<AppNetwork> _networks = getIt.get<List<AppNetwork>>();
-
   final HomePageObserver _homePageObserver = getIt.get<HomePageObserver>();
 
   late HomePageBloc _bloc;
