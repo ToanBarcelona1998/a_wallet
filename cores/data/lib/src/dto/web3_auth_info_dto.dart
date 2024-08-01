@@ -1,7 +1,7 @@
 import 'package:domain/domain.dart';
 
-extension GoogleAccountDtoMapper on GoogleAccountDto {
-  GoogleAccount get toEntities => GoogleAccount(
+extension Web3AuthInfoDtoMapper on Web3AuthInfoDto {
+  Web3AuthInfo get toEntities => Web3AuthInfo(
         email: email,
         name: name,
         idToken: idToken,
@@ -11,7 +11,7 @@ extension GoogleAccountDtoMapper on GoogleAccountDto {
       );
 }
 
-class GoogleAccountDto {
+final class Web3AuthInfoDto {
   final String email;
   final String? name;
   final String? profileImage;
@@ -19,7 +19,7 @@ class GoogleAccountDto {
   final String? oAuthIdToken;
   final String? oAuthAccessToken;
 
-  const GoogleAccountDto({
+  const Web3AuthInfoDto({
     this.idToken,
     required this.email,
     this.profileImage,

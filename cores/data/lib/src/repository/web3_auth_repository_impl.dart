@@ -1,4 +1,4 @@
-import 'package:data/src/dto/google_account_dto.dart';
+import 'package:data/src/dto/web3_auth_info_dto.dart';
 import 'package:data/src/resource/provider/web3_auth_provider.dart';
 import 'package:domain/domain.dart';
 
@@ -20,10 +20,10 @@ class Web3AuthRepositoryImpl implements Web3AuthRepository {
   }
 
   @override
-  Future<GoogleAccount?> login({
+  Future<Web3AuthInfo?> login({
     Web3AuthLoginProvider provider = Web3AuthLoginProvider.google,
   }) async{
-    final GoogleAccountDto? googleAccount =
+    final Web3AuthInfoDto? googleAccount =
         await _web3AuthProvider.login(provider: provider);
 
     return googleAccount?.toEntities;

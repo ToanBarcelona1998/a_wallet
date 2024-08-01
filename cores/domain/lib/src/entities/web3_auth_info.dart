@@ -1,4 +1,4 @@
-class GoogleAccount {
+class Web3AuthInfo {
   final String email;
   final String? name;
   final String? profileImage;
@@ -6,7 +6,7 @@ class GoogleAccount {
   final String? oAuthIdToken;
   final String? oAuthAccessToken;
 
-  const GoogleAccount({
+  const Web3AuthInfo({
     this.idToken,
     required this.email,
     this.profileImage,

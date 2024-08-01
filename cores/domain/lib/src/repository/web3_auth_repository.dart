@@ -1,8 +1,8 @@
 import 'package:domain/core/enum.dart';
-import 'package:domain/src/entities/google_account.dart';
+import 'package:domain/src/entities/web3_auth_info.dart';
 
 abstract interface class Web3AuthRepository {
-  Future<GoogleAccount?> login({
+  Future<Web3AuthInfo?> login({
     Web3AuthLoginProvider provider = Web3AuthLoginProvider.google,
   });
 

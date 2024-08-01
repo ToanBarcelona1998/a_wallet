@@ -7,11 +7,7 @@ abstract class RemoteBalanceRepository {
     required String address,
   });
 
-  Future<List<ErcTokenBalance>> getErc20Balance(
-    QueryBalanceRequest request,
-  );
-
-  Future<List<Cw20TokenBalance>> getCw20Balance(
+  Future<List<Erc20TokenBalance>> getErc20Balance(
     QueryBalanceRequest request,
   );
 }

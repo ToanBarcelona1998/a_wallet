@@ -35,16 +35,10 @@ final class BalanceUseCase {
     return _balanceRepository.getNativeBalance(address: address);
   }
 
-  Future<List<ErcTokenBalance>> getErc20TokenBalance({
+  Future<List<Erc20TokenBalance>> getErc20TokenBalance({
     required QueryBalanceRequest request,
   }) {
     return _balanceRepository.getErc20Balance(request);
-  }
-
-  Future<List<Cw20TokenBalance>> getCw20TokenBalance({
-    required QueryBalanceRequest request,
-  }) {
-    return _balanceRepository.getCw20Balance(request);
   }
 
   Future<AccountBalance?> getByAccountID({

@@ -1,4 +1,4 @@
-export 'google_account.dart';
+export 'web3_auth_info.dart';
 export 'key_store.dart';
 export 'account.dart';
 export 'request/request.dart';

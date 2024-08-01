@@ -68,33 +68,7 @@ final class BalanceRepositoryImpl implements BalanceRepository {
   }
 
   @override
-  Future<List<Cw20TokenBalance>> getCw20Balance(
-      QueryBalanceRequest request) async {
-    final response = await _balanceService.getCw20Balance(
-      body: (request as QueryCW20BalanceRequest).mapRequest.toMap(),
-    );
-
-    final data = response.handleResponse();
-
-    final List<Cw20TokenBalanceDto> balances = [];
-
-    final balanceMaps = data[request.environment]['cw20_holder'];
-
-    for(final map in balanceMaps){
-      final Cw20TokenBalanceDto balanceDto = Cw20TokenBalanceDto.fromJson(map);
-
-      balances.add(balanceDto);
-    }
-
-    return balances
-        .map(
-          (e) => e.toEntity,
-        )
-        .toList();
-  }
-
-  @override
-  Future<List<ErcTokenBalance>> getErc20Balance(
+  Future<List<Erc20TokenBalance>> getErc20Balance(
     QueryBalanceRequest request,
   ) async {
     final response = await _balanceService.getErc20Balance(
@@ -103,12 +77,12 @@ final class BalanceRepositoryImpl implements BalanceRepository {
 
     final data = response.handleResponse();
 
-    final List<ErcTokenBalanceDto> balances = [];
+    final List<Erc20TokenBalanceDto> balances = [];
 
     final balanceMaps = data[request.environment]['account_balance'];
 
     for(final map in balanceMaps){
-      final ErcTokenBalanceDto balanceDto = ErcTokenBalanceDto.fromJson(map);
+      final Erc20TokenBalanceDto balanceDto = Erc20TokenBalanceDto.fromJson(map);
 
       balances.add(balanceDto);
     }
