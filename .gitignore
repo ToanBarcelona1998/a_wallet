@@ -41,3 +41,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+.idea
+.dart_tool
+.metadata
+phyxis_mobile_dev.iml
+
+*.freezed.dart
+*.g.dart
