@@ -339,18 +339,15 @@ Future<void> initDependency(
     ),
   );
 
-  getIt.registerFactoryParam<ImportWalletBloc, AppNetwork, dynamic>(
-    (appNetwork, _) => ImportWalletBloc(
-      appNetwork: appNetwork,
-    ),
+  getIt.registerFactory<ImportWalletBloc>(
+    () => ImportWalletBloc(),
   );
 
-  getIt.registerFactoryParam<ImportWalletYetiBotCubit, AWallet, AppNetwork>(
-    (wallet, network) => ImportWalletYetiBotCubit(
+  getIt.registerFactoryParam<ImportWalletYetiBotCubit, AWallet, dynamic>(
+    (wallet, _) => ImportWalletYetiBotCubit(
       getIt.get<AccountUseCase>(),
       getIt.get<KeyStoreUseCase>(),
       wallet: wallet,
-      appNetwork: network,
     ),
   );
 

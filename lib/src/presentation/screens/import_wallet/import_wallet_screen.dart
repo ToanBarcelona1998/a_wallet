@@ -23,10 +23,7 @@ import 'package:a_wallet/src/presentation/widgets/app_button.dart';
 import 'package:a_wallet/src/presentation/widgets/base_screen.dart';
 
 class ImportWalletScreen extends StatefulWidget {
-  final AppNetwork appNetwork;
-
   const ImportWalletScreen({
-    required this.appNetwork,
     super.key,
   });
 
@@ -44,9 +41,7 @@ class _ImportWalletScreenState extends State<ImportWalletScreen>
 
   @override
   void initState() {
-    _bloc = getIt.get<ImportWalletBloc>(
-      param1: widget.appNetwork,
-    );
+    _bloc = getIt.get<ImportWalletBloc>();
     super.initState();
   }
 
@@ -152,7 +147,6 @@ class _ImportWalletScreenState extends State<ImportWalletScreen>
                 RoutePath.importWalletYetiBot,
                 {
                   'wallet': state.aWallet,
-                  'network': widget.appNetwork,
                 },
               );
               break;

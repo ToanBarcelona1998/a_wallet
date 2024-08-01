@@ -15,7 +15,6 @@ class ImportWalletYetiBotState with _$ImportWalletYetiBotState {
   const factory ImportWalletYetiBotState({
     @Default(ImportWalletYetiBotStatus.none) ImportWalletYetiBotStatus status,
     required AWallet wallet,
-    required AppNetwork appNetwork,
     @Default(false) bool isReady,
   }) = _ImportWalletYetiBotState;
 }

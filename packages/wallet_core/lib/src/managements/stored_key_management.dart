@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 import 'package:convert/convert.dart';
-import 'package:wallet_core/src/constants/constants.dart';
 import 'package:wallet_core/src/objects/wallet_exception.dart';
 import 'package:wallet_core/wallet_core.dart';
 
@@ -12,8 +11,12 @@ class StoredManagement {
   /// [aWallet] is the wallet to be saved.
   /// [coinType] specifies the type of the coin.
   /// Returns the JSON representation of the stored key or throws an exception.
-  String? saveWallet(String name, String password, AWallet aWallet,
-      {int coinType = Constants.defaultCoinType}) {
+  String? saveWallet(
+    String name,
+    String password,
+    AWallet aWallet, {
+    int coinType = TWCoinType.TWCoinTypeEthereum,
+  }) {
     try {
       StoredKey? storedKey = aWallet.wallet != null
           ? StoredKey.importHDWallet(
@@ -39,8 +42,11 @@ class StoredManagement {
   /// [storedKey] is the JSON representation of the stored key.
   /// [password] is the password for the stored key.
   /// Returns the imported AWallet or null if import fails.
-  AWallet? fromSavedJson(String storedKey, String password,
-      {int coinType = Constants.defaultCoinType}) {
+  AWallet? fromSavedJson(
+    String storedKey,
+    String password, {
+    int coinType = TWCoinType.TWCoinTypeEthereum,
+  }) {
     try {
       StoredKey? storedWallet = StoredKey.importJson(storedKey);
       if (storedWallet == null) {

@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 import 'package:convert/convert.dart';
-import 'package:wallet_core/src/constants/constants.dart';
 import 'package:wallet_core/wallet_core.dart';
 
 class WalletManagement {
@@ -28,7 +27,7 @@ class WalletManagement {
   /// Returns the AWallet containing the HDWallet and address.
   AWallet importWallet(
     String mnemonic, {
-    int coinType = Constants.defaultCoinType,
+    int coinType = TWCoinType.TWCoinTypeEthereum,
   }) {
     final wallet = HDWallet.createWithMnemonic(mnemonic);
     final address = wallet.getAddressForCoin(coinType);
@@ -50,7 +49,7 @@ class WalletManagement {
   /// Returns the AWallet containing the address and private key.
   AWallet importWalletWithPrivateKey(
     String privateKey, {
-    int coinType = Constants.defaultCoinType,
+    int coinType = TWCoinType.TWCoinTypeEthereum,
   }) {
     try {
       final bytes = hex.decode(privateKey); // Decode the hex string to bytes
@@ -60,9 +59,9 @@ class WalletManagement {
       PublicKey publicKey;
 
       switch (coinType) {
-        case Constants.defaultCoinType:
+        case TWCoinType.TWCoinTypeEthereum:
           publicKey = pk.getPublicKeySecp256k1(false); // Get the public key
-        case Constants.cosmosCoinType:
+        case TWCoinType.TWCoinTypeCosmos:
           publicKey = pk.getPublicKeySecp256k1(true);
         default:
           publicKey = pk.getPublicKeySecp256k1(false); // Get the public key
@@ -86,8 +85,10 @@ class WalletManagement {
   /// [wallet] is the HDWallet object.
   /// [coinType] specifies the type of the coin.
   /// Returns the private key in hex format.
-  String getPrivateKey(HDWallet wallet,
-      {int coinType = Constants.defaultCoinType}) {
+  String getPrivateKey(
+    HDWallet wallet, {
+    int coinType = TWCoinType.TWCoinTypeEthereum,
+  }) {
     return hex.encode(wallet
         .getKeyForCoin(coinType)
         .data()); // Encode the private key to hex format

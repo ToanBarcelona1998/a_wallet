@@ -1,18 +1,14 @@
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:a_wallet/src/core/utils/app_util.dart';
 import 'package:wallet_core/wallet_core.dart';
 import 'import_wallet_event.dart';
 import 'import_wallet_state.dart';
 
 final class ImportWalletBloc
     extends Bloc<ImportWalletEvent, ImportWalletState> {
-  ImportWalletBloc({
-    required AppNetwork appNetwork,
-  }) : super(
-          ImportWalletState(
-            appNetwork: appNetwork,
-          ),
+  ImportWalletBloc()
+      : super(
+          const ImportWalletState(),
         ) {
     on(_onChangeType);
     on(_onChangeWordCount);
@@ -76,19 +72,15 @@ final class ImportWalletBloc
 
     AWallet wallet;
 
-    int coinType = state.appNetwork.coinType;
-
     switch (state.controllerType) {
       case ControllerKeyType.passPhrase:
         wallet = WalletCore.walletManagement.importWallet(
           state.controllerKey,
-          coinType: coinType,
         );
         break;
       case ControllerKeyType.privateKey:
         wallet = WalletCore.walletManagement.importWalletWithPrivateKey(
           state.controllerKey,
-          coinType: coinType,
         );
         break;
     }
@@ -109,19 +101,16 @@ final class ImportWalletBloc
   }
 
   bool isValidControllerKey(String key) {
-    final coinType = state.appNetwork.coinType;
     try {
       switch (state.controllerType) {
         case ControllerKeyType.passPhrase:
           WalletCore.walletManagement.importWallet(
             key,
-            coinType: coinType,
           );
           break;
         case ControllerKeyType.privateKey:
           WalletCore.walletManagement.importWalletWithPrivateKey(
-              key,
-              coinType: coinType
+            key,
           );
           break;
       }

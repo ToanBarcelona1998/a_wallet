@@ -19,6 +19,5 @@ class ImportWalletState with _$ImportWalletState {
     @Default(ControllerKeyType.passPhrase) ControllerKeyType controllerType,
     @Default(12) int wordCount,
     AWallet ?aWallet,
-    required AppNetwork appNetwork,
   }) = _ImportWalletState;
 }

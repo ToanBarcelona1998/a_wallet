@@ -5,7 +5,6 @@ import 'package:a_wallet/src/application/global/app_global_state/app_global_cubi
 import 'package:a_wallet/src/application/global/app_global_state/app_global_state.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
-import 'package:a_wallet/src/core/constants/app_local_constant.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/utils/copy.dart';
@@ -13,7 +12,6 @@ import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
 import 'package:a_wallet/src/core/utils/toast.dart';
 import 'package:a_wallet/src/presentation/screens/generate_wallet/generate_wallet_state.dart';
 import 'package:a_wallet/src/presentation/widgets/yeti_bot_message_widget.dart';
-import 'package:wallet_core/wallet_core.dart';
 import 'generate_wallet_cubit.dart';
 import 'generate_wallet_selector.dart';
 import 'package:a_wallet/src/presentation/widgets/app_button.dart';
@@ -63,10 +61,6 @@ class _GenerateWalletScreenState extends State<GenerateWalletScreen>
           type: i == messageDelays.length - 1 ? 1 : 0,
           object: i == messageDelays.length - 1
               ? [
-                  bech32.convertEthAddressToBech32Address(
-                    AppLocalConstant.auraPrefix,
-                    _cubit.state.wallet?.address ?? '',
-                  ),
                   _cubit.state.wallet?.address ?? '',
                 ]
               : [],

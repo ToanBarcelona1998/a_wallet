@@ -1,4 +1,3 @@
-import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:a_wallet/app_configs/di.dart';
@@ -8,7 +7,6 @@ import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
-import 'package:a_wallet/src/core/utils/app_util.dart';
 import 'package:a_wallet/src/core/utils/copy.dart';
 import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
 import 'package:a_wallet/src/core/utils/toast.dart';
@@ -24,11 +22,9 @@ import 'package:wallet_core/wallet_core.dart';
 
 class ImportWalletYetiBotScreen extends StatefulWidget {
   final AWallet aWallet;
-  final AppNetwork appNetwork;
 
   const ImportWalletYetiBotScreen({
     required this.aWallet,
-    required this.appNetwork,
     super.key,
   });
 
@@ -48,7 +44,6 @@ class _ImportWalletYetiBotScreenState extends State<ImportWalletYetiBotScreen>
   void initState() {
     _cubit = getIt.get<ImportWalletYetiBotCubit>(
       param1: widget.aWallet,
-      param2: widget.appNetwork,
     );
     super.initState();
   }
@@ -60,13 +55,7 @@ class _ImportWalletYetiBotScreenState extends State<ImportWalletYetiBotScreen>
   }
 
   Future<void> _addContent() async {
-    String displayAddress = _cubit.state.wallet.address;
-
-    if(widget.appNetwork.type == AppNetworkType.cosmos){
-      displayAddress = widget.appNetwork.type.getAuraCosmosAddressByCreateType(displayAddress);
-    }else{
-      displayAddress = widget.appNetwork.type.getAuraEvmAddressByCreateType(displayAddress);
-    }
+    String displayAddress = widget.aWallet.address;
 
     final localization = AppLocalizationManager.of(context);
     const messageDelays = [

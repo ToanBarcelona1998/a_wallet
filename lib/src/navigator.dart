@@ -8,7 +8,6 @@ import 'package:a_wallet/src/presentation/screens/import_wallet/import_wallet_sc
 import 'package:a_wallet/src/presentation/screens/import_wallet_yeti_bot/import_wallet_yeti_bot_screen.dart';
 import 'package:a_wallet/src/presentation/screens/manage_token/manage_token_screen.dart';
 import 'package:a_wallet/src/presentation/screens/re_login/re_login_screen.dart';
-import 'package:a_wallet/src/presentation/screens/select_network/select_network_screen.dart';
 import 'package:a_wallet/src/presentation/screens/send/send_screen.dart';
 import 'package:a_wallet/src/presentation/screens/social_login_yeti_bot/social_login_yeti_bot_screen.dart';
 import 'package:a_wallet/src/presentation/screens/splash/spash_screen.dart';
@@ -27,7 +26,6 @@ sealed class RoutePath {
   static const String getStarted = '$_onBoarding/get_started';
   static const String setPasscode = '$_onBoarding/set_passcode';
   static const String createWallet = '$_onBoarding/create_wallet';
-  static const String selectNetwork = '$_onBoarding/select_network';
   static const String importWallet = '$_onBoarding/import_wallet';
   static const String importWalletYetiBot = '$_onBoarding/import_wallet_yeti_bot';
   static const String socialLoginYetiBot = '$_onBoarding/social_login_yeti_bot';
@@ -87,11 +85,6 @@ sealed class AppNavigator {
           const HomeScreen(),
           settings,
         );
-      case RoutePath.selectNetwork:
-        return _defaultRoute(
-          SelectNetworkScreen(),
-          settings,
-        );
       case RoutePath.importWallet:
         final AppNetwork appNetwork = settings.arguments as AppNetwork;
         return _defaultRoute(
@@ -106,7 +99,6 @@ sealed class AppNavigator {
         return _defaultRoute(
           ImportWalletYetiBotScreen(
             aWallet: arguments['wallet'],
-            appNetwork: arguments['network'],
           ),
           settings,
         );
