@@ -3,6 +3,16 @@ import 'package:isar/isar.dart';
 
 part 'browser_db.g.dart';
 
+extension AddBrowserRequestDtoMapper on AddBrowserParameterDto {
+  BrowserDb get toDb => BrowserDb(
+        url: url,
+        logo: logo,
+        title: siteName,
+        screenShotUri: screenShotUri,
+        isActive: true,
+      );
+}
+
 extension BrowserDbExtension on BrowserDb {
   BrowserDb copyWith({
     Id? id,

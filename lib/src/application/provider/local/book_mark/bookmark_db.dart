@@ -3,6 +3,15 @@ import 'package:isar/isar.dart';
 
 part 'bookmark_db.g.dart';
 
+extension AddBookMarkRequestDtoMapper on AddBookMarkParameterDto {
+  BookMarkDb get toDb => BookMarkDb(
+        name: name,
+        logo: logo,
+        url: url,
+        description: description,
+      );
+}
+
 extension BookMarkDbExtension on BookMarkDb {
   BookMarkDb copyWith({
     int? id,

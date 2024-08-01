@@ -3,6 +3,13 @@ import 'package:isar/isar.dart';
 
 part 'address_book_db.g.dart';
 
+extension AddAddressBookRequestDtoMapper on AddAddressBookRequestDto {
+  AddressBookDb get toDb => AddressBookDb(
+        address: address,
+        name: name,
+      );
+}
+
 extension AddressBookDbExtension on AddressBookDb {
   AddressBookDb copyWith({
     int? id,
