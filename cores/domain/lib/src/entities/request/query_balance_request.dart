@@ -14,10 +14,3 @@ final class QueryERC20BalanceRequest extends QueryBalanceRequest {
     required super.environment,
   });
 }
-
-final class QueryCW20BalanceRequest extends QueryBalanceRequest {
-  QueryCW20BalanceRequest({
-    required super.address,
-    required super.environment,
-  });
-}

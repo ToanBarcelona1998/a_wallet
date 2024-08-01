@@ -251,7 +251,6 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
             .map(
               (e) => PutAllTokenMarketRequest(
                 id: e.id,
-                coinId: e.coinId,
                 symbol: e.symbol,
                 name: e.name,
                 image: e.image,
@@ -284,28 +283,19 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       Map<TokenType, dynamic> result = {};
 
       String amount = await balanceUseCase.getNativeBalance(
-        address: account.aEvmInfo.address,
+        address: account.evmAddress,
       );
 
       result[TokenType.native] = amount;
 
       final erc20TokenBalances = await balanceUseCase.getErc20TokenBalance(
         request: QueryERC20BalanceRequest(
-          address: account.aCosmosInfo.address,
+          address: account.evmAddress,
           environment: environment,
         ),
       );
 
       result[TokenType.erc20] = erc20TokenBalances;
-
-      final cw20TokenBalances = await balanceUseCase.getCw20TokenBalance(
-        request: QueryCW20BalanceRequest(
-          address: account.aCosmosInfo.address,
-          environment: environment,
-        ),
-      );
-
-      result[TokenType.cw20] = cw20TokenBalances;
 
       sendPort.send({
         'balanceMap': result,
@@ -329,25 +319,14 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
       final List<NFTInformation> erc721s = await nftUseCase.queryNFTs(
         QueryERC721Request(
-          owner: account.aEvmInfo.address.toLowerCase(),
-          environment: environment,
-          limit: 4,
-        ),
-      );
-
-      final List<NFTInformation> cw721s = await nftUseCase.queryNFTs(
-        QueryCW721Request(
-          owner: account.aCosmosInfo.address.toLowerCase(),
+          owner: account.evmAddress.toLowerCase(),
           environment: environment,
           limit: 4,
         ),
       );
 
       sendPort.send({
-        'nftS': [
-          ...erc721s,
-          ...cw721s,
-        ],
+        'nftS': erc721s,
       });
     } catch (e) {
       // Send the error back to the main isolate
@@ -443,8 +422,8 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         );
       }
 
-      final List<ErcTokenBalance> ercTokenBalances =
-          event.balanceMap[TokenType.erc20] ?? <ErcTokenBalance>[];
+      final List<Erc20TokenBalance> ercTokenBalances =
+          event.balanceMap[TokenType.erc20] ?? <Erc20TokenBalance>[];
 
       // Add erc token
       for (final erc in ercTokenBalances) {
@@ -473,42 +452,6 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         requests.add(
           AddBalanceRequest(
             balance: erc.amount,
-            tokenId: token.id,
-          ),
-        );
-      }
-
-      // Add cw 20 token
-      final List<Cw20TokenBalance> cwTokenBalances =
-          event.balanceMap[TokenType.cw20] ?? <Cw20TokenBalance>[];
-
-      for (final cw in cwTokenBalances) {
-        Token? token = state.tokens.firstWhereOrNull(
-          (token) => token.contractAddress == cw.contract.smartContract.address,
-        );
-
-        if (token == null) {
-          final tokenMarket = state.tokenMarkets.firstWhereOrNull(
-            (token) => token.symbol == cw.contract.symbol,
-          );
-
-          token = await _tokenUseCase.add(
-            AddTokenRequest(
-              logo: tokenMarket?.image ?? AppLocalConstant.auraLogo,
-              tokenName: tokenMarket?.name ?? cw.contract.name,
-              type: TokenType.cw20,
-              symbol: tokenMarket?.symbol ?? cw.contract.symbol ,
-              contractAddress: cw.contract.smartContract.address,
-              isEnable: true,
-              decimal: int.tryParse(cw.contract.decimal ?? '') ??
-                  tokenMarket?.decimal,
-            ),
-          );
-        }
-
-        requests.add(
-          AddBalanceRequest(
-            balance: cw.amount,
             tokenId: token.id,
           ),
         );
@@ -674,8 +617,6 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   ) {
     switch (event.tokenType) {
       case TokenType.native:
-        break;
-      case TokenType.cw20:
         break;
       case TokenType.erc20:
         break;

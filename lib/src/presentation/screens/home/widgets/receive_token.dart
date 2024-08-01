@@ -1,4 +1,4 @@
-import 'package:domain/domain.dart';
+import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
@@ -7,7 +7,6 @@ import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
-import 'package:a_wallet/src/core/utils/app_util.dart';
 import 'package:a_wallet/src/core/utils/context_extension.dart';
 import 'package:a_wallet/src/presentation/widgets/app_button.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -15,9 +14,9 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'account_receive.dart';
 
 class ReceiveTokenWidget extends StatelessWidget {
-  final AppNetwork network;
-  final Account ?account;
   final AppTheme theme;
+  final String name;
+  final String address;
   final VoidCallback onSwipeUp;
   final void Function(String) onShareAddress;
   final void Function(String) onCopyAddress;
@@ -25,9 +24,9 @@ class ReceiveTokenWidget extends StatelessWidget {
   final void Function() onDownload;
 
   const ReceiveTokenWidget({
-    required this.network,
-    required this.account,
     required this.theme,
+    required this.name,
+    required this.address,
     required this.onSwipeUp,
     required this.onShareAddress,
     required this.onCopyAddress,
@@ -93,7 +92,7 @@ class ReceiveTokenWidget extends StatelessWidget {
                   ),
                   // QR code image view
                   QrImageView(
-                    data: account != null ? network.getAddress(account!) : '',
+                    data: address,
                     version: QrVersions.auto,
                     padding: EdgeInsets.zero,
                     backgroundColor: theme.bgPrimary,
@@ -104,10 +103,10 @@ class ReceiveTokenWidget extends StatelessWidget {
                   ),
                   // Account card receive widget
                   HomeWalletReceiveWidget(
-                    address: account != null ? network.getAddress(account!) : '',
-                    type: network.name,
+                    address: address.addressView,
+                    type: name,
                     appTheme: theme,
-                    logo: network.logo,
+                    logo: AssetIconPath.icCommonAWallet,
                     onCopy: onCopyAddress,
                     onShare: onShareAddress,
                   ),

@@ -62,7 +62,7 @@ final class HomeAppBar extends StatelessWidget {
         ),
       ),
       child: SvgPicture.asset(
-        AssetIconPath.icCommonAllNetwork,
+        AssetIconPath.icCommonAWallet,
       ),
     );
   }
@@ -76,7 +76,7 @@ final class HomeAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset(
-          AssetIconPath.icCommonAllNetwork,
+          AssetIconPath.icCommonAWallet,
         ),
         const SizedBox(
           width: BoxSize.boxSize04,

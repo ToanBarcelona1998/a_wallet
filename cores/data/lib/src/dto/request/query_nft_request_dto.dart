@@ -4,16 +4,6 @@ import 'graphql_request_dto.dart';
 
 extension QueryNftRequestMapper on QueryNftRequest {
   QueryNftRequestDto get mapRequest {
-    if (this is QueryCW721Request) {
-      return QueryCW721RequestDto(
-        owner: owner,
-        environment: environment,
-        offset: offset,
-        contractAddress: contractAddress,
-        limit: limit,
-      );
-    }
-
     return QueryERC721RequestDto(
       owner: owner,
       environment: environment,
@@ -47,69 +37,6 @@ abstract class QueryNftRequestDto extends GraphqlRequestDto {
       'offset': offset,
       'owner': owner,
     };
-  }
-}
-
-final class QueryCW721RequestDto extends QueryNftRequestDto {
-  const QueryCW721RequestDto({
-    required super.owner,
-    required super.environment,
-    super.contractAddress,
-    super.limit,
-    super.offset,
-  });
-
-  @override
-  String operationName() {
-    return 'queryAssetCW721';
-  }
-
-  @override
-  String query() {
-    const query = r'''
-    query queryAssetCW721(
-      $contract_address: String
-      $limit: Int = 10
-      $tokenId: String = null
-      $owner: String = null
-      $offset: Int = 0
-    ) {
-      euphoria {
-        cw721_token(
-          limit: $limit
-          offset: $offset
-          where: {
-            cw721_contract: {
-              smart_contract: { address: { _eq: $contract_address }, name: {_neq: "crates.io:cw4973"} }
-            }
-            token_id: { _eq: $tokenId }
-            owner: { _eq: $owner }
-            burned: {_eq: false}
-          }
-          order_by: [{ last_updated_height: desc }, { id: desc }]
-        ) {
-          id
-          token_id
-          owner
-          media_info
-          last_updated_height
-          created_at
-          burned
-          cw721_contract {
-            name
-            symbol
-            smart_contract {
-              name
-              address
-            }
-          }
-        }
-      }
-    }
-    
-    ''';
-
-    return query.replaceAll('\${environment}', environment);
   }
 }
 

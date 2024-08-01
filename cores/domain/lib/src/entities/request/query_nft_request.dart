@@ -14,16 +14,6 @@ abstract class QueryNftRequest {
   });
 }
 
-final class QueryCW721Request extends QueryNftRequest {
-  const QueryCW721Request({
-    required super.owner,
-    required super.environment,
-    super.contractAddress,
-    super.limit,
-    super.offset,
-  });
-}
-
 final class QueryERC721Request extends QueryNftRequest {
   const QueryERC721Request({
     required super.owner,

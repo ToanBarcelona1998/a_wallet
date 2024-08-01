@@ -12,7 +12,6 @@ import 'package:a_wallet/src/presentation/screens/send/send_screen.dart';
 import 'package:a_wallet/src/presentation/screens/social_login_yeti_bot/social_login_yeti_bot_screen.dart';
 import 'package:a_wallet/src/presentation/screens/splash/spash_screen.dart';
 import 'package:a_wallet/src/presentation/screens/transaction_result/transaction_result_screen.dart';
-import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_core/wallet_core.dart';
 
@@ -27,7 +26,8 @@ sealed class RoutePath {
   static const String setPasscode = '$_onBoarding/set_passcode';
   static const String createWallet = '$_onBoarding/create_wallet';
   static const String importWallet = '$_onBoarding/import_wallet';
-  static const String importWalletYetiBot = '$_onBoarding/import_wallet_yeti_bot';
+  static const String importWalletYetiBot =
+      '$_onBoarding/import_wallet_yeti_bot';
   static const String socialLoginYetiBot = '$_onBoarding/social_login_yeti_bot';
 
   static const String home = '${_base}home'; // Home path
@@ -58,9 +58,9 @@ sealed class AppNavigator {
         );
       case RoutePath.setPasscode:
         final Map<String, dynamic> argument =
-        settings.arguments as Map<String, dynamic>;
+            settings.arguments as Map<String, dynamic>;
         final void Function(BuildContext context) onCreatePasscodeDone =
-        argument['callback'] as void Function(BuildContext);
+            argument['callback'] as void Function(BuildContext);
 
         final bool canBack = argument['canBack'] as bool? ?? true;
         return _defaultRoute(
@@ -86,16 +86,13 @@ sealed class AppNavigator {
           settings,
         );
       case RoutePath.importWallet:
-        final AppNetwork appNetwork = settings.arguments as AppNetwork;
         return _defaultRoute(
-          ImportWalletScreen(
-            appNetwork: appNetwork,
-          ),
+          ImportWalletScreen(),
           settings,
         );
       case RoutePath.importWalletYetiBot:
         final Map<String, dynamic> arguments =
-        settings.arguments as Map<String, dynamic>;
+            settings.arguments as Map<String, dynamic>;
         return _defaultRoute(
           ImportWalletYetiBotScreen(
             aWallet: arguments['wallet'],
@@ -118,7 +115,7 @@ sealed class AppNavigator {
 
       case RoutePath.confirmSend:
         final Map<String, dynamic> arguments =
-        settings.arguments as Map<String, dynamic>;
+            settings.arguments as Map<String, dynamic>;
         return _defaultRoute(
           ConfirmSendScreen(
             appNetwork: arguments['appNetwork'],
@@ -133,7 +130,7 @@ sealed class AppNavigator {
 
       case RoutePath.transactionResult:
         final Map<String, dynamic> arguments =
-        settings.arguments as Map<String, dynamic>;
+            settings.arguments as Map<String, dynamic>;
         return _defaultRoute(
           TransactionResultScreen(
             time: arguments['time'],
@@ -171,7 +168,7 @@ sealed class AppNavigator {
   // Pops routes until the specified route is reached.
   static void popUntil(String routeName) => state?.popUntil(
         (route) => route.settings.name == routeName,
-  );
+      );
 
   // Pops all routes until the first one.
   static void popToFirst() => state?.popUntil((route) => route.isFirst);
@@ -185,9 +182,9 @@ sealed class AppNavigator {
 
   // Creates a default route with a slide transition.
   static Route _defaultRoute(
-      Widget child,
-      RouteSettings settings,
-      ) {
+    Widget child,
+    RouteSettings settings,
+  ) {
     return SlideRoute(
       page: child,
       settings: settings,

@@ -10,12 +10,9 @@ import 'package:a_wallet/src/core/helpers/share_network.dart';
 import 'package:a_wallet/src/core/utils/context_extension.dart';
 import 'package:a_wallet/src/core/utils/copy.dart';
 import 'package:a_wallet/src/core/utils/toast.dart';
-import 'package:a_wallet/src/navigator.dart';
 import 'home_selector.dart';
 import 'home_bloc.dart';
 import 'home_event.dart';
-import 'package:a_wallet/src/presentation/widgets/bottom_sheet_base/app_bottom_sheet_provider.dart';
-import 'package:a_wallet/src/presentation/widgets/select_network_widget.dart';
 
 import 'widgets/bottom_navigator_bar_widget.dart';
 import 'widgets/receive_token.dart';
@@ -44,11 +41,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   final HomeBloc _bloc = getIt.get<HomeBloc>();
 
-  late AppNetwork appNetwork;
-
   @override
   void initState() {
-    appNetwork = getIt.get<List<AppNetwork>>()[0];
     currentSection = HomeScreenSection.home;
     _receiveWidgetController = AnimationController(
       vsync: this,
@@ -77,38 +71,8 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  void _onReceiveTap(
-    Account account,
-    List<AppNetwork> networks,
-    AppTheme appTheme,
-    AppLocalizationManager localization,
-  ) {
-    // Show all
-    if (networks.length == 2) {
-      AppBottomSheetProvider.showFullScreenDialog(
-        context,
-        child: SelectNetworkAccountReceiveWidget(
-          appTheme: appTheme,
-          localization: localization,
-          networks: networks,
-          account: account,
-          onShowQr: (account, network) {
-            AppNavigator.pop();
-            appNetwork = network;
-
-            setState(() {
-
-            });
-            _receiveWidgetController.forward();
-          },
-          onCopy: (address) {
-            AppNavigator.pop();
-            _onCopy(address);
-          },
-        ),
-        appTheme: appTheme,
-      );
-    } else {}
+  void _onReceiveTap() {
+    _receiveWidgetController.forward();
   }
 
   void _onCopy(String address) {
@@ -159,28 +123,24 @@ class _HomeScreenState extends State<HomeScreen>
                     // AnimatedBuilder for receiving widget animation
                     AnimatedBuilder(
                       animation: _receiveWidgetController,
-                      child: HomeActiveAccountSelector(
-                        builder: (account) {
-                          return ReceiveTokenWidget(
-                            network: appNetwork,
-                            account: account,
-                            theme: appTheme,
-                            localization: localization,
-                            onSwipeUp: () async {
-                              // Reverse the animation when the widget is swiped up
-                              if (_receiveWidgetController.isCompleted) {
-                                await _receiveWidgetController.reverse();
-                                _receiveWidgetController.reset();
-                              }
-                            },
-                            onShareAddress:_onShareAddress,
-                            onCopyAddress: _onCopy,
-                            onDownload: () {
-                              
-                            },
-                          );
-                        }
-                      ),
+                      child: HomeActiveAccountSelector(builder: (account) {
+                        return ReceiveTokenWidget(
+                          name: account?.name ?? '',
+                          address: account?.evmAddress ?? '',
+                          theme: appTheme,
+                          localization: localization,
+                          onSwipeUp: () async {
+                            // Reverse the animation when the widget is swiped up
+                            if (_receiveWidgetController.isCompleted) {
+                              await _receiveWidgetController.reverse();
+                              _receiveWidgetController.reset();
+                            }
+                          },
+                          onShareAddress: _onShareAddress,
+                          onCopyAddress: _onCopy,
+                          onDownload: () {},
+                        );
+                      }),
                       // Apply translation to the child based on the animation value
                       builder: (context, child) {
                         return Transform.translate(
@@ -202,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  void _onShareAddress(String address){
+  void _onShareAddress(String address) {
     ShareNetWork.shareText(address);
   }
 }

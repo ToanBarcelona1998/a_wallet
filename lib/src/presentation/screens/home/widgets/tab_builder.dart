@@ -11,7 +11,7 @@ import 'package:a_wallet/src/presentation/screens/home/wallet/wallet_page.dart';
 
 class HomeScreenTabBuilder extends StatelessWidget {
   final HomeScreenSection currentSection;
-  final void Function(Account, List<AppNetwork>,AppTheme,AppLocalizationManager) onReceivedTap;
+  final VoidCallback onReceivedTap;
 
   const HomeScreenTabBuilder({
     required this.currentSection,

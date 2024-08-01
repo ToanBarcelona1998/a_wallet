@@ -25,9 +25,7 @@ import 'package:a_wallet/src/presentation/widgets/base_screen.dart';
 import 'home_page_bloc.dart';
 
 class HomePage extends StatefulWidget {
-  final void Function(
-          Account, List<AppNetwork>, AppTheme, AppLocalizationManager)
-      onReceivedTap;
+  final VoidCallback onReceivedTap;
 
   const HomePage({
     required this.onReceivedTap,
@@ -40,7 +38,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with StateFulBaseScreen, SingleTickerProviderStateMixin {
-
   final List<AppNetwork> _networks = getIt.get<List<AppNetwork>>();
 
   final HomePageObserver _homePageObserver = getIt.get<HomePageObserver>();
@@ -175,18 +172,17 @@ class _HomePageState extends State<HomePage>
     super.didChangeDependencies();
   }
 
-  void _homePageListener(HomePageEmitParam param){
+  void _homePageListener(HomePageEmitParam param) {
     final String event = param.event;
     final data = param.data;
 
-    switch(event){
+    switch (event) {
       case HomePageObserver.onSendTokenDone:
         // Refresh balance home page
         break;
       default:
         break;
     }
-
   }
 
   @override
@@ -271,14 +267,7 @@ class _HomePageState extends State<HomePage>
                       appTheme: appTheme,
                       localization: localization,
                       onSendTap: _onSendTap,
-                      onReceiveTap: () {
-                        _onReceiveTap(
-                          account!,
-                          _networks,
-                          appTheme,
-                          localization,
-                        );
-                      },
+                      onReceiveTap: _onReceiveTap,
                       onStakingTap: _onStakingTap,
                       onSwapTap: _onSwapTap,
                     );
@@ -344,14 +333,7 @@ class _HomePageState extends State<HomePage>
                 showWallet: _showWalletCard,
                 avatarAsset: avatarAsset,
                 onSendTap: _onSendTap,
-                onReceiveTap: () {
-                  _onReceiveTap(
-                    account!,
-                    _networks,
-                    appTheme,
-                    localization,
-                  );
-                },
+                onReceiveTap: _onReceiveTap,
                 onStakingTap: _onStakingTap,
                 onSwapTap: _onSwapTap,
               );
@@ -397,23 +379,11 @@ class _HomePageState extends State<HomePage>
     AppNavigator.push(RoutePath.send);
   }
 
-  void _onReceiveTap(
-    Account account,
-    List<AppNetwork> networks,
-    AppTheme appTheme,
-    AppLocalizationManager localization,
-  ) {
-    widget.onReceivedTap(
-      account,
-      networks,
-      appTheme,
-      localization,
-    );
+  void _onReceiveTap() {
+    widget.onReceivedTap();
   }
 
-  void _onSwapTap() {
-
-  }
+  void _onSwapTap() {}
 
   void _onStakingTap() {}
 }
