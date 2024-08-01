@@ -37,8 +37,6 @@ extension FormatAuraByType on TokenType{
       case TokenType.erc20:
         decimal = customDecimal ?? decimal;
         break;
-      case TokenType.cw20:
-        decimal = customDecimal ?? decimal;
         break;
     }
 
@@ -60,9 +58,6 @@ extension FormatAuraByType on TokenType{
       case TokenType.native:
         break;
       case TokenType.erc20:
-        decimal = customDecimal ?? decimal;
-        break;
-      case TokenType.cw20:
         decimal = customDecimal ?? decimal;
         break;
     }

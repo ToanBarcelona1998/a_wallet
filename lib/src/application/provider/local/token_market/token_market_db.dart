@@ -6,7 +6,6 @@ part 'token_market_db.g.dart';
 extension TokenMarketDtoRequestMapper on PutAllTokenMarketRequestDto {
   TokenMarketDb get mapRequestToDb => TokenMarketDb(
         id: id,
-        coinId: coinId,
         symbol: symbol,
         name: name,
         image: image,
@@ -27,14 +26,12 @@ extension TokenMarketDbMapper on TokenMarketDb {
         symbol: symbol,
         denom: denom,
         image: image,
-        coinId: coinId,
       );
 }
 
 @Collection(inheritance: false)
 final class TokenMarketDb {
   final Id id;
-  final String? coinId;
   final String? symbol;
   final String? name;
   final String? image;
@@ -45,7 +42,6 @@ final class TokenMarketDb {
 
   const TokenMarketDb({
     this.id = Isar.autoIncrement,
-    this.coinId,
     this.symbol,
     this.name,
     this.image,

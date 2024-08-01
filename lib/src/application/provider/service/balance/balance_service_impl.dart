@@ -15,13 +15,7 @@ final class BalanceServiceImpl implements BalanceService {
   const BalanceServiceImpl(this._balanceServiceGenerator);
 
   @override
-  Future<AuraBaseResponseV2> getCw20Balance(
-      {required Map<String, dynamic> body}) {
-    return _balanceServiceGenerator.getCw20Balance(body);
-  }
-
-  @override
-  Future<AuraBaseResponseV2> getErc20Balance(
+  Future<XWalletBaseResponseV2> getErc20Balance(
       {required Map<String, dynamic> body}) {
     return _balanceServiceGenerator.getErc20Balance(body);
   }
@@ -40,9 +34,7 @@ abstract class BalanceServiceGenerator {
     String? baseUrl,
   }) = _BalanceServiceGenerator;
 
-  @POST(ApiServicePath.graphiql)
-  Future<AuraBaseResponseV2> getCw20Balance(@Body() Map<String, dynamic> body,);
 
   @POST(ApiServicePath.graphiql)
-  Future<AuraBaseResponseV2> getErc20Balance(@Body() Map<String, dynamic> body,);
+  Future<XWalletBaseResponseV2> getErc20Balance(@Body() Map<String, dynamic> body,);
 }

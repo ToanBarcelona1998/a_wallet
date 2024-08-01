@@ -5,11 +5,7 @@ abstract interface class BalanceService {
     required String address,
   });
 
-  Future<AuraBaseResponseV2> getErc20Balance({
-    required Map<String,dynamic> body,
-  });
-
-  Future<AuraBaseResponseV2> getCw20Balance({
+  Future<XWalletBaseResponseV2> getErc20Balance({
     required Map<String,dynamic> body,
   });
 }

@@ -69,8 +69,7 @@ final class AccountDatabaseServiceImpl implements AccountDatabaseService {
         name: p.name,
         keyStoreId: p.keyStoreId,
         index: p.index,
-        aEvmInfoDb: p.updateAEvmInfoRequest?.mapRequestToDb,
-        aCosmosInfoDb: p.updateACosmosInfoRequest?.mapRequestToDb,
+        evmAddress: p.evmAddress,
       );
 
       await _database.writeTxn(

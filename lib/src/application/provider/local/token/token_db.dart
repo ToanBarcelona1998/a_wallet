@@ -32,7 +32,7 @@ extension TokenDbExtension on TokenDb {
       tokenName: name ?? tokenName,
       type: type ?? this.type,
       symbol: symbol ?? this.symbol,
-      contractAddress: contract ?? this.contractAddress,
+      contractAddress: contract ?? contractAddress,
       isEnable: isEnable ?? this.isEnable,
       decimal: decimal ?? this.decimal,
     );

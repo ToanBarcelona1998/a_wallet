@@ -12,13 +12,13 @@ final class NftServiceImpl implements NftService {
   const NftServiceImpl(this._nftServiceGenerator);
 
   @override
-  Future<AuraBaseResponseV2> queryNFTDetail(Map<String, dynamic> body) {
+  Future<XWalletBaseResponseV2> queryNFTDetail(Map<String, dynamic> body) {
     // TODO: implement queryNFTDetail
     throw UnimplementedError();
   }
 
   @override
-  Future<AuraBaseResponseV2> queryNFTs(Map<String, dynamic> body) {
+  Future<XWalletBaseResponseV2> queryNFTs(Map<String, dynamic> body) {
     return _nftServiceGenerator.queryNFTs(body);
   }
 }
@@ -31,5 +31,5 @@ abstract class NFTServiceGenerator {
   }) = _NFTServiceGenerator;
   
   @POST(ApiServicePath.graphiql)
-  Future<AuraBaseResponseV2> queryNFTs(@Body() Map<String, dynamic> body);
+  Future<XWalletBaseResponseV2> queryNFTs(@Body() Map<String, dynamic> body);
 }

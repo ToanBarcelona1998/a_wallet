@@ -47,15 +47,13 @@ class AppLocalizationManager {
   }
 
   bool setCurrentLocale(String localeCode) {
-    print('Set current locale: $localeCode');
     if (_supportedLocale.containsKey(localeCode)) {
-      print('Set current locale: $localeCode');
       _locale = Locale(localeCode);
-      print('Current locale #1: $_locale');
+
       return true;
     }
     _locale = const Locale('en');
-    print('Current locale #2: $_locale');
+
     return false;
   }
 
@@ -74,18 +72,13 @@ class AppLocalizationManager {
       );
     }
 
-    print('Supported locale: $supportLocales');
-
     /// Get user setting selected locale
     String? userSelectedLocale = await _localizationUseCase.getSelectedLocale();
-
-    print('User selected locale: $userSelectedLocale');
 
     /// Check if user selected locale is not null
     if (userSelectedLocale != null) {
       isUserSettingLocale = setCurrentLocale(userSelectedLocale);
 
-      print('Set current locale: $userSelectedLocale');
       return;
     }
     isUserSettingLocale = false;
@@ -95,8 +88,6 @@ class AppLocalizationManager {
   /// Load selected locale from device setting
   ///
   Future<void> updateDeviceLocale(String deviceLocale) async {
-    print('Device locale: $deviceLocale');
-    print('Is user setting locale: $isUserSettingLocale');
     if (isUserSettingLocale) return;
     if (setCurrentLocale(deviceLocale)) {
       await _localizationUseCase.saveSelectedLocale(

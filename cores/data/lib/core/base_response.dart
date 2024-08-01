@@ -6,18 +6,18 @@ abstract class BaseResponse<T> {
   const BaseResponse({this.data});
 }
 
-final class AuraBaseResponseV2<T> extends BaseResponse<T> {
+final class XWalletBaseResponseV2<T> extends BaseResponse<T> {
   final int code;
   final String message;
 
-  const AuraBaseResponseV2({
+  const XWalletBaseResponseV2({
     required this.code,
     super.data,
     required this.message,
   });
 
-  factory AuraBaseResponseV2.fromJson(Map<String, dynamic> json) {
-    return AuraBaseResponseV2(
+  factory XWalletBaseResponseV2.fromJson(Map<String, dynamic> json) {
+    return XWalletBaseResponseV2(
       code: json['code'],
       data: json['data'],
       message: json['message'],
@@ -36,13 +36,13 @@ final class AuraBaseResponseV2<T> extends BaseResponse<T> {
   }
 }
 
-final class AuraBaseResponseV1<T> extends BaseResponse<T> {
-  const AuraBaseResponseV1({
+final class XWalletBaseResponseV1<T> extends BaseResponse<T> {
+  const XWalletBaseResponseV1({
     super.data,
   });
 
-  factory AuraBaseResponseV1.fromJson(T json) {
-    return AuraBaseResponseV1(
+  factory XWalletBaseResponseV1.fromJson(T json) {
+    return XWalletBaseResponseV1(
       data: json,
     );
   }

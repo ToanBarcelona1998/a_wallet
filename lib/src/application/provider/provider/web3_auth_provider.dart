@@ -18,7 +18,7 @@ class Web3AuthProviderImpl implements Web3AuthProvider {
   }
 
   @override
-  Future<GoogleAccountDto?> login({
+  Future<Web3AuthInfoDto?> login({
     Web3AuthLoginProvider provider = Web3AuthLoginProvider.google,
   }) async {
     final Web3AuthResponse response = await Web3AuthFlutter.login(
@@ -32,7 +32,7 @@ class Web3AuthProviderImpl implements Web3AuthProvider {
 
     final userInfo = response.userInfo!;
 
-    return GoogleAccountDto(
+    return Web3AuthInfoDto(
       idToken: userInfo.idToken ?? '',
       email: userInfo.email ?? '',
       name: userInfo.name,

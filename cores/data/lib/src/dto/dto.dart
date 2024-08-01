@@ -5,3 +5,4 @@ export 'token_market.dto.dart';
 export 'balance_dto.dart';
 export 'nft_dto.dart';
 export 'token_dto.dart';
+export 'web3_auth_info_dto.dart';
