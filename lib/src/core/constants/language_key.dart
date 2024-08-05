@@ -100,6 +100,16 @@ sealed class LanguageKey {
   static const String homePageEstimateNFTValue = 'home_page_estimate_nft_value';
   static const String homePageAllNetwork = 'home_page_all_network';
 
+  ///region browser page
+  static const String browserPagePlaceHolder = 'browser_page_place_holder';
+  static const String browserPageEcosystemTab = 'browser_page_ecosystem_tab';
+  static const String browserPageBookMarkTab = 'browser_page_book_mark_tab';
+  static const String browserPageOpen = 'browser_page_open';
+  static const String browserPageUndo = 'browser_page_undo';
+  static const String browserPageDelete = 'browser_page_delete';
+  static const String browserPageDeleteMessage = 'browser_page_delete_message';
+  static const String browserNoBookMarkFound= 'browser_page_no_book_mark_found';
+
 // Settings page
   static const String settingsPageTitle = 'settings_page_title';
   static const String settingsPageProfileSection = 'settings_page_profile_section';

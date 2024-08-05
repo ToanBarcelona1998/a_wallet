@@ -1,3 +1,4 @@
+import 'package:a_wallet/src/core/constants/aura_ecosystem.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'browser_page_event.dart';
@@ -11,8 +12,8 @@ class BrowserPageBloc extends Bloc<BrowserPageEvent, BrowserPageState> {
     this._browserManagementUseCase,
     this._bookMarkUseCase,
   ) : super(
-          const BrowserPageState(
-            ecosystems: [],
+          BrowserPageState(
+            ecosystems: AuraEcosystem.auraEcosystems,
           ),
         ) {
     on(_onInit);

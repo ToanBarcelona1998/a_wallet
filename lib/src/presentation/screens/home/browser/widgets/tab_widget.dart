@@ -1,15 +1,21 @@
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
+import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
+import 'package:a_wallet/src/core/constants/asset_path.dart';
+import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
+import 'package:a_wallet/src/core/constants/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TabWidget extends StatefulWidget {
   final AppTheme appTheme;
+  final AppLocalizationManager localization;
   final int selectedTab;
   final void Function(int) onSelect;
 
   const TabWidget({
     required this.appTheme,
+    required this.localization,
     this.selectedTab = 0,
     required this.onSelect,
     super.key,
@@ -48,7 +54,7 @@ class _TabWidgetState extends State<TabWidget> {
       children: [
         Expanded(
           child: _TabItemWidget(
-            titleKey: LanguageKey.inAppBrowserPageEcosystemTab,
+            titleKey: LanguageKey.browserPageEcosystemTab,
             appTheme: widget.appTheme,
             isSelected: _indexSelected == 0,
             onSelect: () {
@@ -59,26 +65,28 @@ class _TabWidgetState extends State<TabWidget> {
               children: [
                 _indexSelected == 0
                     ? SvgPicture.asset(
-                        AssetIconPath.browserEcosystemWhite,
+                        AssetIconPath.icBrowserEcosystemWhite,
                       )
                     : SvgPicture.asset(
-                        AssetIconPath.browserEcosystem,
+                        AssetIconPath.icBrowserEcosystem,
                       ),
                 const SizedBox(
                   width: BoxSize.boxSize04,
                 ),
               ],
             ),
+            localization: widget.localization,
           ),
         ),
         Expanded(
           child: _TabItemWidget(
-            titleKey: LanguageKey.inAppBrowserPageBookMarkTab,
+            titleKey: LanguageKey.browserPageBookMarkTab,
             appTheme: widget.appTheme,
             isSelected: _indexSelected == 1,
             onSelect: () {
               _onSelect(1);
             },
+            localization: widget.localization,
           ),
         ),
       ],
@@ -90,6 +98,7 @@ final class _TabItemWidget extends StatelessWidget {
   final String titleKey;
   final bool isSelected;
   final AppTheme appTheme;
+  final AppLocalizationManager localization;
   final Widget? leading;
   final VoidCallback onSelect;
 
@@ -97,6 +106,7 @@ final class _TabItemWidget extends StatelessWidget {
     required this.titleKey,
     this.isSelected = false,
     required this.appTheme,
+    required this.localization,
     super.key,
     this.leading,
     required this.onSelect,
@@ -113,7 +123,7 @@ final class _TabItemWidget extends StatelessWidget {
           vertical: Spacing.spacing03,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? appTheme.primaryColor600 : null,
+          color: isSelected ? appTheme.bgBrandPrimary : null,
           borderRadius: isSelected
               ? BorderRadius.circular(
                   BorderRadiusSize.borderRadiusRound,
@@ -124,19 +134,13 @@ final class _TabItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             leading ?? const SizedBox.shrink(),
-            AppLocalizationProvider(
-              builder: (localization, _) {
-                return Text(
-                  localization.translate(
-                    titleKey,
-                  ),
-                  style: AppTypoGraPhy.bodyMedium02.copyWith(
-                    color: isSelected
-                        ? appTheme.contentColorWhite
-                        : appTheme.contentColor500,
-                  ),
-                );
-              },
+            Text(
+              localization.translate(
+                titleKey,
+              ),
+              style: AppTypoGraPhy.textSmMedium.copyWith(
+                color: isSelected ? appTheme.textWhite : appTheme.textSecondary,
+              ),
             ),
           ],
         ),

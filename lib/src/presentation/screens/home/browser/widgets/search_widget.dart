@@ -1,20 +1,22 @@
+import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
+import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
+import 'package:a_wallet/src/core/constants/asset_path.dart';
+import 'package:a_wallet/src/core/constants/language_key.dart';
+import 'package:a_wallet/src/core/constants/size_constant.dart';
+import 'package:a_wallet/src/core/constants/typography.dart';
+import 'package:a_wallet/src/presentation/screens/home/browser/browser_page_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pyxis_mobile/src/application/global/app_theme/app_theme.dart';
-import 'package:pyxis_mobile/src/application/global/localization/app_localization_provider.dart';
-import 'package:pyxis_mobile/src/core/constants/asset_path.dart';
-import 'package:pyxis_mobile/src/core/constants/language_key.dart';
-import 'package:pyxis_mobile/src/core/constants/size_constant.dart';
-import 'package:pyxis_mobile/src/core/constants/typography.dart';
-import 'package:pyxis_mobile/src/presentation/screens/home/browser/browser_page_selector.dart';
 
 class SearchWidget extends StatelessWidget {
   final AppTheme appTheme;
+  final AppLocalizationManager localization;
   final VoidCallback onViewTap;
   final VoidCallback onSearchTap;
 
   const SearchWidget({
     required this.appTheme,
+    required this.localization,
     required this.onViewTap,
     required this.onSearchTap,
     super.key,
@@ -35,7 +37,7 @@ class SearchWidget extends StatelessWidget {
                 vertical: Spacing.spacing03,
               ),
               decoration: BoxDecoration(
-                color: appTheme.surfaceColorGrayDefault,
+                color: appTheme.bgSecondary,
                 borderRadius: BorderRadius.circular(
                   BorderRadiusSize.borderRadiusRound,
                 ),
@@ -43,20 +45,16 @@ class SearchWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppLocalizationProvider(
-                    builder: (localization, _) {
-                      return Text(
-                        localization.translate(
-                          LanguageKey.inAppBrowserPagePlaceHolder,
-                        ),
-                        style: AppTypoGraPhy.body03.copyWith(
-                          color: appTheme.contentColor300,
-                        ),
-                      );
-                    },
+                  Text(
+                    localization.translate(
+                      LanguageKey.browserPagePlaceHolder,
+                    ),
+                    style: AppTypoGraPhy.textSmMedium.copyWith(
+                      color: appTheme.textTertiary,
+                    ),
                   ),
                   SvgPicture.asset(
-                    AssetIconPath.commonSearch,
+                    AssetIconPath.icCommonSearch,
                   ),
                 ],
               ),
@@ -72,7 +70,7 @@ class SearchWidget extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: appTheme.borderColorUnKnow,
+                color: appTheme.borderPrimary,
                 width: BoxSize.boxSize01,
               ),
               borderRadius: BorderRadius.circular(
@@ -86,8 +84,8 @@ class SearchWidget extends StatelessWidget {
               builder: (tabCount) {
                 return Text(
                   tabCount.toString(),
-                  style: AppTypoGraPhy.heading01.copyWith(
-                    color: appTheme.contentColor700,
+                  style: AppTypoGraPhy.displayMdBold.copyWith(
+                    color: appTheme.textPrimary,
                   ),
                   textAlign: TextAlign.center,
                 );

@@ -3,6 +3,7 @@ import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
+import 'package:a_wallet/src/core/constants/typography.dart';
 import 'package:a_wallet/src/navigator.dart';
 import 'package:a_wallet/src/presentation/widgets/base_screen.dart';
 import 'package:a_wallet/src/presentation/widgets/combine_list_view.dart';
@@ -24,19 +25,19 @@ class BrowserPage extends StatefulWidget {
   State<BrowserPage> createState() => _BrowserPageState();
 }
 
-class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen{
+class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen {
   final BrowserPageBloc _bloc = getIt.get<BrowserPageBloc>();
 
   // final HomeScreenObserver _homeScreenObserver =
   //     getIt.get<HomeScreenObserver>();
   //
   // void _registerEvent(HomeScreenEmitParam param) {
-  //   if (param.event == HomeScreenObserver.onInAppBrowserRefreshBookMarkEvent) {
+  //   if (param.event == HomeScreenObserver.onbrowserRefreshBookMarkEvent) {
   //     _bloc.add(
   //       const BrowserPageOnRefreshBookMarkEvent(),
   //     );
   //   } else if (param.event ==
-  //       HomeScreenObserver.onInAppBrowserRefreshBrowserEvent) {
+  //       HomeScreenObserver.onbrowserRefreshBrowserEvent) {
   //     _bloc.add(
   //       const BrowserPageOnRefreshTabEvent(),
   //     );
@@ -56,7 +57,8 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen{
   }
 
   @override
-  Widget child(BuildContext context, AppTheme appTheme, AppLocalizationManager localization) {
+  Widget child(BuildContext context, AppTheme appTheme,
+      AppLocalizationManager localization) {
     return Column(
       children: [
         Padding(
@@ -84,9 +86,12 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen{
                 const BrowserPageOnInitEvent(),
               );
             },
+            localization: localization,
           ),
         ),
-        const HoLiZonTalDividerWidget(),
+        HoLiZonTalDividerWidget(
+          appTheme: appTheme,
+        ),
         const SizedBox(
           height: BoxSize.boxSize06,
         ),
@@ -102,6 +107,7 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen{
                   builder: (selectedTab) {
                     return TabWidget(
                       appTheme: appTheme,
+                      localization: localization,
                       selectedTab: selectedTab,
                       onSelect: (index) {
                         _bloc.add(
@@ -155,44 +161,33 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen{
                                           const BrowserPageOnInitEvent(),
                                         );
                                       },
-                                      behavior:
-                                      HitTestBehavior.opaque,
+                                      behavior: HitTestBehavior.opaque,
                                       child: BrowserSuggestionWidget(
                                         name: browser.name,
-                                        description:
-                                        browser.description ?? '',
+                                        description: browser.description ?? '',
                                         logo: browser.logo,
                                         appTheme: appTheme,
                                         suffix: Container(
-                                          padding: const EdgeInsets
-                                              .symmetric(
-                                            horizontal:
-                                            Spacing.spacing05,
-                                            vertical:
-                                            Spacing.spacing02,
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: Spacing.spacing05,
+                                            vertical: Spacing.spacing02,
                                           ),
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius.circular(
+                                            borderRadius: BorderRadius.circular(
                                               BorderRadiusSize
                                                   .borderRadiusRound,
                                             ),
                                             border: Border.all(
-                                              color: appTheme
-                                                  .borderColorGrayDefault,
+                                              color: appTheme.borderPrimary,
                                             ),
                                           ),
                                           child: Text(
-                                            localization
-                                                .translate(
-                                              LanguageKey
-                                                  .inAppBrowserPageOpen,
+                                            localization.translate(
+                                              LanguageKey.browserPageOpen,
                                             ),
-                                            style: AppTypoGraPhy
-                                                .bodyMedium02
+                                            style: AppTypoGraPhy.textSmMedium
                                                 .copyWith(
-                                              color: appTheme
-                                                  .contentColor700,
+                                              color: appTheme.textPrimary,
                                             ),
                                           ),
                                         ),
@@ -211,14 +206,10 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen{
                               return Center(
                                 child: Text(
                                   localization.translate(
-                                    LanguageKey
-                                        .inAppBrowserNoBookMarkFound,
+                                    LanguageKey.browserNoBookMarkFound,
                                   ),
-                                  style: AppTypoGraPhy
-                                      .bodyMedium02
-                                      .copyWith(
-                                    color:
-                                    appTheme.contentColor500,
+                                  style: AppTypoGraPhy.textSmMedium.copyWith(
+                                    color: appTheme.textSecondary,
                                   ),
                                 ),
                               );
@@ -250,15 +241,13 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen{
                                           const BrowserPageOnInitEvent(),
                                         );
                                       },
-                                      behavior:
-                                      HitTestBehavior.opaque,
+                                      behavior: HitTestBehavior.opaque,
                                       child: BrowserSuggestionWidget(
                                         name: bookMark.name,
                                         description: bookMark.url,
                                         logo: bookMark.logo,
                                         appTheme: appTheme,
-                                        suffix:
-                                        BookMarkMoreActionWidget(
+                                        suffix: BookMarkMoreActionWidget(
                                           appTheme: appTheme,
                                           onDelete: () {
                                             _bloc.add(
@@ -267,6 +256,7 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen{
                                               ),
                                             );
                                           },
+                                          localization: localization,
                                         ),
                                       ),
                                     ),
@@ -290,7 +280,8 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen{
   }
 
   @override
-  Widget wrapBuild(BuildContext context, Widget child, AppTheme appTheme, AppLocalizationManager localization) {
+  Widget wrapBuild(BuildContext context, Widget child, AppTheme appTheme,
+      AppLocalizationManager localization) {
     return BlocProvider.value(
       value: _bloc,
       child: Scaffold(

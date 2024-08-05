@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:a_wallet/src/core/constants/aura_ecosystem.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -85,6 +86,8 @@ void main() async {
   );
 
   AuraScan.init(environment);
+
+  AuraEcosystem.init(environment);
 
   final Map<String, dynamic> config = await _loadConfig();
 

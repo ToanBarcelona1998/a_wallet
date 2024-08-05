@@ -35,6 +35,7 @@ class BrowserSuggestionWidget extends StatelessWidget {
             url: logo,
             width: _size,
             height: _size,
+            appTheme: appTheme,
           ),
         ),
         const SizedBox(
@@ -47,7 +48,7 @@ class BrowserSuggestionWidget extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: AppTypoGraPhy.heading02.copyWith(
+                style: AppTypoGraPhy.displayMdBold.copyWith(
                   color: appTheme.textPrimary,
                 ),
                 maxLines: 2,
@@ -58,8 +59,8 @@ class BrowserSuggestionWidget extends StatelessWidget {
               ),
               Text(
                 description,
-                style: AppTypoGraPhy.body02.copyWith(
-                  color: appTheme.contentColor500,
+                style: AppTypoGraPhy.textSmMedium.copyWith(
+                  color: appTheme.textSecondary,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

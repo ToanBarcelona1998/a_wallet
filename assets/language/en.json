@@ -89,6 +89,14 @@
   "home_page_estimate_nft_value": "Estimate value",
   "home_page_all_network": "All network",
 
+  "browser_page_place_holder" : "Search or type URL",
+  "browser_page_ecosystem_tab" : "Ecosystem",
+  "browser_page_book_mark_tab" : "Bookmark",
+  "browser_page_open" : "Open",
+  "browser_page_undo" : "Undo",
+  "browser_page_delete" : "Delete",
+  "browser_page_delete_message" : "Delete ${message}",
+  "browser_page_no_book_mark_found" : "No bookmark found",
 
   "settings_page_title": "Settings",
   "settings_page_profile_section": "Profile",

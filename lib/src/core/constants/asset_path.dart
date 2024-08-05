@@ -68,6 +68,7 @@ sealed class AssetIconPath {
   static const String icCommonAdd = '${_baseIconPath}ic_common_add.svg';
   static const String icCommonInformation = '${_baseIconPath}ic_common_information.svg';
   static const String icCommonFilter = '${_baseIconPath}ic_common_filter.svg';
+  static const String icCommonDelete = '${_baseIconPath}ic_common_delete.svg';
 
   static const String icHomeScreenBottomNavigationBarBrowser = '${_baseIconPath}ic_home_screen_bottom_navigation_bar_browser.svg';
   static const String icHomeScreenBottomNavigationBarWallet = '${_baseIconPath}ic_home_screen_bottom_navigator_bar_wallet.svg';
@@ -80,4 +81,10 @@ sealed class AssetIconPath {
   /// Scanner
   static const String icScannerBack = '${_baseIconPath}ic_scanner_back.svg';
   static const String icScannerPhoto = '${_baseIconPath}ic_scanner_photo.svg';
+
+  /// Browser page
+  static const String icBrowserEcosystem =
+      '${_baseIconPath}ic_browser_ecosystem.svg';
+  static const String icBrowserEcosystemWhite =
+      '${_baseIconPath}ic_browser_ecosystem_white.svg';
 }

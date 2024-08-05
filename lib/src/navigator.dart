@@ -40,6 +40,10 @@ sealed class RoutePath {
   static const String manageToken = '$home/manage_token';
 
   static const String scan = '$home/scan';
+
+  static const String browser = '$home/browser';
+  static const String browserSearch = '$home/search';
+  static const String browserTabManagement = '$home/tab_management';
 }
 
 // This class handles navigation within the application.
