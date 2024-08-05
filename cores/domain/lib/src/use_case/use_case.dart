@@ -7,3 +7,5 @@ export 'token_market_use_case.dart';
 export 'balance_use_case.dart';
 export 'nft_use_case.dart';
 export 'token_use_case.dart';
+export 'browser_management_use_case.dart';
+export 'book_mark_use_case.dart';
