@@ -27,4 +27,8 @@ final class BookMarkUseCase {
   Future<void> deleteAll(){
     return _bookMarkRepository.deleteAll();
   }
+
+  Future<BookMark?> getBookMarkByUrl(String url){
+    return _bookMarkRepository.getBookMarkByUrl(url: url);
+  }
 }

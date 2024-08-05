@@ -206,4 +206,11 @@ sealed class LanguageKey {
   static const scanScreenAppBarTitle = 'scan_screen_app_bar_title';
   static const scanScreenUploadPhoto = 'scan_screen_upload_photo';
   static const scanScreenInvalidQrcode = 'scan_screen_invalid_qr_code';
+
+  // region browser screen
+  static const String browserScreenChooseAccountDialogTitle = 'browser_screen_choose_account_dialog_title';
+  static const String browserScreenSmartAccount = 'browser_screen_smart_account';
+  static const String browserScreenNewTab = 'browser_screen_new_tab';
+  static const String browserScreenShare = 'browser_screen_share';
+  static const String browserScreenRefresh = 'browser_screen_refresh';
 }

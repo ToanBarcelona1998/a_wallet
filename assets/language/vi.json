@@ -175,5 +175,11 @@
 
   "scan_screen_app_bar_title" : "Scan QR code",
   "scan_screen_upload_photo" : "Upload photo",
-  "scan_screen_invalid_qr_code" : "Invalid QR code"
+  "scan_screen_invalid_qr_code" : "Invalid QR code",
+
+  "browser_screen_choose_account_dialog_title" : "Choose account",
+  "browser_screen_smart_account" : "Smart acc",
+  "browser_screen_new_tab" : "New tab",
+  "browser_screen_share" : "Share",
+  "browser_screen_refresh" : "Refresh"
 }

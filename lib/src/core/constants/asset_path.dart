@@ -69,6 +69,9 @@ sealed class AssetIconPath {
   static const String icCommonInformation = '${_baseIconPath}ic_common_information.svg';
   static const String icCommonFilter = '${_baseIconPath}ic_common_filter.svg';
   static const String icCommonDelete = '${_baseIconPath}ic_common_delete.svg';
+  static const String icCommonMore = '${_baseIconPath}ic_common_more.svg';
+  static const String icCommonRefresh = '${_baseIconPath}ic_common_refresh.svg';
+  static const String icCommonLock = '${_baseIconPath}ic_common_lock.svg';
 
   static const String icHomeScreenBottomNavigationBarBrowser = '${_baseIconPath}ic_home_screen_bottom_navigation_bar_browser.svg';
   static const String icHomeScreenBottomNavigationBarWallet = '${_baseIconPath}ic_home_screen_bottom_navigator_bar_wallet.svg';
@@ -87,4 +90,11 @@ sealed class AssetIconPath {
       '${_baseIconPath}ic_browser_ecosystem.svg';
   static const String icBrowserEcosystemWhite =
       '${_baseIconPath}ic_browser_ecosystem_white.svg';
+
+  /// Browser screen
+  static const String icBrowserScreenBack = '${_baseIconPath}ic_browser_screen_back.svg';
+  static const String icBrowserScreenBookmark = '${_baseIconPath}ic_browser_screen_bookmark.svg';
+  static const String icBrowserScreenBookmarkActive = '${_baseIconPath}ic_browser_screen_bookmark_active.svg';
+  static const String icBrowserScreenNext = '${_baseIconPath}ic_browser_screen_next.svg';
+  static const String icBrowserScreenNextBold = '${_baseIconPath}ic_browser_screen_next_bold.svg';
 }
