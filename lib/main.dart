@@ -1,125 +1,145 @@
+import 'dart:convert';
+
+import 'package:a_wallet/src/application/provider/local/book_mark/bookmark_db.dart';
+import 'package:a_wallet/src/application/provider/local/browser/browser_db.dart';
+import 'package:a_wallet/src/core/constants/aura_ecosystem.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:isar/isar.dart';
+import 'package:a_wallet/app_configs/di.dart' as di;
+import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
+import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
+import 'package:a_wallet/src/application/provider/local/account/account_db.dart';
+import 'package:a_wallet/src/application/provider/local/balance/balance_db.dart';
+import 'package:a_wallet/src/application/provider/local/key_store/key_store_db.dart';
+import 'package:a_wallet/src/application/provider/local/token/token_db.dart';
+import 'package:a_wallet/src/application/provider/local/token_market/token_market_db.dart';
+import 'package:a_wallet/src/core/constants/app_local_constant.dart';
+import 'package:a_wallet/src/core/constants/asset_path.dart';
+import 'package:a_wallet/src/core/constants/aura_scan.dart';
+import 'package:a_wallet/src/a_wallet_application.dart';
+import 'package:wallet_core/wallet_core.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:developer' as developer;
 
-void main() {
-  runApp(const MyApp());
+// Change this one if you want to change environment
+const AWalletEnvironment environment = AWalletEnvironment.staging;
+
+class LogProviderImpl implements LogProvider {
+  @override
+  void printLog(String message) {
+    developer.log(message, name: 'pyxis_mobile');
+  }
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+Future<Map<String, dynamic>> _loadConfig() async {
+  String loader;
+  String path;
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+  switch (environment) {
+    case AWalletEnvironment.serenity:
+      path = AssetConfigPath.configDev;
+      break;
+    case AWalletEnvironment.staging:
+      path = AssetConfigPath.configStaging;
+      break;
+    case AWalletEnvironment.production:
+      path = AssetConfigPath.config;
+      break;
+  }
+  try {
+    loader = await rootBundle.loadString(
+      path,
+    );
+  } catch (e) {
+    loader = '';
+    LogProvider.log('can\'t load config ${e.toString()}');
+  }
+
+  return jsonDecode(loader);
+}
+
+Future<void> _saveAuraToken(String name, String symbol) async {
+  final TokenUseCase tokenUseCase = di.getIt.get<TokenUseCase>();
+  final nativeAura = await tokenUseCase.getByName(
+    name: name,
+  );
+
+  if (nativeAura == null) {
+    await tokenUseCase.add(
+      AddTokenRequest(
+        logo: AppLocalConstant.auraLogo,
+        tokenName: name,
+        type: TokenType.native,
+        symbol: symbol,
+        contractAddress: '',
+        isEnable: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+  LogProvider.init(
+    LogProviderImpl(),
+  );
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+  AuraScan.init(environment);
 
-  final String title;
+  AuraEcosystem.init(environment);
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  final Map<String, dynamic> config = await _loadConfig();
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  // Get the path to the application documents directory
+  final path = (await getApplicationDocumentsDirectory()).path;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+  late Isar isar;
+  if (Isar.instanceNames.isEmpty) {
+    // Open the Isar database with the specified schema, directory, name, and maximum size
+    isar = await Isar.open(
+      [
+        AccountDbSchema,
+        KeyStoreDbSchema,
+        AccountBalanceDbSchema,
+        TokenMarketDbSchema,
+        TokenDbSchema,
+        BrowserDbSchema,
+        BookMarkDbSchema,
+      ],
+      directory: path,
+      name: AppLocalConstant.localDbName,
+      maxSizeMiB: 128,
     );
+  } else {
+    // Get the existing instance of the Isar database
+    isar = Isar.getInstance(AppLocalConstant.localDbName)!;
   }
+
+  final pickWalletConfig = PyxisMobileConfig(
+    configs: config,
+    environment: environment,
+  );
+
+  // Init dependencies
+  await di.initDependency(
+    pickWalletConfig,
+    isar,
+  );
+
+  await _saveAuraToken(
+    pickWalletConfig.config.nativeCoin.name,
+    pickWalletConfig.config.nativeCoin.symbol,
+  );
+
+  // Load language
+  await AppLocalizationManager.instance.load();
+
+  FlutterTrustWalletCore.init();
+
+  runApp(
+    const AWalletApplication(),
+  );
 }
