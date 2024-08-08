@@ -482,7 +482,7 @@ class _BrowserScreenState extends State<BrowserScreen> with StateFulBaseScreen {
           padding: defaultPadding(),
           child: BrowserUrlSelector(
             builder: (url) {
-              return BrowserHeaderWidget(
+              return BrowserScreenHeaderWidget(
                 appTheme: appTheme,
                 onViewTap: _onViewTabManagement,
                 onSearchTap: () {},
@@ -509,7 +509,7 @@ class _BrowserScreenState extends State<BrowserScreen> with StateFulBaseScreen {
                   ),
           ),
         ),
-        BrowserBottomNavigatorWidget(
+        BrowserScreenBottomNavigatorWidget(
           appTheme: appTheme,
           onBack: _onBackClick,
           onBookmarkClick: _onBookMarkClick,

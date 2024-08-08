@@ -68,7 +68,7 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen {
       children: [
         Padding(
           padding: defaultPadding(),
-          child: SearchWidget(
+          child: BrowserPageSearchWidget(
             appTheme: appTheme,
             onViewTap: () async {
               await AppNavigator.push(
@@ -104,7 +104,7 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen {
               children: [
                 BrowserPageTabSelector(
                   builder: (selectedTab) {
-                    return TabWidget(
+                    return BrowserPageTabWidget(
                       appTheme: appTheme,
                       localization: localization,
                       selectedTab: selectedTab,
@@ -161,7 +161,7 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen {
                                         );
                                       },
                                       behavior: HitTestBehavior.opaque,
-                                      child: BrowserSuggestionWidget(
+                                      child: BrowserPageSuggestionWidget(
                                         name: browser.name,
                                         description: browser.description ?? '',
                                         logo: browser.logo,
@@ -241,12 +241,12 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen {
                                         );
                                       },
                                       behavior: HitTestBehavior.opaque,
-                                      child: BrowserSuggestionWidget(
+                                      child: BrowserPageSuggestionWidget(
                                         name: bookMark.name,
                                         description: bookMark.url,
                                         logo: bookMark.logo,
                                         appTheme: appTheme,
-                                        suffix: BookMarkMoreActionWidget(
+                                        suffix: BrowserPageBookMarkMoreActionWidget(
                                           appTheme: appTheme,
                                           onDelete: () {
                                             _bloc.add(

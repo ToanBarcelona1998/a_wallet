@@ -11,7 +11,7 @@ import 'package:a_wallet/src/presentation/widgets/icon_with_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BrowserHeaderWidget extends StatelessWidget {
+class BrowserScreenHeaderWidget extends StatelessWidget {
   final AppTheme appTheme;
   final AppLocalizationManager localization;
   final VoidCallback onViewTap;
@@ -21,7 +21,7 @@ class BrowserHeaderWidget extends StatelessWidget {
   final VoidCallback onAddNewTab;
   final VoidCallback onRefresh;
 
-  const BrowserHeaderWidget({
+  const BrowserScreenHeaderWidget({
     required this.appTheme,
     required this.localization,
     required this.onViewTap,

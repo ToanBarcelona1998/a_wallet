@@ -8,13 +8,13 @@ import 'package:a_wallet/src/presentation/screens/home/browser/browser_page_sele
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SearchWidget extends StatelessWidget {
+class BrowserPageSearchWidget extends StatelessWidget {
   final AppTheme appTheme;
   final AppLocalizationManager localization;
   final VoidCallback onViewTap;
   final VoidCallback onSearchTap;
 
-  const SearchWidget({
+  const BrowserPageSearchWidget({
     required this.appTheme,
     required this.localization,
     required this.onViewTap,

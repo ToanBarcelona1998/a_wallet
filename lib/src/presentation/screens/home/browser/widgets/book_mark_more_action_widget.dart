@@ -8,12 +8,12 @@ import 'package:a_wallet/src/presentation/widgets/icon_with_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BookMarkMoreActionWidget extends StatelessWidget {
+class BrowserPageBookMarkMoreActionWidget extends StatelessWidget {
   final AppTheme appTheme;
   final AppLocalizationManager localization;
   final VoidCallback onDelete;
 
-  const BookMarkMoreActionWidget({
+  const BrowserPageBookMarkMoreActionWidget({
     required this.appTheme,
     required this.localization,
     required this.onDelete,

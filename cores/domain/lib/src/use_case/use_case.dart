@@ -9,3 +9,4 @@ export 'nft_use_case.dart';
 export 'token_use_case.dart';
 export 'browser_management_use_case.dart';
 export 'book_mark_use_case.dart';
+export 'address_book_use_case.dart';

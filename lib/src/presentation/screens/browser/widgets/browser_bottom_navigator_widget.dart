@@ -8,7 +8,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BrowserBottomNavigatorWidget extends StatelessWidget {
+class BrowserScreenBottomNavigatorWidget extends StatelessWidget {
   final AppTheme appTheme;
   final VoidCallback onBack;
   final VoidCallback onNext;
@@ -19,7 +19,7 @@ class BrowserBottomNavigatorWidget extends StatelessWidget {
     Account?,
   ) onAccountClick;
 
-  const BrowserBottomNavigatorWidget({
+  const BrowserScreenBottomNavigatorWidget({
     required this.appTheme,
     required this.onNext,
     required this.onBack,

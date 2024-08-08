@@ -3,16 +3,15 @@ import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
 import 'package:a_wallet/src/presentation/widgets/network_image_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class BrowserSuggestionWidget extends StatelessWidget {
+class BrowserPageSuggestionWidget extends StatelessWidget {
   final String logo;
   final String name;
   final String description;
   final AppTheme appTheme;
   final Widget suffix;
 
-  const BrowserSuggestionWidget({
+  const BrowserPageSuggestionWidget({
     super.key,
     required this.name,
     required this.description,

@@ -7,13 +7,13 @@ import 'package:a_wallet/src/core/constants/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class TabWidget extends StatefulWidget {
+class BrowserPageTabWidget extends StatefulWidget {
   final AppTheme appTheme;
   final AppLocalizationManager localization;
   final int selectedTab;
   final void Function(int) onSelect;
 
-  const TabWidget({
+  const BrowserPageTabWidget({
     required this.appTheme,
     required this.localization,
     this.selectedTab = 0,
@@ -22,10 +22,10 @@ class TabWidget extends StatefulWidget {
   });
 
   @override
-  State<TabWidget> createState() => _TabWidgetState();
+  State<BrowserPageTabWidget> createState() => _BrowserPageTabWidgetState();
 }
 
-class _TabWidgetState extends State<TabWidget> {
+class _BrowserPageTabWidgetState extends State<BrowserPageTabWidget> {
   int _indexSelected = 0;
 
   @override
@@ -35,7 +35,7 @@ class _TabWidgetState extends State<TabWidget> {
   }
 
   @override
-  void didUpdateWidget(covariant TabWidget oldWidget) {
+  void didUpdateWidget(covariant BrowserPageTabWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     _indexSelected = widget.selectedTab;
   }
