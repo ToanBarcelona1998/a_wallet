@@ -255,4 +255,5 @@ sealed class LanguageKey {
   static const String nftDetailScreenContractAddress = 'nft_detail_screen_contract_address';
   static const String nftDetailScreenTokenStandard = 'nft_detail_screen_token_standard';
   static const String nftDetailScreenTokenStandardTitle = 'nft_detail_screen_token_standard_title';
+  static const String nftDetailScreenTransfer = 'nft_detail_screen_token_transfer';
 }

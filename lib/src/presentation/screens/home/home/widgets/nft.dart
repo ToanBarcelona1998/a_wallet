@@ -186,13 +186,20 @@ final class HomePageNFTsWidget extends StatelessWidget {
                 data: nftS,
                 physics: const NeverScrollableScrollPhysics(),
                 builder: (nft, _) {
-                  return _HomePageNFTCardWidget(
-                    id: nft.tokenId,
-                    name: nft.mediaInfo.onChain.metadata?.name ?? '',
-                    createTime: nft.createdAt.toString(),
-                    price: "--",
-                    thumbnail: nft.mediaInfo.offChain.image.url ?? '',
-                    appTheme: appTheme,
+                  return GestureDetector(
+                    onTap: () => AppNavigator.push(
+                      RoutePath.nftDetail,
+                      nft,
+                    ),
+                    behavior: HitTestBehavior.opaque,
+                    child: _HomePageNFTCardWidget(
+                      id: nft.tokenId,
+                      name: nft.mediaInfo.onChain.metadata?.name ?? '',
+                      createTime: nft.createdAt.toString(),
+                      price: "--",
+                      thumbnail: nft.mediaInfo.offChain.image.url ?? '',
+                      appTheme: appTheme,
+                    ),
                   );
                 },
                 canLoadMore: false,

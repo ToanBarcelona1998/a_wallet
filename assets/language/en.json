@@ -219,5 +219,6 @@
   "nft_detail_screen_blockChain" : "Blockchain",
   "nft_detail_screen_contract_address" : "Contract address",
   "nft_detail_screen_token_standard" : "ERC721",
-  "nft_detail_screen_token_standard_title" : "Token standard"
+  "nft_detail_screen_token_standard_title" : "Token standard",
+  "nft_detail_screen_token_transfer" : "Transfer"
 }

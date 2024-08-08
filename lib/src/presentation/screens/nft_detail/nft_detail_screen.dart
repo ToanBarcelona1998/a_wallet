@@ -1,6 +1,8 @@
 import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
+import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/utils/copy.dart';
+import 'package:a_wallet/src/presentation/widgets/app_button.dart';
 import 'package:a_wallet/src/presentation/widgets/base_screen.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -35,27 +37,40 @@ class _NFTDetailScreenState extends State<NFTDetailScreen>
   @override
   Widget child(BuildContext context, AppTheme appTheme,
       AppLocalizationManager localization) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          NFTMediaBuilder(
-            mediaInfo: widget.nftInformation.mediaInfo.offChain,
-            appTheme: appTheme,
+    return Column(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                NFTMediaBuilder(
+                  mediaInfo: widget.nftInformation.mediaInfo.offChain,
+                  appTheme: appTheme,
+                ),
+                const SizedBox(
+                  height: BoxSize.boxSize06,
+                ),
+                NFTDetailInformationFormWidget(
+                  name:
+                      widget.nftInformation.mediaInfo.onChain.metadata?.name ??
+                          '',
+                  blockChain: widget.nftInformation.cw721Contract.name,
+                  contractAddress:
+                      widget.nftInformation.cw721Contract.smartContract.address,
+                  appTheme: appTheme,
+                  onCopy: _onCopy,
+                  localization: localization,
+                ),
+              ],
+            ),
           ),
-          const SizedBox(
-            height: BoxSize.boxSize06,
+        ),
+        PrimaryAppButton(
+          text: localization.translate(
+            LanguageKey.nftDetailScreenTransfer,
           ),
-          NFTDetailInformationFormWidget(
-            name: widget.nftInformation.mediaInfo.onChain.metadata?.name ?? '',
-            blockChain: widget.nftInformation.cw721Contract.name,
-            contractAddress:
-                widget.nftInformation.cw721Contract.smartContract.address,
-            appTheme: appTheme,
-            onCopy: _onCopy,
-            localization: localization,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
