@@ -84,7 +84,7 @@ class BrowserPageSearchWidget extends StatelessWidget {
               builder: (tabCount) {
                 return Text(
                   tabCount.toString(),
-                  style: AppTypoGraPhy.textLgBold.copyWith(
+                  style: AppTypoGraPhy.textSmSemiBold.copyWith(
                     color: appTheme.textPrimary,
                   ),
                   textAlign: TextAlign.center,

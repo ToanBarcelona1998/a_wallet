@@ -113,7 +113,7 @@ class _BrowserScreenState extends State<BrowserScreen> with StateFulBaseScreen {
     final currentBrowser = _bloc.state.currentBrowser;
 
     if (currentBrowser != null) {
-      // Get pyxis application directory
+      // Get a wallet application directory
       final directory = await getApplicationDocumentsDirectory();
 
       File file = File(currentBrowser.screenShotUri);

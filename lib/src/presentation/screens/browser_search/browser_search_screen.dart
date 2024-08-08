@@ -68,6 +68,9 @@ class _BrowserSearchScreenState extends State<BrowserSearchScreen>
           onChanged: _onChange,
           localization: localization,
         ),
+        const SizedBox(
+          height: BoxSize.boxSize07,
+        ),
         BrowserSearchSystemsSelector(
           builder: (auraEcosystems) {
             return ListView.builder(

@@ -1,5 +1,7 @@
 import 'package:a_wallet/src/core/app_routes.dart';
 import 'package:a_wallet/src/presentation/screens/browser/browser_screen.dart';
+import 'package:a_wallet/src/presentation/screens/browser_search/browser_search_screen.dart';
+import 'package:a_wallet/src/presentation/screens/browser_tab_management/browser_tab_management_screen.dart';
 import 'package:a_wallet/src/presentation/screens/confirm_send/confirm_send_screen.dart';
 import 'package:a_wallet/src/presentation/screens/create_passcode/create_passcode_screen.dart';
 import 'package:a_wallet/src/presentation/screens/generate_wallet/generate_wallet_creen.dart';
@@ -8,12 +10,15 @@ import 'package:a_wallet/src/presentation/screens/home/home_screen.dart';
 import 'package:a_wallet/src/presentation/screens/import_wallet/import_wallet_screen.dart';
 import 'package:a_wallet/src/presentation/screens/import_wallet_yeti_bot/import_wallet_yeti_bot_screen.dart';
 import 'package:a_wallet/src/presentation/screens/manage_token/manage_token_screen.dart';
+import 'package:a_wallet/src/presentation/screens/nft/nft_screen.dart';
+import 'package:a_wallet/src/presentation/screens/nft_detail/nft_detail_screen.dart';
 import 'package:a_wallet/src/presentation/screens/re_login/re_login_screen.dart';
 import 'package:a_wallet/src/presentation/screens/scan/scanner_screen.dart';
 import 'package:a_wallet/src/presentation/screens/send/send_screen.dart';
 import 'package:a_wallet/src/presentation/screens/social_login_yeti_bot/social_login_yeti_bot_screen.dart';
 import 'package:a_wallet/src/presentation/screens/splash/spash_screen.dart';
 import 'package:a_wallet/src/presentation/screens/transaction_result/transaction_result_screen.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_core/wallet_core.dart';
 
@@ -167,6 +172,33 @@ sealed class AppNavigator {
         return _defaultRoute(
           BrowserScreen(
             initUrl: url,
+          ),
+          settings,
+        );
+      case RoutePath.browserSearch:
+        return _defaultRoute(
+          const BrowserSearchScreen(),
+          settings,
+        );
+      case RoutePath.browserTabManagement:
+        final bool closeAndReplace = settings.arguments as bool? ?? true;
+        return _defaultRoute(
+          BrowserTabManagementScreen(
+            isCloseAndReplace: closeAndReplace,
+          ),
+          settings,
+        );
+      case RoutePath.nft:
+        return _defaultRoute(
+          const NFTScreen(),
+          settings,
+        );
+      case RoutePath.nftDetail:
+        final NFTInformation nftInformation =
+            settings.arguments as NFTInformation;
+        return _defaultRoute(
+          NFTDetailScreen(
+            nftInformation: nftInformation,
           ),
           settings,
         );

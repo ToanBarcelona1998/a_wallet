@@ -52,7 +52,7 @@ final class BrowserManagementRepositoryImpl
 
   @override
   Future<Browser> update<P>(P param) async{
-    final browserDto = await _browserDatabaseService.add(
+    final browserDto = await _browserDatabaseService.update(
       (param as UpdateBrowserParameter).mapRequest,
     );
 
