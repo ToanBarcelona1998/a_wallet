@@ -216,6 +216,11 @@ class _BrowserScreenState extends State<BrowserScreen> with StateFulBaseScreen {
   }
 
   @override
+  EdgeInsets? padding() {
+    return EdgeInsets.zero;
+  }
+
+  @override
   void initState() {
     // Give a instance of denounce and register an observer
     _denounce = Denounce(

@@ -1,4 +1,5 @@
 import 'package:a_wallet/src/core/app_routes.dart';
+import 'package:a_wallet/src/presentation/screens/browser/browser_screen.dart';
 import 'package:a_wallet/src/presentation/screens/confirm_send/confirm_send_screen.dart';
 import 'package:a_wallet/src/presentation/screens/create_passcode/create_passcode_screen.dart';
 import 'package:a_wallet/src/presentation/screens/generate_wallet/generate_wallet_creen.dart';
@@ -94,7 +95,7 @@ sealed class AppNavigator {
         );
       case RoutePath.importWallet:
         return _defaultRoute(
-          ImportWalletScreen(),
+          const ImportWalletScreen(),
           settings,
         );
       case RoutePath.importWalletYetiBot:
@@ -156,6 +157,14 @@ sealed class AppNavigator {
       case RoutePath.scan:
         return _defaultRoute(
           const ScannerScreen(),
+          settings,
+        );
+      case RoutePath.browser:
+        final String url = settings.arguments as String;
+        return _defaultRoute(
+          BrowserScreen(
+            initUrl: url,
+          ),
           settings,
         );
       default:

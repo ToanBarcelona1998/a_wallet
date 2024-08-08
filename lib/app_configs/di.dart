@@ -1,4 +1,8 @@
 import 'dart:io';
+import 'package:a_wallet/src/application/provider/local/book_mark/book_mark_database_service_impl.dart';
+import 'package:a_wallet/src/application/provider/local/browser/browser_database_service_impl.dart';
+import 'package:a_wallet/src/presentation/screens/browser/browser_bloc.dart';
+import 'package:a_wallet/src/presentation/screens/home/browser/browser_page_bloc.dart';
 import 'package:data/data.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
@@ -166,6 +170,18 @@ Future<void> initDependency(
     ),
   );
 
+  getIt.registerLazySingleton<BrowserDatabaseService>(
+    () => BrowserDatabaseServiceImpl(
+      isar,
+    ),
+  );
+
+  getIt.registerLazySingleton<BookMarkDatabaseService>(
+    () => BookMarkDatabaseServiceImpl(
+      isar,
+    ),
+  );
+
   getIt.registerLazySingleton<RemoteTokenMarketService>(
     () => RemoteTokenMarketServiceImpl(
       getIt.get<RemoteTokenMarketServiceGenerator>(),
@@ -256,6 +272,18 @@ Future<void> initDependency(
     ),
   );
 
+  getIt.registerLazySingleton<BrowserManagementRepository>(
+    () => BrowserManagementRepositoryImpl(
+      getIt.get<BrowserDatabaseService>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<BookMarkRepository>(
+    () => BookMarkRepositoryImpl(
+      getIt.get<BookMarkDatabaseService>(),
+    ),
+  );
+
   // Register use case
   getIt.registerLazySingleton<LocalizationUseCase>(
     () => LocalizationUseCase(
@@ -308,6 +336,18 @@ Future<void> initDependency(
   getIt.registerLazySingleton<TokenUseCase>(
     () => TokenUseCase(
       getIt.get<TokenRepository>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<BrowserManagementUseCase>(
+    () => BrowserManagementUseCase(
+      getIt.get<BrowserManagementRepository>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<BookMarkUseCase>(
+    () => BookMarkUseCase(
+      getIt.get<BookMarkRepository>(),
     ),
   );
 
@@ -405,6 +445,22 @@ Future<void> initDependency(
   getIt.registerFactory<ManageTokenBloc>(
     () => ManageTokenBloc(
       getIt.get<TokenUseCase>(),
+    ),
+  );
+
+  getIt.registerFactory<BrowserPageBloc>(
+    () => BrowserPageBloc(
+      getIt.get<BrowserManagementUseCase>(),
+      getIt.get<BookMarkUseCase>(),
+    ),
+  );
+
+  getIt.registerFactoryParam<BrowserBloc, String, dynamic>(
+    (initUrl, _) => BrowserBloc(
+      getIt.get<AccountUseCase>(),
+      getIt.get<BrowserManagementUseCase>(),
+      getIt.get<BookMarkUseCase>(),
+      initUrl: initUrl,
     ),
   );
 }

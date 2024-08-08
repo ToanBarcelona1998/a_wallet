@@ -84,7 +84,7 @@ class SearchWidget extends StatelessWidget {
               builder: (tabCount) {
                 return Text(
                   tabCount.toString(),
-                  style: AppTypoGraPhy.displayMdBold.copyWith(
+                  style: AppTypoGraPhy.textLgBold.copyWith(
                     color: appTheme.textPrimary,
                   ),
                   textAlign: TextAlign.center,

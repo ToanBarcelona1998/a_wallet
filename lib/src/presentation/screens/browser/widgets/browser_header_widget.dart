@@ -98,7 +98,7 @@ class BrowserHeaderWidget extends StatelessWidget {
             child: BrowserTabCountSelector(builder: (tabCount) {
               return Text(
                 tabCount.toString(),
-                style: AppTypoGraPhy.displayMdBold.copyWith(
+                style: AppTypoGraPhy.textLgBold.copyWith(
                   color: appTheme.textPrimary,
                 ),
                 textAlign: TextAlign.center,

@@ -102,6 +102,8 @@ PODS:
   - web3auth_flutter (2.0.1):
     - Flutter
     - Web3Auth (~> 9.0.0)
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -118,6 +120,7 @@ DEPENDENCIES:
   - trust_wallet_core (from `.symlinks/plugins/trust_wallet_core/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - web3auth_flutter (from `.symlinks/plugins/web3auth_flutter/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
@@ -171,6 +174,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   web3auth_flutter:
     :path: ".symlinks/plugins/web3auth_flutter/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
   BigInt: f668a80089607f521586bbe29513d708491ef2f7
@@ -207,6 +212,7 @@ SPEC CHECKSUMS:
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   Web3Auth: 086b5152a43df347ceff196c0ce67f6330838884
   web3auth_flutter: bc5ffefe573c72f7fb1814573269952b045b7b22
+  webview_flutter_wkwebview: 2a23822e9039b7b1bc52e5add778e5d89ad488d1
 
 PODFILE CHECKSUM: 487bd332930375dc658c18785d006a169809769b
 

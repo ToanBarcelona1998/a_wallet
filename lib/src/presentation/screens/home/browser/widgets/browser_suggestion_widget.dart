@@ -48,7 +48,7 @@ class BrowserSuggestionWidget extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: AppTypoGraPhy.displayMdBold.copyWith(
+                style: AppTypoGraPhy.textLgBold.copyWith(
                   color: appTheme.textPrimary,
                 ),
                 maxLines: 2,
@@ -59,7 +59,7 @@ class BrowserSuggestionWidget extends StatelessWidget {
               ),
               Text(
                 description,
-                style: AppTypoGraPhy.textSmMedium.copyWith(
+                style: AppTypoGraPhy.textXsMedium.copyWith(
                   color: appTheme.textSecondary,
                 ),
                 maxLines: 2,

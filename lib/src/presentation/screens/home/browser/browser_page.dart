@@ -57,15 +57,17 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen {
   }
 
   @override
+  EdgeInsets? padding() {
+    return EdgeInsets.zero;
+  }
+
+  @override
   Widget child(BuildContext context, AppTheme appTheme,
       AppLocalizationManager localization) {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Spacing.spacing07,
-            vertical: Spacing.spacing06,
-          ),
+          padding: defaultPadding(),
           child: SearchWidget(
             appTheme: appTheme,
             onViewTap: () async {
@@ -97,10 +99,7 @@ class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: Spacing.spacing07,
-              vertical: Spacing.spacing02,
-            ),
+            padding: defaultPadding(),
             child: Column(
               children: [
                 BrowserPageTabSelector(
