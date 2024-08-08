@@ -1,4 +1,5 @@
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
+import 'package:a_wallet/src/core/utils/app_date_format.dart';
 import 'package:a_wallet/src/presentation/widgets/network_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
@@ -7,6 +8,7 @@ import 'package:a_wallet/src/core/constants/typography.dart';
 
 final class NFTScreenVerticalCard extends StatelessWidget {
   final String name;
+  final String createTime;
   final String url;
   final AppTheme appTheme;
   final AppLocalizationManager localization;
@@ -15,6 +17,7 @@ final class NFTScreenVerticalCard extends StatelessWidget {
   const NFTScreenVerticalCard({
     super.key,
     required this.name,
+    required this.createTime,
     required this.url,
     required this.appTheme,
     required this.localization,
@@ -67,15 +70,26 @@ final class NFTScreenVerticalCard extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: BoxSize.boxSize05,
+          height: BoxSize.boxSize02,
         ),
         Text(
           name,
-          style: AppTypoGraPhy.textSmMedium.copyWith(
+          style: AppTypoGraPhy.textMdBold.copyWith(
             color: appTheme.textPrimary,
           ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(
+          height: BoxSize.boxSize01,
+        ),
+        Text(
+          AppDateTime.formatDateHHMMDMMMYYY(
+            createTime,
+          ),
+          style: AppTypoGraPhy.textXsRegular.copyWith(
+            color: appTheme.textTertiary,
+          ),
         ),
       ],
     );

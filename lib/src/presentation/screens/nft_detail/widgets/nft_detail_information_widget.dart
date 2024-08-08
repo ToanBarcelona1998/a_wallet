@@ -39,7 +39,9 @@ class NFTDetailInformationFormWidget extends StatelessWidget {
         ),
         _NFTDetailInformationWidget(
           appTheme: appTheme,
-          title: LanguageKey.nftDetailScreenBlockChain,
+          title: localization.translate(
+            LanguageKey.nftDetailScreenBlockChain,
+          ),
           value: blockChain,
         ),
         _NFTDetailInformationWidget(

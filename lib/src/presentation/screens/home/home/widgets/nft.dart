@@ -1,3 +1,4 @@
+import 'package:a_wallet/src/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
@@ -42,41 +43,12 @@ class _HomePageNFTCardWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(
               BorderRadiusSize.borderRadius04,
             ),
-            child: Stack(
-              children: [
-                NetworkImageWidget(
-                  appTheme: appTheme,
-                  cacheTarget: context.cacheImageTarget,
-                  url: thumbnail,
-                  width: double.maxFinite,
-                  height: double.maxFinite,
-                ),
-                // Positioned(
-                //   top: Spacing.spacing03,
-                //   right: Spacing.spacing03,
-                //   child: Container(
-                //     padding: const EdgeInsets.symmetric(
-                //       vertical: Spacing.spacing01,
-                //       horizontal: Spacing.spacing03,
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: appTheme.surfaceColorBlack.withOpacity(
-                //         0.5,
-                //       ),
-                //       borderRadius: BorderRadius.circular(
-                //         BorderRadiusSize.borderRadiusRound,
-                //       ),
-                //     ),
-                //     alignment: Alignment.center,
-                //     child: Text(
-                //       idToken,
-                //       style: AppTypoGraPhy.body01.copyWith(
-                //         color: appTheme.contentColorWhite,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              ],
+            child: NetworkImageWidget(
+              appTheme: appTheme,
+              cacheTarget: context.cacheImageTarget,
+              url: thumbnail,
+              width: double.maxFinite,
+              height: double.maxFinite,
             ),
           ),
         ),
@@ -162,13 +134,15 @@ final class HomePageNFTsWidget extends StatelessWidget {
                 const SizedBox(
                   height: BoxSize.boxSize02,
                 ),
-                HomePageTotalTokenValueSelector(builder: (totalTokenBalance) {
-                  return Text(
-                    '0.0',
-                    style: AppTypoGraPhy.textXlBold
-                        .copyWith(color: appTheme.textPrimary),
-                  );
-                }),
+                HomePageTotalTokenValueSelector(
+                  builder: (totalTokenBalance) {
+                    return Text(
+                      '0.0',
+                      style: AppTypoGraPhy.textXlBold
+                          .copyWith(color: appTheme.textPrimary),
+                    );
+                  },
+                ),
               ],
             ),
             BoxBorderTextWidget(
@@ -181,6 +155,9 @@ final class HomePageNFTsWidget extends StatelessWidget {
               ),
               appTheme: appTheme,
               radius: BorderRadiusSize.borderRadius04,
+              onTap: () => AppNavigator.push(
+                RoutePath.nft,
+              ),
             ),
           ],
         ),

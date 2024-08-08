@@ -28,7 +28,7 @@ final class NFTBloc extends Bloc<NFTEvent, NFTState> {
     String? owner,
   }) async {
     return _nftUseCase.queryNFTs(QueryERC721Request(
-      owner: owner ?? state.owner,
+      owner: (owner ?? state.owner).toLowerCase(),
       environment: config.environment.environmentString,
       offset: state.offset,
       limit: state.limit,
@@ -46,6 +46,12 @@ final class NFTBloc extends Bloc<NFTEvent, NFTState> {
     try {
       final account = await _accountUseCase.getFirstAccount();
 
+      emit(
+        state.copyWith(
+          owner: account?.evmAddress ?? '',
+        ),
+      );
+
       final List<NFTInformation> nftS = await _getNFTsInformation(
         owner: account?.evmAddress,
       );
@@ -60,6 +66,7 @@ final class NFTBloc extends Bloc<NFTEvent, NFTState> {
         ),
       );
     } catch (e) {
+      LogProvider.log('Fetch NFTs error ${e.toString()}');
       emit(state.copyWith(
         status: NFTStatus.error,
         error: e.toString(),
@@ -95,6 +102,7 @@ final class NFTBloc extends Bloc<NFTEvent, NFTState> {
         ),
       );
     } catch (e) {
+      LogProvider.log('Fetch NFTs error ${e.toString()}');
       emit(state.copyWith(
         status: NFTStatus.error,
         error: e.toString(),
@@ -127,6 +135,7 @@ final class NFTBloc extends Bloc<NFTEvent, NFTState> {
         ),
       );
     } catch (e) {
+      LogProvider.log('Fetch NFTs error ${e.toString()}');
       emit(state.copyWith(
         status: NFTStatus.error,
         error: e.toString(),

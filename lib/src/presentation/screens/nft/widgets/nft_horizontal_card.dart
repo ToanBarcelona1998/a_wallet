@@ -1,5 +1,6 @@
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
+import 'package:a_wallet/src/core/utils/app_date_format.dart';
 import 'package:a_wallet/src/presentation/widgets/network_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
@@ -8,6 +9,7 @@ import 'package:a_wallet/src/core/constants/typography.dart';
 
 final class NFTScreenHorizontalCard extends StatelessWidget {
   final String name;
+  final String createTime;
   final String url;
   final AppTheme appTheme;
   final AppLocalizationManager localization;
@@ -16,6 +18,7 @@ final class NFTScreenHorizontalCard extends StatelessWidget {
   const NFTScreenHorizontalCard({
     super.key,
     required this.name,
+    required this.createTime,
     required this.url,
     required this.appTheme,
     required this.localization,
@@ -23,7 +26,7 @@ final class NFTScreenHorizontalCard extends StatelessWidget {
   });
 
   static const double _width = 100;
-  static const double _height = 70;
+  static const double _height = 90;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,7 @@ final class NFTScreenHorizontalCard extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: AppTypoGraPhy.textLgBold.copyWith(
+                style: AppTypoGraPhy.textMdBold.copyWith(
                   color: appTheme.textPrimary,
                 ),
                 maxLines: 1,
@@ -64,8 +67,19 @@ final class NFTScreenHorizontalCard extends StatelessWidget {
                 localization.translate(
                   LanguageKey.nftScreenTokenStandard,
                 ),
-                style: AppTypoGraPhy.textSmMedium.copyWith(
+                style: AppTypoGraPhy.textXsSemiBold.copyWith(
                   color: appTheme.textSecondary,
+                ),
+              ),
+              const SizedBox(
+                height: BoxSize.boxSize02,
+              ),
+              Text(
+                AppDateTime.formatDateHHMMDMMMYYY(
+                  createTime,
+                ),
+                style: AppTypoGraPhy.textXsRegular.copyWith(
+                  color: appTheme.textTertiary,
                 ),
               ),
             ],

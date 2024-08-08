@@ -1,3 +1,4 @@
+import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
 import 'package:a_wallet/src/presentation/widgets/base_screen.dart';
@@ -24,10 +25,14 @@ class NFTScreen extends StatefulWidget {
 }
 
 class _NFTScreenState extends State<NFTScreen> with StateFulBaseScreen {
-  final NFTBloc _bloc = getIt.get<NFTBloc>();
+  late NFTBloc _bloc;
+  final AWalletConfig _config = getIt.get<AWalletConfig>();
 
   @override
   void initState() {
+    _bloc = getIt.get<NFTBloc>(
+      param1: _config,
+    );
     _bloc.add(
       const NFTEventOnInit(),
     );

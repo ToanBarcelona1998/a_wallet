@@ -46,7 +46,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen>
             height: BoxSize.boxSize06,
           ),
           NFTDetailInformationFormWidget(
-            name: widget.nftInformation.cw721Contract.name,
+            name: widget.nftInformation.mediaInfo.onChain.metadata?.name ?? '',
             blockChain: widget.nftInformation.cw721Contract.name,
             contractAddress:
                 widget.nftInformation.cw721Contract.smartContract.address,
@@ -66,7 +66,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen>
       backgroundColor: appTheme.bgPrimary,
       appBar: AppBarDefault(
         appTheme: appTheme,
-        titleKey: '#${widget.nftInformation.tokenId}',
+        titleKey: '${widget.nftInformation.mediaInfo.onChain.metadata?.name}',
         localization: localization,
       ),
       body: child,
