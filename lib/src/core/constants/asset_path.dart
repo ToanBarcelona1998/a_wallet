@@ -98,4 +98,9 @@ sealed class AssetIconPath {
   static const String icBrowserScreenBookmarkActive = '${_baseIconPath}ic_browser_screen_bookmark_active.svg';
   static const String icBrowserScreenNext = '${_baseIconPath}ic_browser_screen_next.svg';
   static const String icBrowserScreenNextBold = '${_baseIconPath}ic_browser_screen_next_bold.svg';
+
+
+  /// NFt screen
+  static const String icNftScreenGrid = '${_baseIconPath}ic_nft_screen_grid.svg';
+  static const String icNftScreenList = '${_baseIconPath}ic_nft_screen_list.svg';
 }

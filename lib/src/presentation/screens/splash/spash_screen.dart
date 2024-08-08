@@ -24,7 +24,7 @@ final class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> with StateFulBaseScreen {
-  final PyxisMobileConfig _config = getIt.get<PyxisMobileConfig>();
+  final AWalletConfig _config = getIt.get<AWalletConfig>();
   final SplashCubit _cubit = getIt.get<SplashCubit>();
 
   @override

@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage>
   final String avatarAsset = randomAvatar();
 
   /// Region declare controller
-  final PyxisMobileConfig _config = getIt.get<PyxisMobileConfig>();
+  final AWalletConfig _config = getIt.get<AWalletConfig>();
   late TabController _controller;
   late PageController _pageController;
 

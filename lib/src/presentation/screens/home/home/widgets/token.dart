@@ -150,7 +150,7 @@ final class _HomePageTokenInfoWidget extends StatelessWidget {
 final class HomePageTokensWidget extends StatelessWidget {
   final AppTheme appTheme;
   final AppLocalizationManager localization;
-  final PyxisMobileConfig config;
+  final AWalletConfig config;
 
   const HomePageTokensWidget({
     required this.appTheme,

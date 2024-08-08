@@ -30,7 +30,7 @@ extension AWalletEnvironmentMapper on AWalletEnvironment {
   }
 }
 
-/// Represents the entire configuration for the Pyxis Wallet app.
+/// Represents the entire configuration for the A Wallet app.
 final class AppConfig {
   final String appName;
   final NativeCoin nativeCoin;
@@ -39,7 +39,7 @@ final class AppConfig {
   final ApiConfig api;
   final Web3AuthConfig web3Auth;
 
-  /// Constructor for creating a [PyxisWalletConfig] instance.
+  /// Constructor for creating a [AppConfig] instance.
   const AppConfig({
     required this.appName,
     required this.nativeCoin,
@@ -49,7 +49,7 @@ final class AppConfig {
     required this.web3Auth,
   });
 
-  /// Factory method for creating a [PyxisWalletConfig] instance from a JSON object.
+  /// Factory method for creating a [AppConfig] instance from a JSON object.
   factory AppConfig.fromJson(Map<String, dynamic> json) {
     return AppConfig(
       appName: json['APP_NAME'],
@@ -256,11 +256,11 @@ final class Web3AuthConfig {
   }
 }
 
-class PyxisMobileConfig {
+class AWalletConfig {
   final Map<String, dynamic> configs;
   final AWalletEnvironment environment;
 
-  PyxisMobileConfig({
+  AWalletConfig({
     required this.configs,
     this.environment = AWalletEnvironment.serenity,
   });

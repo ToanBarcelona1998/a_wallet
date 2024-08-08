@@ -49,7 +49,7 @@ import 'pyxis_mobile_config.dart';
 final getIt = GetIt.instance;
 
 Future<void> initDependency(
-  PyxisMobileConfig config,
+  AWalletConfig config,
   Isar isar,
 ) async {
   final Dio dio = Dio(
@@ -65,7 +65,7 @@ Future<void> initDependency(
     ),
   );
 
-  getIt.registerLazySingleton<PyxisMobileConfig>(
+  getIt.registerLazySingleton<AWalletConfig>(
     () => config,
   );
 
@@ -411,7 +411,7 @@ Future<void> initDependency(
     ),
   );
 
-  getIt.registerFactoryParam<HomePageBloc, PyxisMobileConfig, dynamic>(
+  getIt.registerFactoryParam<HomePageBloc, AWalletConfig, dynamic>(
     (config, _) => HomePageBloc(
       getIt.get<TokenUseCase>(),
       getIt.get<AccountUseCase>(),
@@ -430,7 +430,7 @@ Future<void> initDependency(
     ),
   );
 
-  getIt.registerFactoryParam<ConfirmSendBloc, PyxisMobileConfig,
+  getIt.registerFactoryParam<ConfirmSendBloc, AWalletConfig,
       Map<String, dynamic>>(
     (config, arguments) => ConfirmSendBloc(getIt.get<KeyStoreUseCase>(),
         config: config,

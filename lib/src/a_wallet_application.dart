@@ -23,7 +23,7 @@ final class AWalletApplication extends StatefulWidget {
 
 class _AWalletApplicationState extends State<AWalletApplication>
     with WidgetsBindingObserver {
-  final PyxisMobileConfig _config = getIt.get<PyxisMobileConfig>();
+  final AWalletConfig _config = getIt.get<AWalletConfig>();
 
   @override
   void initState() {

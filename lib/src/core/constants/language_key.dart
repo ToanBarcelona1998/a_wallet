@@ -242,4 +242,17 @@ sealed class LanguageKey {
   static const String addressBookScreenAddContactAdded = 'address_book_screen_add_contact_added';
   static const String addressBookScreenEmptyContact = 'address_book_screen_empty_contact';
   static const String addressBookScreenExist = 'address_book_screen_exists';
+
+  // Nft screen
+  static const String nftScreenAppBarTitle = 'nft_screen_app_bar_title';
+  static const String nftScreenTotal = 'nft_screen_total';
+  static const String nftScreenNoNFTFound = 'nft_screen_no_nft_found';
+  static const String nftScreenTokenStandard = 'nft_screen_token_standard';
+
+  // nft detail screen
+  static const String nftDetailScreenName = 'nft_detail_screen_name';
+  static const String nftDetailScreenBlockChain = 'nft_detail_screen_blockChain';
+  static const String nftDetailScreenContractAddress = 'nft_detail_screen_contract_address';
+  static const String nftDetailScreenTokenStandard = 'nft_detail_screen_token_standard';
+  static const String nftDetailScreenTokenStandardTitle = 'nft_detail_screen_token_standard_title';
 }

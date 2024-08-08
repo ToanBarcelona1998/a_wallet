@@ -208,5 +208,16 @@
   "address_book_screen_add_contact_confirm" : "Confirm",
   "address_book_screen_add_contact_added" : "New contact added",
   "address_book_screen_empty_contact" : "No address book found",
-  "address_book_screen_exists" : "This address book was exists"
+  "address_book_screen_exists" : "This address book was exists",
+
+  "nft_screen_app_bar_title" : "NFTs",
+  "nft_screen_total" : "Total NFTs",
+  "nft_screen_no_nft_found" : "No NFT found",
+  "nft_screen_token_standard" : "ERC721",
+
+  "nft_detail_screen_name" : "Name",
+  "nft_detail_screen_blockChain" : "Blockchain",
+  "nft_detail_screen_contract_address" : "Contract address",
+  "nft_detail_screen_token_standard" : "ERC721",
+  "nft_detail_screen_token_standard_title" : "Token standard"
 }

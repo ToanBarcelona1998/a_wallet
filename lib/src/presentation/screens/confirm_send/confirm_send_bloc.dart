@@ -12,7 +12,7 @@ import 'confirm_send_event.dart';
 import 'confirm_send_state.dart';
 
 final class ConfirmSendBloc extends Bloc<ConfirmSendEvent, ConfirmSendState> {
-  final PyxisMobileConfig config;
+  final AWalletConfig config;
   final KeyStoreUseCase _keyStoreUseCase;
 
   ConfirmSendBloc(

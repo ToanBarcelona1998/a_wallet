@@ -45,6 +45,9 @@ sealed class RoutePath {
   static const String browser = '$home/browser';
   static const String browserSearch = '$home/search';
   static const String browserTabManagement = '$home/tab_management';
+
+  static const String nft = '$home/nft';
+  static const String nftDetail = '$nft/detail';
 }
 
 // This class handles navigation within the application.

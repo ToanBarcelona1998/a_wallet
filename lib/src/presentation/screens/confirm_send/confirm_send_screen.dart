@@ -48,7 +48,7 @@ final class ConfirmSendScreen extends StatefulWidget {
 
 class _ConfirmSendScreenState extends State<ConfirmSendScreen>
     with StateFulBaseScreen, CustomFlutterToast {
-  final PyxisMobileConfig _config = getIt.get<PyxisMobileConfig>();
+  final AWalletConfig _config = getIt.get<AWalletConfig>();
   final HomePageObserver _homePageObserver = getIt.get<HomePageObserver>();
   late ConfirmSendBloc _bloc;
 
