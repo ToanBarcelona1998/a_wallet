@@ -256,4 +256,25 @@ sealed class LanguageKey {
   static const String nftDetailScreenTokenStandard = 'nft_detail_screen_token_standard';
   static const String nftDetailScreenTokenStandardTitle = 'nft_detail_screen_token_standard_title';
   static const String nftDetailScreenTransfer = 'nft_detail_screen_token_transfer';
+
+  // NFT transfer screen
+  static const String nftTransferScreenAppBarTitle = 'nft_transfer_screen_app_bar_title';
+  static const String nftTransferScreenFrom = 'nft_transfer_screen_from';
+  static const String nftTransferScreenTo = 'nft_transfer_screen_to';
+  static const String nftTransferScreenToHint = 'nft_transfer_screen_to_hint';
+  static const String nftTransferScreenNext = 'nft_transfer_screen_next';
+  static const String nftTransferScreenInvalidAddress = 'nft_transfer_invalid_address';
+
+  // Confirm transfer nft screen
+  static const String confirmTransferNftScreenAppBarTitle = 'confirm_transfer_nft_screen_app_bar_title';
+  static const String confirmTransferNftScreenMessages = 'confirm_transfer_nft_screen_messages';
+  static const String confirmTransferNftScreenViewData = 'confirm_transfer_nft_screen_view_data';
+  static const String confirmTransferNftScreenViewCompile = 'confirm_transfer_nft_screen_view_compile';
+  static const String confirmTransferNftScreenSend = 'confirm_transfer_nft_screen_send';
+  static const String confirmTransferNftScreenTo = 'confirm_transfer_nft_screen_to';
+  static const String confirmTransferNftScreenFrom = 'confirm_transfer_nft_screen_from';
+  static const String confirmTransferNftScreenRecipient = 'confirm_transfer_nft_screen_recipient';
+  static const String confirmTransferNftScreenFee = 'confirm_transfer_nft_screen_send_fee';
+  static const String confirmTransferNftScreenSendEdit = 'confirm_transfer_nft_screen_send_edit';
+  static const String confirmTransferNftScreenConfirmSend = 'confirm_transfer_nft_screen_confirm_send';
 }

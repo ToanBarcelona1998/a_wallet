@@ -1,3 +1,4 @@
+import 'package:a_wallet/src/presentation/screens/confirm_transfer_nft/confirm_transfer_nft_selector.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,25 +10,22 @@ import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
 import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:a_wallet/src/core/utils/json_formatter.dart';
-import 'package:a_wallet/src/presentation/screens/confirm_send/confirm_send_selector.dart';
 import 'package:a_wallet/src/presentation/widgets/scroll_bar_widget.dart';
 import 'package:a_wallet/src/presentation/widgets/transaction_box_widget.dart';
 
-class ConfirmSendScreenMessageFormWidget extends StatelessWidget {
+class ConfirmTransferNftScreenMessageFormWidget extends StatelessWidget {
   final AppLocalizationManager localization;
   final AppTheme appTheme;
   final VoidCallback onChangeIsShowedMsg;
-  final String amount;
-  final String tokenName;
+  final String tokenId;
   final String recipient;
   final AppNetworkType networkType;
 
-  const ConfirmSendScreenMessageFormWidget({
+  const ConfirmTransferNftScreenMessageFormWidget({
     required this.appTheme,
     required this.localization,
     required this.onChangeIsShowedMsg,
-    required this.amount,
-    required this.tokenName,
+    required this.tokenId,
     required this.recipient,
     required this.networkType,
     super.key,
@@ -42,7 +40,7 @@ class ConfirmSendScreenMessageFormWidget extends StatelessWidget {
           children: [
             Text(
               localization.translate(
-                LanguageKey.confirmSendScreenMessages,
+                LanguageKey.confirmTransferNftScreenMessages,
               ),
               style: AppTypoGraPhy.textSmSemiBold.copyWith(
                 color: appTheme.textPrimary,
@@ -59,7 +57,7 @@ class ConfirmSendScreenMessageFormWidget extends StatelessWidget {
                   const SizedBox(
                     width: BoxSize.boxSize04,
                   ),
-                  ConfirmSendIsShowedFullMessageSelector(
+                  ConfirmTransferNftIsShowedFullMessageSelector(
                     builder: (isShowedMsg) {
                       final style = AppTypoGraPhy.textSmMedium.copyWith(
                         color: appTheme.textBrandPrimary,
@@ -67,14 +65,14 @@ class ConfirmSendScreenMessageFormWidget extends StatelessWidget {
                       if (isShowedMsg) {
                         return Text(
                           localization.translate(
-                            LanguageKey.confirmSendScreenViewCompile,
+                            LanguageKey.confirmTransferNftScreenViewCompile,
                           ),
                           style: style,
                         );
                       }
                       return Text(
                         localization.translate(
-                          LanguageKey.confirmSendScreenViewData,
+                          LanguageKey.confirmTransferNftScreenViewData,
                         ),
                         style: style,
                       );
@@ -90,7 +88,7 @@ class ConfirmSendScreenMessageFormWidget extends StatelessWidget {
         ),
         TransactionBoxWidget(
           appTheme: appTheme,
-          child: ConfirmSendIsShowedFullMessageSelector(
+          child: ConfirmTransferNftIsShowedFullMessageSelector(
             builder: (isShowedMsg) {
               if (isShowedMsg) {
                 return ScrollBarWidget(
@@ -101,7 +99,7 @@ class ConfirmSendScreenMessageFormWidget extends StatelessWidget {
                       minHeight: BoxSize.boxSize13,
                     ),
                     child: SingleChildScrollView(
-                      child: ConfirmSendMsgSelector(
+                      child: ConfirmTransferNftMsgSelector(
                         builder: (msg) {
                           return Text(
                             prettyJson(msg),
@@ -129,7 +127,7 @@ class ConfirmSendScreenMessageFormWidget extends StatelessWidget {
                       children: [
                         Text(
                           localization.translate(
-                            LanguageKey.confirmSendScreenSend,
+                            LanguageKey.confirmTransferNftScreenSend,
                           ),
                           style: AppTypoGraPhy.textSmBold.copyWith(
                             color: appTheme.textPrimary,
@@ -143,21 +141,21 @@ class ConfirmSendScreenMessageFormWidget extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: localization.translate(
-                                  LanguageKey.confirmSendScreenSend,
+                                  LanguageKey.confirmTransferNftScreenSend,
                                 ),
                                 style: AppTypoGraPhy.textSmMedium.copyWith(
                                   color: appTheme.textTertiary,
                                 ),
                               ),
                               TextSpan(
-                                text: ' [$amount] [$tokenName] ',
+                                text: ' [$tokenId] ',
                                 style: AppTypoGraPhy.textSmMedium.copyWith(
                                   color: appTheme.textPrimary,
                                 ),
                               ),
                               TextSpan(
                                 text: localization.translate(
-                                  LanguageKey.confirmSendScreenTo,
+                                  LanguageKey.confirmTransferNftScreenTo,
                                 ),
                                 style: AppTypoGraPhy.textSmMedium.copyWith(
                                   color: appTheme.textTertiary,

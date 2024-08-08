@@ -3,6 +3,7 @@ import 'package:a_wallet/src/presentation/screens/browser/browser_screen.dart';
 import 'package:a_wallet/src/presentation/screens/browser_search/browser_search_screen.dart';
 import 'package:a_wallet/src/presentation/screens/browser_tab_management/browser_tab_management_screen.dart';
 import 'package:a_wallet/src/presentation/screens/confirm_send/confirm_send_screen.dart';
+import 'package:a_wallet/src/presentation/screens/confirm_transfer_nft/confirm_transfer_nft_screen.dart';
 import 'package:a_wallet/src/presentation/screens/create_passcode/create_passcode_screen.dart';
 import 'package:a_wallet/src/presentation/screens/generate_wallet/generate_wallet_creen.dart';
 import 'package:a_wallet/src/presentation/screens/get_started/get_started_screen.dart';
@@ -12,6 +13,7 @@ import 'package:a_wallet/src/presentation/screens/import_wallet_yeti_bot/import_
 import 'package:a_wallet/src/presentation/screens/manage_token/manage_token_screen.dart';
 import 'package:a_wallet/src/presentation/screens/nft/nft_screen.dart';
 import 'package:a_wallet/src/presentation/screens/nft_detail/nft_detail_screen.dart';
+import 'package:a_wallet/src/presentation/screens/nft_transfer/nft_transfer_screen.dart';
 import 'package:a_wallet/src/presentation/screens/re_login/re_login_screen.dart';
 import 'package:a_wallet/src/presentation/screens/scan/scanner_screen.dart';
 import 'package:a_wallet/src/presentation/screens/send/send_screen.dart';
@@ -53,6 +55,9 @@ sealed class RoutePath {
 
   static const String nft = '$home/nft';
   static const String nftDetail = '$nft/detail';
+
+  static const String nftTransfer = '$nftDetail/transfer';
+  static const String confirmTransferNft = '$nftTransfer/confirm';
 }
 
 // This class handles navigation within the application.
@@ -199,6 +204,27 @@ sealed class AppNavigator {
         return _defaultRoute(
           NFTDetailScreen(
             nftInformation: nftInformation,
+          ),
+          settings,
+        );
+      case RoutePath.nftTransfer:
+        final NFTInformation nftInformation =
+            settings.arguments as NFTInformation;
+        return _defaultRoute(
+          NftTransferScreen(
+            nft: nftInformation,
+          ),
+          settings,
+        );
+      case RoutePath.confirmTransferNft:
+        final Map<String, dynamic> arguments =
+            settings.arguments as Map<String, dynamic>;
+        return _defaultRoute(
+          ConfirmTransferNftScreen(
+            appNetwork: arguments['network'],
+            account: arguments['account'],
+            recipient: arguments['recipient'],
+            nft: arguments['nft'],
           ),
           settings,
         );

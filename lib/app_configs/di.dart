@@ -1,11 +1,14 @@
 import 'dart:io';
+import 'package:a_wallet/src/application/provider/local/address_book/address_book_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/local/book_mark/book_mark_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/local/browser/browser_database_service_impl.dart';
 import 'package:a_wallet/src/presentation/screens/browser/browser_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/browser_search/browser_search_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/browser_tab_management/browser_tab_management_bloc.dart';
+import 'package:a_wallet/src/presentation/screens/confirm_transfer_nft/confirm_send_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/home/browser/browser_page_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/nft/nft_bloc.dart';
+import 'package:a_wallet/src/presentation/screens/nft_transfer/nft_transfer_bloc.dart';
 import 'package:data/data.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
@@ -217,6 +220,12 @@ Future<void> initDependency(
     ),
   );
 
+  getIt.registerLazySingleton<AddressBookDatabaseService>(
+    () => AddressBookDatabaseServiceImpl(
+      isar,
+    ),
+  );
+
   // Register repository
   getIt.registerLazySingleton<LocalizationRepository>(
     () => LocalizationRepositoryImpl(
@@ -287,6 +296,12 @@ Future<void> initDependency(
     ),
   );
 
+  getIt.registerLazySingleton<AddressBookRepository>(
+    () => AddressBookRepositoryImpl(
+      getIt.get<AddressBookDatabaseService>(),
+    ),
+  );
+
   // Register use case
   getIt.registerLazySingleton<LocalizationUseCase>(
     () => LocalizationUseCase(
@@ -351,6 +366,12 @@ Future<void> initDependency(
   getIt.registerLazySingleton<BookMarkUseCase>(
     () => BookMarkUseCase(
       getIt.get<BookMarkRepository>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<AddressBookUseCase>(
+    () => AddressBookUseCase(
+      getIt.get<AddressBookRepository>(),
     ),
   );
 
@@ -481,6 +502,24 @@ Future<void> initDependency(
     (config, _) => NFTBloc(
       getIt.get<NftUseCase>(),
       getIt.get<AccountUseCase>(),
+      config: config,
+    ),
+  );
+
+  getIt.registerFactory<NftTransferBloc>(
+    () => NftTransferBloc(
+      getIt.get<AccountUseCase>(),
+      getIt.get<AddressBookUseCase>(),
+    ),
+  );
+
+  getIt.registerFactoryParam<ConfirmTransferNftBloc,AWalletConfig,Map<String,dynamic>>(
+    (config,argument) => ConfirmTransferNftBloc(
+      getIt.get<KeyStoreUseCase>(),
+      nft: argument['nft'],
+      account: argument['account'],
+      appNetwork: argument['network'],
+      recipient: argument['recipient'],
       config: config,
     ),
   );

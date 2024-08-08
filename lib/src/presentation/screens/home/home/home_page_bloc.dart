@@ -13,6 +13,7 @@ import 'package:a_wallet/src/core/factory_creator/nft.dart';
 import 'package:a_wallet/src/core/factory_creator/token_market.dart';
 import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
+import 'package:wallet_core/wallet_core.dart';
 
 import 'home_page_event.dart';
 import 'home_page_state.dart';
@@ -268,7 +269,6 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     }
   }
 
-
   // Fetch balance data from the server
   static Future<void> _fetchBalance(
     BalanceUseCase balanceUseCase,
@@ -290,7 +290,10 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
       final erc20TokenBalances = await balanceUseCase.getErc20TokenBalance(
         request: QueryERC20BalanceRequest(
-          address: account.evmAddress,
+          address: bech32.convertEthAddressToBech32Address(
+            'aura',
+            account.evmAddress,
+          ),
           environment: environment,
         ),
       );
@@ -404,15 +407,15 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         );
 
         token ??= await _tokenUseCase.add(
-            AddTokenRequest(
-              logo: AppLocalConstant.auraLogo,
-              tokenName: config.config.nativeCoin.name,
-              type: TokenType.native,
-              symbol: config.config.nativeCoin.symbol,
-              contractAddress: '',
-              isEnable: true,
-            ),
-          );
+          AddTokenRequest(
+            logo: AppLocalConstant.auraLogo,
+            tokenName: config.config.nativeCoin.name,
+            type: TokenType.native,
+            symbol: config.config.nativeCoin.symbol,
+            contractAddress: '',
+            isEnable: true,
+          ),
+        );
 
         requests.add(
           AddBalanceRequest(
@@ -530,7 +533,7 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   }
 
   // Send a message to fetch account balance data
-  void _sendMessageFetchAccountBalance(Account ?activeAccount) {
+  void _sendMessageFetchAccountBalance(Account? activeAccount) {
     _balanceSendPort?.send({
       'account': activeAccount ?? state.activeAccount!,
       'base_url_v2': config.config.api.v2.url,
@@ -539,7 +542,7 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   }
 
   // Send a message to fetch NFT data
-  void _sendMessageFetchNFTs(Account ?activeAccount) {
+  void _sendMessageFetchNFTs(Account? activeAccount) {
     _nftSendPort?.send({
       'account': activeAccount ?? state.activeAccount!,
       'base_url_v2': config.config.api.v2.url,
@@ -579,9 +582,10 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       // Parse the amount of the token balance using a custom decimal format if provided.
       final amount = double.tryParse(
             token?.type.formatBalance(
-              balance.balance,
-              customDecimal: token.decimal,
-            ) ?? '',
+                  balance.balance,
+                  customDecimal: token.decimal,
+                ) ??
+                '',
           ) ??
           0;
 

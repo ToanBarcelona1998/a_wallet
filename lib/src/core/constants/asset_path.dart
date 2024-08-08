@@ -80,7 +80,7 @@ sealed class AssetIconPath {
   static const String icHomeScreenBottomNavigationBarSetting= '${_baseIconPath}ic_home_screen_bottom_navigation_bar_setting.svg';
   static const String icHomeScreenBottomNavigationBarHome= '${_baseIconPath}ic_home_screen_bottom_navigation_bar_home.svg';
 
-  static const String icConfirmSendScreenViewMessage = '${_baseIconPath}ic_confirm_send_screen_view_message.svg';
+  static const String icCommonConfirmViewMessage = '${_baseIconPath}ic_common_confirm_view_message.svg';
 
   /// Scanner
   static const String icScannerBack = '${_baseIconPath}ic_scanner_back.svg';

@@ -20,7 +20,7 @@ class TransactionResultButtonFormWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextAppButton(
+        PrimaryAppButton(
           text: localization.translate(
             LanguageKey.transactionResultScreenBackToHome,
           ),
@@ -28,17 +28,17 @@ class TransactionResultButtonFormWidget extends StatelessWidget {
             RoutePath.home,
           ),
         ),
-        const SizedBox(
-          height: BoxSize.boxSize05,
-        ),
-        PrimaryAppButton(
-          text: localization.translate(
-            LanguageKey.transactionResultScreenDone,
-          ),
-          onPress: () => AppNavigator.popUntil(
-            RoutePath.send,
-          ),
-        ),
+        // const SizedBox(
+        //   height: BoxSize.boxSize05,
+        // ),
+        // PrimaryAppButton(
+        //   text: localization.translate(
+        //     LanguageKey.transactionResultScreenDone,
+        //   ),
+        //   onPress: () => AppNavigator.popUntil(
+        //     RoutePath.send,
+        //   ),
+        // ),
       ],
     );
   }
