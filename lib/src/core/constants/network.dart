@@ -1,7 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
 
-AppNetwork createNetwork(PyxisMobileConfig config){
+AppNetwork createNetwork(AWalletConfig config){
   return AppNetwork(
     id: 1,
     type: AppNetworkType.evm,

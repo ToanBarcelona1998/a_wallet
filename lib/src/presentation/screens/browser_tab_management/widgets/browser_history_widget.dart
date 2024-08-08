@@ -33,7 +33,7 @@ class BrowserTabManagementHistoryWidget extends StatelessWidget {
         Spacing.spacing02,
       ),
       decoration: BoxDecoration(
-        color: appTheme.bgPrimary,
+        color: appTheme.bgSecondary,
         borderRadius: BorderRadius.circular(
           BorderRadiusSize.borderRadius04,
         ),

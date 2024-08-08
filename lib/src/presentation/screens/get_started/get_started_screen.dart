@@ -24,7 +24,7 @@ class GetStartedScreen extends StatefulWidget {
 
 class _GetStartedScreenState extends State<GetStartedScreen>
     with StateFulBaseScreen, CustomFlutterToast {
-  final PyxisMobileConfig _config = getIt.get<PyxisMobileConfig>();
+  final AWalletConfig _config = getIt.get<AWalletConfig>();
 
   final GetStartedCubit _cubit = getIt.get<GetStartedCubit>();
 

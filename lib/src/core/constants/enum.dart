@@ -5,3 +5,8 @@ enum MediaType{
   audio,
   ip,
 }
+
+enum NFTLayoutType{
+  list,
+  grid,
+}

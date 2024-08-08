@@ -22,7 +22,7 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   final TokenMarketUseCase _tokenMarketUseCase;
   final BalanceUseCase _balanceUseCase;
   final AccountUseCase _accountUseCase;
-  final PyxisMobileConfig config;
+  final AWalletConfig config;
   final TokenUseCase _tokenUseCase;
 
 // Constructor initializing use cases and setting up event handlers

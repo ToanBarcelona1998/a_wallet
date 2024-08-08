@@ -29,7 +29,7 @@ const AWalletEnvironment environment = AWalletEnvironment.staging;
 class LogProviderImpl implements LogProvider {
   @override
   void printLog(String message) {
-    developer.log(message, name: 'pyxis_mobile');
+    developer.log(message, name: 'a_wallet');
   }
 }
 
@@ -118,20 +118,20 @@ void main() async {
     isar = Isar.getInstance(AppLocalConstant.localDbName)!;
   }
 
-  final pickWalletConfig = PyxisMobileConfig(
+  final aWalletConfig = AWalletConfig(
     configs: config,
     environment: environment,
   );
 
   // Init dependencies
   await di.initDependency(
-    pickWalletConfig,
+    aWalletConfig,
     isar,
   );
 
   await _saveAuraToken(
-    pickWalletConfig.config.nativeCoin.name,
-    pickWalletConfig.config.nativeCoin.symbol,
+    aWalletConfig.config.nativeCoin.name,
+    aWalletConfig.config.nativeCoin.symbol,
   );
 
   // Load language

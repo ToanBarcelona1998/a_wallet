@@ -2,7 +2,10 @@ import 'dart:io';
 import 'package:a_wallet/src/application/provider/local/book_mark/book_mark_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/local/browser/browser_database_service_impl.dart';
 import 'package:a_wallet/src/presentation/screens/browser/browser_bloc.dart';
+import 'package:a_wallet/src/presentation/screens/browser_search/browser_search_bloc.dart';
+import 'package:a_wallet/src/presentation/screens/browser_tab_management/browser_tab_management_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/home/browser/browser_page_bloc.dart';
+import 'package:a_wallet/src/presentation/screens/nft/nft_bloc.dart';
 import 'package:data/data.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
@@ -49,7 +52,7 @@ import 'pyxis_mobile_config.dart';
 final getIt = GetIt.instance;
 
 Future<void> initDependency(
-  PyxisMobileConfig config,
+  AWalletConfig config,
   Isar isar,
 ) async {
   final Dio dio = Dio(
@@ -65,7 +68,7 @@ Future<void> initDependency(
     ),
   );
 
-  getIt.registerLazySingleton<PyxisMobileConfig>(
+  getIt.registerLazySingleton<AWalletConfig>(
     () => config,
   );
 
@@ -411,7 +414,7 @@ Future<void> initDependency(
     ),
   );
 
-  getIt.registerFactoryParam<HomePageBloc, PyxisMobileConfig, dynamic>(
+  getIt.registerFactoryParam<HomePageBloc, AWalletConfig, dynamic>(
     (config, _) => HomePageBloc(
       getIt.get<TokenUseCase>(),
       getIt.get<AccountUseCase>(),
@@ -430,7 +433,7 @@ Future<void> initDependency(
     ),
   );
 
-  getIt.registerFactoryParam<ConfirmSendBloc, PyxisMobileConfig,
+  getIt.registerFactoryParam<ConfirmSendBloc, AWalletConfig,
       Map<String, dynamic>>(
     (config, arguments) => ConfirmSendBloc(getIt.get<KeyStoreUseCase>(),
         config: config,
@@ -461,6 +464,24 @@ Future<void> initDependency(
       getIt.get<BrowserManagementUseCase>(),
       getIt.get<BookMarkUseCase>(),
       initUrl: initUrl,
+    ),
+  );
+
+  getIt.registerFactory<BrowserSearchBloc>(
+    () => BrowserSearchBloc(),
+  );
+
+  getIt.registerFactory<BrowserTabManagementBloc>(
+    () => BrowserTabManagementBloc(
+      getIt.get<BrowserManagementUseCase>(),
+    ),
+  );
+
+  getIt.registerFactoryParam<NFTBloc, AWalletConfig, dynamic>(
+    (config, _) => NFTBloc(
+      getIt.get<NftUseCase>(),
+      getIt.get<AccountUseCase>(),
+      config: config,
     ),
   );
 }
