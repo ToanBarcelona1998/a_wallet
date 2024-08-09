@@ -270,4 +270,18 @@ sealed class LanguageKey {
   static const String confirmTransferNftScreenFee = 'confirm_transfer_nft_screen_send_fee';
   static const String confirmTransferNftScreenSendEdit = 'confirm_transfer_nft_screen_send_edit';
   static const String confirmTransferNftScreenConfirmSend = 'confirm_transfer_nft_screen_confirm_send';
+
+  // Setting passcode and bio screen
+  static const String settingPasscodeScreenAppBarTitle = 'setting_passcode_screen_app_bar_title';
+  static const String settingPasscodeScreenChangePasscode = 'setting_passcode_screen_change_passcode';
+  static const String settingPasscodeScreenFaceId = 'setting_passcode_screen_face_id';
+  static const String settingPasscodeScreenSetNewPasscodeSuccessful = 'setting_passcode_screen_set_new_passcode_successful';
+
+  // Setting change passcode screen
+  static const settingChangePasscodeScreenEnterYourPasscode = 'setting_change_passcode_screen_enter_your_password';
+  static const settingChangePasscodeScreenInputPasscodeInvalid = 'setting_change_passcode_screen_input_passcode_invalid';
+  static const settingChangePasscodeScreenCreateNewPasscode = 'setting_change_passcode_screen_create_new_pass_code';
+  static const settingChangePasscodeScreenCreateNewPasscodeContent = 'setting_change_passcode_screen_create_new_pass_code_content';
+  static const settingChangePasscodeScreenConfirmPasscode = 'setting_change_passcode_screen_confirm_passcode';
+  static const settingChangePasscodeScreenConfirmPasscodeInvalid = 'setting_change_passcode_screen_confirm_passcode_invalid';
 }

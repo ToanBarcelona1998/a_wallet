@@ -1,3 +1,4 @@
+import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/navigator.dart';
 import 'package:a_wallet/src/presentation/widgets/divider_widget.dart';
 
@@ -25,10 +26,14 @@ class _SettingPageState extends State<SettingPage> with StateFulBaseScreen {
       child: Column(
         children: [
           SettingPageOptionWidget(
-            onTap: () {},
+            onTap: () {
+              AppNavigator.push(
+                RoutePath.settingPassCodeAndBioMetric,
+              );
+            },
             appTheme: appTheme,
             localization: localization,
-            iconPath: '',
+            iconPath: AssetIconPath.icCommonLock,
             labelPath: LanguageKey.settingsPagePasscode,
           ),
           SettingPageOptionWidget(
@@ -39,14 +44,14 @@ class _SettingPageState extends State<SettingPage> with StateFulBaseScreen {
             },
             appTheme: appTheme,
             localization: localization,
-            iconPath: '',
+            iconPath: AssetIconPath.icCommonLock,
             labelPath: LanguageKey.settingsPageAddressBook,
           ),
           SettingPageOptionWidget(
             onTap: () {},
             appTheme: appTheme,
             localization: localization,
-            iconPath: '',
+            iconPath: AssetIconPath.icCommonLock,
             labelPath: LanguageKey.settingsPageLanguage,
           ),
           const SizedBox(
@@ -62,7 +67,7 @@ class _SettingPageState extends State<SettingPage> with StateFulBaseScreen {
             onTap: () {},
             appTheme: appTheme,
             localization: localization,
-            iconPath: '',
+            iconPath: AssetIconPath.icCommonDelete,
             labelPath: LanguageKey.settingsPageLogout,
           ),
         ],

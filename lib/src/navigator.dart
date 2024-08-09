@@ -18,6 +18,8 @@ import 'package:a_wallet/src/presentation/screens/nft_transfer/nft_transfer_scre
 import 'package:a_wallet/src/presentation/screens/re_login/re_login_screen.dart';
 import 'package:a_wallet/src/presentation/screens/scan/scanner_screen.dart';
 import 'package:a_wallet/src/presentation/screens/send/send_screen.dart';
+import 'package:a_wallet/src/presentation/screens/setting_change_passcode/setting_change_passcode_screen.dart';
+import 'package:a_wallet/src/presentation/screens/setting_passcode_and_biometric/setting_passcode_and_biometric_screen.dart';
 import 'package:a_wallet/src/presentation/screens/social_login_yeti_bot/social_login_yeti_bot_screen.dart';
 import 'package:a_wallet/src/presentation/screens/splash/spash_screen.dart';
 import 'package:a_wallet/src/presentation/screens/transaction_result/transaction_result_screen.dart';
@@ -57,7 +59,15 @@ sealed class RoutePath {
   static const String nft = '$home/nft';
   static const String nftDetail = '$nft/detail';
 
-  static const String addressBook = '$home/address_book';
+  static const String _setting = '$home/setting';
+
+  static const String addressBook = '$_setting/address_book';
+
+  static const String settingPassCodeAndBioMetric =
+      '$_setting/setting_change_passcode_and_biometric';
+
+  static const String settingChangePassCode =
+      '$settingPassCodeAndBioMetric/change_passcode';
 
   static const String nftTransfer = '$nftDetail/transfer';
   static const String confirmTransferNft = '$nftTransfer/confirm';
@@ -234,6 +244,16 @@ sealed class AppNavigator {
       case RoutePath.addressBook:
         return _defaultRoute(
           const AddressBookScreen(),
+          settings,
+        );
+      case RoutePath.settingChangePassCode:
+        return _defaultRoute(
+          const SettingChangePasscodeScreen(),
+          settings,
+        );
+      case RoutePath.settingPassCodeAndBioMetric:
+        return _defaultRoute(
+          const SettingPasscodeAndBiometricScreen(),
           settings,
         );
       default:
