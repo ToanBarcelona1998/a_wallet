@@ -2,6 +2,7 @@ import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/utils/copy.dart';
+import 'package:a_wallet/src/navigator.dart';
 import 'package:a_wallet/src/presentation/widgets/app_button.dart';
 import 'package:a_wallet/src/presentation/widgets/base_screen.dart';
 import 'package:domain/domain.dart';
@@ -68,6 +69,10 @@ class _NFTDetailScreenState extends State<NFTDetailScreen>
         PrimaryAppButton(
           text: localization.translate(
             LanguageKey.nftDetailScreenTransfer,
+          ),
+          onPress: () => AppNavigator.push(
+            RoutePath.nftTransfer,
+            widget.nftInformation,
           ),
         ),
       ],

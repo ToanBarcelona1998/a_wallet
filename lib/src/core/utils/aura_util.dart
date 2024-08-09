@@ -37,7 +37,6 @@ extension FormatAuraByType on TokenType{
       case TokenType.erc20:
         decimal = customDecimal ?? decimal;
         break;
-        break;
     }
 
     double auraD = double.tryParse(balance) ?? 0;

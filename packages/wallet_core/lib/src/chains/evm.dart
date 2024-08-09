@@ -125,6 +125,41 @@ class EvmChainClient {
     );
   }
 
+  Future<Ethereum.SigningOutput> createErc721Transaction({
+    required AWallet wallet,
+    required BigInt gasLimit,
+    required BigInt tokenId,
+    required String contractAddress,
+    required String recipient,
+    BigInt? gasPrice,
+  }) async {
+    final BigInt chainId = await _web3client.getChainId();
+
+    if (gasPrice == null) {
+      final EtherAmount remoteGasPrice = await _web3client.getGasPrice();
+
+      gasPrice = remoteGasPrice.getInWei;
+    }
+
+    final nonce = await _web3client.getTransactionCount(
+      EthereumAddress.fromHex(
+        wallet.address,
+      ),
+    );
+
+    return createERC721TransferTransaction(
+      privateKey: wallet.privateKeyData,
+      chainId: chainId,
+      gasLimit: gasLimit,
+      contractAddress: contractAddress,
+      recipient: recipient,
+      gasPrice: gasPrice,
+      nonce: BigInt.from(nonce),
+      from: wallet.address,
+      tokenId: tokenId,
+    );
+  }
+
   Future<BigInt> estimateGas({
     required String sender,
     required BigInt amount,

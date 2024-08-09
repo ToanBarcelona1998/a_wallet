@@ -99,14 +99,9 @@
   "browser_page_no_book_mark_found" : "No bookmark found",
 
   "settings_page_title": "Settings",
-  "settings_page_profile_section": "Profile",
-  "settings_page_edit_profile": "Edit Profile",
-  "settings_page_change_password": "Change Password",
-  "settings_page_preferences_section": "Preferences",
   "settings_page_language": "Language",
-  "settings_page_notifications": "Notifications",
-  "settings_page_system_section": "System",
-  "settings_page_reset_onboarding": "Reset Onboarding",
+  "setting_page_address_book" : "Address book",
+  "setting_page_passcode" : "Passcode and Biometrics",
   "settings_page_logout": "Logout",
 
   "send_screen_app_bar_title" : "Send",
@@ -141,8 +136,6 @@
   "confirm_send_screen_send_fee" : "Transaction fee",
   "confirm_send_screen_send_edit" : "Edit",
   "confirm_send_screen_confirm_send" : "Confirm Send",
-  "confirm_send_screen_memo" : "Memo",
-  "confirm_send_screen_memo_hint" : "Input memo...",
 
   "transaction_result_screen_title" : "Transaction successful!",
   "transaction_result_screen_from" : "From",
@@ -150,7 +143,6 @@
   "transaction_result_screen_time" : "Time",
   "transaction_result_screen_tx" : "Transaction",
   "transaction_result_screen_back_to_home" : "Back to homepage",
-  "transaction_result_screen_back_to_done" : "Done",
 
   "manage_token_screen_app_bar_title" : "Manage tokens",
   "manage_token_screen_search_hint" : "Search by token name",
@@ -220,5 +212,24 @@
   "nft_detail_screen_contract_address" : "Contract address",
   "nft_detail_screen_token_standard" : "ERC721",
   "nft_detail_screen_token_standard_title" : "Token standard",
-  "nft_detail_screen_token_transfer" : "Transfer"
+  "nft_detail_screen_token_transfer" : "Transfer",
+
+  "nft_transfer_screen_app_bar_title" : "Transfer NFT",
+  "nft_transfer_screen_from" : "From",
+  "nft_transfer_screen_to" : "To address",
+  "nft_transfer_screen_to_hint" : "Enter Address",
+  "nft_transfer_screen_next" : "Next",
+  "nft_transfer_invalid_address" : "Invalid address.",
+
+  "confirm_transfer_nft_screen_app_bar_title" : "Transfer NFT",
+  "confirm_transfer_nft_screen_messages" : "Messages",
+  "confirm_transfer_nft_screen_view_data" : "View data",
+  "confirm_transfer_nft_screen_view_compile" : "View compile",
+  "confirm_transfer_nft_screen_send" : "Send",
+  "confirm_transfer_nft_screen_to" : "to",
+  "confirm_transfer_nft_screen_from" : "From",
+  "confirm_transfer_nft_screen_recipient" : "Recipient",
+  "confirm_transfer_nft_screen_send_fee" : "Transaction fee",
+  "confirm_transfer_nft_screen_send_edit" : "Edit",
+  "confirm_transfer_nft_screen_confirm_send" : "Confirm Send"
 }

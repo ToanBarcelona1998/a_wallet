@@ -5,7 +5,7 @@ import 'package:trust_wallet_core/protobuf/Ethereum.pb.dart' as Ethereum;
 import 'package:trust_wallet_core/trust_wallet_core_ffi.dart';
 import 'package:wallet_core/src/extensions/bigint_extension.dart';
 
-Ethereum.SigningOutput evmSigner(Uint8List bytes){
+Ethereum.SigningOutput evmSigner(Uint8List bytes) {
   final Uint8List signBytes = AnySigner.sign(
     bytes,
     TWCoinType.TWCoinTypeEthereum,
@@ -61,6 +61,36 @@ Ethereum.SigningOutput createEvmTransferTransaction({
     transaction: Ethereum.Transaction(
       transfer: Ethereum.Transaction_Transfer(
         amount: amount.toUin8List(),
+      ),
+    ),
+  );
+
+  return evmSigner(signingInput.writeToBuffer());
+}
+
+Ethereum.SigningOutput createERC721TransferTransaction({
+  required Uint8List privateKey,
+  required BigInt chainId,
+  required BigInt gasLimit,
+  required String recipient,
+  required BigInt gasPrice,
+  required BigInt nonce,
+  required BigInt tokenId,
+  required String contractAddress,
+  required String from,
+}) {
+  final Ethereum.SigningInput signingInput = Ethereum.SigningInput(
+    toAddress: contractAddress,
+    privateKey: privateKey,
+    chainId: chainId.toUin8List(),
+    gasPrice: gasPrice.toUin8List(),
+    gasLimit: gasLimit.toUin8List(),
+    nonce: nonce.toUin8List(),
+    transaction: Ethereum.Transaction(
+      erc721Transfer: Ethereum.Transaction_ERC721Transfer(
+        to: recipient,
+        from: from,
+        tokenId: tokenId.toUin8List(),
       ),
     ),
   );

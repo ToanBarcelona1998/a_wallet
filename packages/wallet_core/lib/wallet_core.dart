@@ -16,6 +16,7 @@ export 'package:wallet_core/src/constants/chain_list.dart';
 export 'package:wallet_core/src/chains/evm.dart';
 export 'package:wallet_core/src/utils/message_creator.dart';
 export 'package:web3dart/crypto.dart';
+export 'package:wallet_core/src/utils/address_converter.dart';
 
 /// WalletCore class provides various functionalities to manage wallets.
 class WalletCore {

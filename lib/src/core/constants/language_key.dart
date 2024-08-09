@@ -100,7 +100,7 @@ sealed class LanguageKey {
   static const String homePageEstimateNFTValue = 'home_page_estimate_nft_value';
   static const String homePageAllNetwork = 'home_page_all_network';
 
-  ///region browser page
+  // region browser page
   static const String browserPagePlaceHolder = 'browser_page_place_holder';
   static const String browserPageEcosystemTab = 'browser_page_ecosystem_tab';
   static const String browserPageBookMarkTab = 'browser_page_book_mark_tab';
@@ -110,19 +110,13 @@ sealed class LanguageKey {
   static const String browserPageDeleteMessage = 'browser_page_delete_message';
   static const String browserNoBookMarkFound= 'browser_page_no_book_mark_found';
 
-// Settings page
+  // Settings page
   static const String settingsPageTitle = 'settings_page_title';
-  static const String settingsPageProfileSection = 'settings_page_profile_section';
-  static const String settingsPageEditProfile = 'settings_page_edit_profile';
-  static const String settingsPageChangePassword = 'settings_page_change_password';
-  static const String settingsPagePreferencesSection = 'settings_page_preferences_section';
   static const String settingsPageLanguage = 'settings_page_language';
-  static const String settingsPageNotifications = 'settings_page_notifications';
-  static const String settingsPageSystemSection = 'settings_page_system_section';
-  static const String settingsPageResetOnboarding = 'settings_page_reset_onboarding';
+  static const String settingsPageAddressBook = 'setting_page_address_book';
+  static const String settingsPagePasscode= 'setting_page_passcode';
   static const String settingsPageLogout = 'settings_page_logout';
 
-  
   
   // Send screen
   static const String sendScreenAppBarTitle = 'send_screen_app_bar_title';
@@ -175,7 +169,6 @@ sealed class LanguageKey {
   static const String transactionResultScreenTime = 'transaction_result_screen_time';
   static const String transactionResultScreenHash = 'transaction_result_screen_tx';
   static const String transactionResultScreenBackToHome = 'transaction_result_screen_back_to_home';
-  static const String transactionResultScreenDone = 'transaction_result_screen_back_to_done';
 
   // Manage token screen
   static const manageTokenScreenAppBarTitle = 'manage_token_screen_app_bar_title';
@@ -256,4 +249,39 @@ sealed class LanguageKey {
   static const String nftDetailScreenTokenStandard = 'nft_detail_screen_token_standard';
   static const String nftDetailScreenTokenStandardTitle = 'nft_detail_screen_token_standard_title';
   static const String nftDetailScreenTransfer = 'nft_detail_screen_token_transfer';
+
+  // NFT transfer screen
+  static const String nftTransferScreenAppBarTitle = 'nft_transfer_screen_app_bar_title';
+  static const String nftTransferScreenFrom = 'nft_transfer_screen_from';
+  static const String nftTransferScreenTo = 'nft_transfer_screen_to';
+  static const String nftTransferScreenToHint = 'nft_transfer_screen_to_hint';
+  static const String nftTransferScreenNext = 'nft_transfer_screen_next';
+  static const String nftTransferScreenInvalidAddress = 'nft_transfer_invalid_address';
+
+  // Confirm transfer nft screen
+  static const String confirmTransferNftScreenAppBarTitle = 'confirm_transfer_nft_screen_app_bar_title';
+  static const String confirmTransferNftScreenMessages = 'confirm_transfer_nft_screen_messages';
+  static const String confirmTransferNftScreenViewData = 'confirm_transfer_nft_screen_view_data';
+  static const String confirmTransferNftScreenViewCompile = 'confirm_transfer_nft_screen_view_compile';
+  static const String confirmTransferNftScreenSend = 'confirm_transfer_nft_screen_send';
+  static const String confirmTransferNftScreenTo = 'confirm_transfer_nft_screen_to';
+  static const String confirmTransferNftScreenFrom = 'confirm_transfer_nft_screen_from';
+  static const String confirmTransferNftScreenRecipient = 'confirm_transfer_nft_screen_recipient';
+  static const String confirmTransferNftScreenFee = 'confirm_transfer_nft_screen_send_fee';
+  static const String confirmTransferNftScreenSendEdit = 'confirm_transfer_nft_screen_send_edit';
+  static const String confirmTransferNftScreenConfirmSend = 'confirm_transfer_nft_screen_confirm_send';
+
+  // Setting passcode and bio screen
+  static const String settingPasscodeScreenAppBarTitle = 'setting_passcode_screen_app_bar_title';
+  static const String settingPasscodeScreenChangePasscode = 'setting_passcode_screen_change_passcode';
+  static const String settingPasscodeScreenFaceId = 'setting_passcode_screen_face_id';
+  static const String settingPasscodeScreenSetNewPasscodeSuccessful = 'setting_passcode_screen_set_new_passcode_successful';
+
+  // Setting change passcode screen
+  static const settingChangePasscodeScreenEnterYourPasscode = 'setting_change_passcode_screen_enter_your_password';
+  static const settingChangePasscodeScreenInputPasscodeInvalid = 'setting_change_passcode_screen_input_passcode_invalid';
+  static const settingChangePasscodeScreenCreateNewPasscode = 'setting_change_passcode_screen_create_new_pass_code';
+  static const settingChangePasscodeScreenCreateNewPasscodeContent = 'setting_change_passcode_screen_create_new_pass_code_content';
+  static const settingChangePasscodeScreenConfirmPasscode = 'setting_change_passcode_screen_confirm_passcode';
+  static const settingChangePasscodeScreenConfirmPasscodeInvalid = 'setting_change_passcode_screen_confirm_passcode_invalid';
 }
