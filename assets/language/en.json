@@ -99,14 +99,9 @@
   "browser_page_no_book_mark_found" : "No bookmark found",
 
   "settings_page_title": "Settings",
-  "settings_page_profile_section": "Profile",
-  "settings_page_edit_profile": "Edit Profile",
-  "settings_page_change_password": "Change Password",
-  "settings_page_preferences_section": "Preferences",
   "settings_page_language": "Language",
-  "settings_page_notifications": "Notifications",
-  "settings_page_system_section": "System",
-  "settings_page_reset_onboarding": "Reset Onboarding",
+  "setting_page_address_book" : "Address book",
+  "setting_page_passcode" : "Passcode and Biometrics",
   "settings_page_logout": "Logout",
 
   "send_screen_app_bar_title" : "Send",
@@ -148,7 +143,6 @@
   "transaction_result_screen_time" : "Time",
   "transaction_result_screen_tx" : "Transaction",
   "transaction_result_screen_back_to_home" : "Back to homepage",
-  "transaction_result_screen_back_to_done" : "Done",
 
   "manage_token_screen_app_bar_title" : "Manage tokens",
   "manage_token_screen_search_hint" : "Search by token name",

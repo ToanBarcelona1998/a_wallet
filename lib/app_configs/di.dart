@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:a_wallet/src/application/provider/local/address_book/address_book_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/local/book_mark/book_mark_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/local/browser/browser_database_service_impl.dart';
+import 'package:a_wallet/src/presentation/screens/address_book/address_book_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/browser/browser_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/browser_search/browser_search_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/browser_tab_management/browser_tab_management_bloc.dart';
@@ -513,14 +514,21 @@ Future<void> initDependency(
     ),
   );
 
-  getIt.registerFactoryParam<ConfirmTransferNftBloc,AWalletConfig,Map<String,dynamic>>(
-    (config,argument) => ConfirmTransferNftBloc(
+  getIt.registerFactoryParam<ConfirmTransferNftBloc, AWalletConfig,
+      Map<String, dynamic>>(
+    (config, argument) => ConfirmTransferNftBloc(
       getIt.get<KeyStoreUseCase>(),
       nft: argument['nft'],
       account: argument['account'],
       appNetwork: argument['network'],
       recipient: argument['recipient'],
       config: config,
+    ),
+  );
+
+  getIt.registerFactory<AddressBookBloc>(
+    () => AddressBookBloc(
+      getIt.get<AddressBookUseCase>(),
     ),
   );
 }

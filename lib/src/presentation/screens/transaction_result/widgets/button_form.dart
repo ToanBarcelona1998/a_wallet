@@ -28,17 +28,6 @@ class TransactionResultButtonFormWidget extends StatelessWidget {
             RoutePath.home,
           ),
         ),
-        // const SizedBox(
-        //   height: BoxSize.boxSize05,
-        // ),
-        // PrimaryAppButton(
-        //   text: localization.translate(
-        //     LanguageKey.transactionResultScreenDone,
-        //   ),
-        //   onPress: () => AppNavigator.popUntil(
-        //     RoutePath.send,
-        //   ),
-        // ),
       ],
     );
   }

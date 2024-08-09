@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:a_wallet/src/application/provider/local/address_book/address_book_db.dart';
 import 'package:a_wallet/src/application/provider/local/book_mark/bookmark_db.dart';
 import 'package:a_wallet/src/application/provider/local/browser/browser_db.dart';
 import 'package:a_wallet/src/core/constants/aura_ecosystem.dart';
@@ -108,6 +109,7 @@ void main() async {
         TokenDbSchema,
         BrowserDbSchema,
         BookMarkDbSchema,
+        AddressBookDbSchema,
       ],
       directory: path,
       name: AppLocalConstant.localDbName,

@@ -100,7 +100,7 @@ sealed class LanguageKey {
   static const String homePageEstimateNFTValue = 'home_page_estimate_nft_value';
   static const String homePageAllNetwork = 'home_page_all_network';
 
-  ///region browser page
+  // region browser page
   static const String browserPagePlaceHolder = 'browser_page_place_holder';
   static const String browserPageEcosystemTab = 'browser_page_ecosystem_tab';
   static const String browserPageBookMarkTab = 'browser_page_book_mark_tab';
@@ -110,19 +110,13 @@ sealed class LanguageKey {
   static const String browserPageDeleteMessage = 'browser_page_delete_message';
   static const String browserNoBookMarkFound= 'browser_page_no_book_mark_found';
 
-// Settings page
+  // Settings page
   static const String settingsPageTitle = 'settings_page_title';
-  static const String settingsPageProfileSection = 'settings_page_profile_section';
-  static const String settingsPageEditProfile = 'settings_page_edit_profile';
-  static const String settingsPageChangePassword = 'settings_page_change_password';
-  static const String settingsPagePreferencesSection = 'settings_page_preferences_section';
   static const String settingsPageLanguage = 'settings_page_language';
-  static const String settingsPageNotifications = 'settings_page_notifications';
-  static const String settingsPageSystemSection = 'settings_page_system_section';
-  static const String settingsPageResetOnboarding = 'settings_page_reset_onboarding';
+  static const String settingsPageAddressBook = 'setting_page_address_book';
+  static const String settingsPagePasscode= 'setting_page_passcode';
   static const String settingsPageLogout = 'settings_page_logout';
 
-  
   
   // Send screen
   static const String sendScreenAppBarTitle = 'send_screen_app_bar_title';
@@ -175,7 +169,6 @@ sealed class LanguageKey {
   static const String transactionResultScreenTime = 'transaction_result_screen_time';
   static const String transactionResultScreenHash = 'transaction_result_screen_tx';
   static const String transactionResultScreenBackToHome = 'transaction_result_screen_back_to_home';
-  static const String transactionResultScreenDone = 'transaction_result_screen_back_to_done';
 
   // Manage token screen
   static const manageTokenScreenAppBarTitle = 'manage_token_screen_app_bar_title';

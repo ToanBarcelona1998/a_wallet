@@ -1,4 +1,5 @@
 import 'package:a_wallet/src/core/app_routes.dart';
+import 'package:a_wallet/src/presentation/screens/address_book/address_book_screen.dart';
 import 'package:a_wallet/src/presentation/screens/browser/browser_screen.dart';
 import 'package:a_wallet/src/presentation/screens/browser_search/browser_search_screen.dart';
 import 'package:a_wallet/src/presentation/screens/browser_tab_management/browser_tab_management_screen.dart';
@@ -55,6 +56,8 @@ sealed class RoutePath {
 
   static const String nft = '$home/nft';
   static const String nftDetail = '$nft/detail';
+
+  static const String addressBook = '$home/address_book';
 
   static const String nftTransfer = '$nftDetail/transfer';
   static const String confirmTransferNft = '$nftTransfer/confirm';
@@ -226,6 +229,11 @@ sealed class AppNavigator {
             recipient: arguments['recipient'],
             nft: arguments['nft'],
           ),
+          settings,
+        );
+      case RoutePath.addressBook:
+        return _defaultRoute(
+          const AddressBookScreen(),
           settings,
         );
       default:
