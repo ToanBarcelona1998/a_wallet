@@ -104,6 +104,15 @@
   "setting_page_passcode" : "Passcode and Biometrics",
   "settings_page_logout": "Logout",
 
+  "wallet_page_app_bar_title": "Wallets",
+  "wallet_page_add": "Add",
+  "wallet_page_import": "Import",
+  "wallet_page_social": "Social",
+  "wallet_page_add_title": "Add new wallet",
+  "wallet_page_wallet_name": "Wallet name",
+  "wallet_page_wallet_name_hint": "Enter wallet name",
+  "wallet_page_wallet_already": "Wallet name was exists",
+
   "send_screen_app_bar_title" : "Send",
   "send_screen_from" : "From",
   "send_screen_to" : "To address",
@@ -231,5 +240,18 @@
   "confirm_transfer_nft_screen_recipient" : "Recipient",
   "confirm_transfer_nft_screen_send_fee" : "Transaction fee",
   "confirm_transfer_nft_screen_send_edit" : "Edit",
-  "confirm_transfer_nft_screen_confirm_send" : "Confirm Send"
+  "confirm_transfer_nft_screen_confirm_send" : "Confirm Send",
+
+  "setting_passcode_screen_app_bar_title" : "Passcode and Biometrics",
+  "setting_passcode_screen_change_passcode" : "Change Passcode",
+  "setting_passcode_screen_face_id" : "Face ID/Touch ID",
+  "setting_passcode_screen_set_new_passcode_successful" : "Passcode has been set",
+
+
+  "setting_change_passcode_screen_enter_your_password" : "Enter your passcode",
+  "setting_change_passcode_screen_input_passcode_invalid" : "Passcode does wrong",
+  "setting_change_passcode_screen_create_new_pass_code" : "Create a new passcode",
+  "setting_change_passcode_screen_create_new_pass_code_content" : "Set an app passcode to protects your data and funds",
+  "setting_change_passcode_screen_confirm_passcode" : "Confirm the passcode",
+  "setting_change_passcode_screen_confirm_passcode_invalid" : "Passcode does not match"
 }

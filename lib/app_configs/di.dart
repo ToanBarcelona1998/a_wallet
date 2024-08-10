@@ -8,6 +8,7 @@ import 'package:a_wallet/src/presentation/screens/browser_search/browser_search_
 import 'package:a_wallet/src/presentation/screens/browser_tab_management/browser_tab_management_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/confirm_transfer_nft/confirm_send_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/home/browser/browser_page_bloc.dart';
+import 'package:a_wallet/src/presentation/screens/home/wallet/wallet_cubit.dart';
 import 'package:a_wallet/src/presentation/screens/nft/nft_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/nft_transfer/nft_transfer_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/setting_change_passcode/setting_change_passcode_cubit.dart';
@@ -543,6 +544,13 @@ Future<void> initDependency(
   getIt.registerFactory<SettingChangePasscodeCubit>(
     () => SettingChangePasscodeCubit(
       getIt.get<AppSecureUseCase>(),
+    ),
+  );
+
+  getIt.registerFactory<WalletCubit>(
+    () => WalletCubit(
+      getIt.get<AccountUseCase>(),
+      getIt.get<KeyStoreUseCase>(),
     ),
   );
 }

@@ -117,6 +117,16 @@ sealed class LanguageKey {
   static const String settingsPagePasscode= 'setting_page_passcode';
   static const String settingsPageLogout = 'settings_page_logout';
 
+  // Wallet page
+  static const String walletPageAppBarTitle = 'wallet_page_app_bar_title';
+  static const String walletPageAdd = 'wallet_page_add';
+  static const String walletPageImport = 'wallet_page_import';
+  static const String walletPageSocial = 'wallet_page_social';
+  static const String walletPageAddTitle = 'wallet_page_add_title';
+  static const String walletPageWalletName = 'wallet_page_wallet_name';
+  static const String walletPageWalletNameHint = 'wallet_page_wallet_name_hint';
+  static const String walletPageWalletAlready = 'wallet_page_wallet_already';
+
   
   // Send screen
   static const String sendScreenAppBarTitle = 'send_screen_app_bar_title';
