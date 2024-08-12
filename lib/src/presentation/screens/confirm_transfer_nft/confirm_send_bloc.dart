@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:a_wallet/src/core/utils/app_util.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
+import 'package:a_wallet/app_configs/a_wallet_config.dart';
 import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:wallet_core/wallet_core.dart';
 

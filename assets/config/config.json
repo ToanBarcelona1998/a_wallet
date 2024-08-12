@@ -4,19 +4,6 @@
     "name" : "Aura Network",
     "symbol" : "AURA"
   },
-  "COSMOS_INFO": {
-    "symbol": "AURA",
-    "denom": "uaura",
-    "chainId": "aura_6322-2",
-    "decimals" : 6,
-    "chainName": "Aura COSMOS",
-    "rpc" : "https://grpc.aura.network",
-    "gasPrice": {
-      "low": 0.001,
-      "average": 0.0025,
-      "high": 0.004
-    }
-  },
   "EVM_INFO" : {
     "symbol" : "AURA",
     "denom" : "uaura",

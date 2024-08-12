@@ -34,7 +34,6 @@ extension AWalletEnvironmentMapper on AWalletEnvironment {
 final class AppConfig {
   final String appName;
   final NativeCoin nativeCoin;
-  final CosmosInfoConfig cosmosInfo;
   final EvmInfoConfig evmInfo;
   final ApiConfig api;
   final Web3AuthConfig web3Auth;
@@ -43,7 +42,6 @@ final class AppConfig {
   const AppConfig({
     required this.appName,
     required this.nativeCoin,
-    required this.cosmosInfo,
     required this.evmInfo,
     required this.api,
     required this.web3Auth,
@@ -56,7 +54,6 @@ final class AppConfig {
       nativeCoin: NativeCoin.fromJson(
         json['NATIVE_COIN'],
       ),
-      cosmosInfo: CosmosInfoConfig.fromJson(json['COSMOS_INFO']),
       evmInfo: EvmInfoConfig.fromJson(json['EVM_INFO']),
       api: ApiConfig.fromJson(json['API']),
       web3Auth: Web3AuthConfig.fromJson(json['WEB_3_AUTH']),
@@ -103,43 +100,6 @@ final class GasPriceStep {
       low: json['low'],
       average: json['average'],
       high: json['high'],
-    );
-  }
-}
-
-/// Represents the configuration for the Cosmos chain.
-final class CosmosInfoConfig {
-  final String symbol;
-  final String denom;
-  final String chainId;
-  final int decimals;
-  final String chainName;
-  final String rpc;
-  final GasPriceStep gasPriceStep;
-
-  /// Constructor for creating a [CosmosInfoConfig] instance.
-  CosmosInfoConfig({
-    required this.symbol,
-    required this.denom,
-    required this.chainId,
-    required this.decimals,
-    required this.chainName,
-    required this.rpc,
-    required this.gasPriceStep,
-  });
-
-  /// Factory method for creating a [CosmosInfoConfig] instance from a JSON object.
-  factory CosmosInfoConfig.fromJson(Map<String, dynamic> json) {
-    return CosmosInfoConfig(
-      symbol: json['symbol'],
-      denom: json['denom'],
-      chainId: json['chainId'],
-      decimals: json['decimals'],
-      chainName: json['chainName'],
-      rpc: json['rpc'],
-      gasPriceStep: GasPriceStep.fromJson(
-        json['gasPrice'],
-      ),
     );
   }
 }

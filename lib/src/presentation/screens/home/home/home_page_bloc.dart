@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:isar/isar.dart';
-import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
+import 'package:a_wallet/app_configs/a_wallet_config.dart';
 import 'package:a_wallet/src/core/constants/app_local_constant.dart';
 import 'package:a_wallet/src/core/factory_creator/account_balance.dart';
 import 'package:a_wallet/src/core/factory_creator/dio.dart';
@@ -43,6 +43,7 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     on(_onUpdateNFTs);
     on(_onChangeEnableToken);
     on(_onRefreshTokenBalance);
+    on(_onChangeSelectedAccount);
   }
 
   // Isolates and SendPorts for handling concurrent tasks
@@ -619,11 +620,18 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     HomePageOnRefreshTokenBalanceEvent event,
     Emitter<HomePageState> emit,
   ) {
-    switch (event.tokenType) {
-      case TokenType.native:
-        break;
-      case TokenType.erc20:
-        break;
-    }
+    _sendMessageFetchAccountBalance(state.activeAccount);
+  }
+
+  void _onChangeSelectedAccount(
+    HomePageOnChangeAccountEvent event,
+    Emitter<HomePageState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        activeAccount: event.account,
+      ),
+    );
+    _sendMessageFetchAccountBalance(event.account);
   }
 }

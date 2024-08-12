@@ -1,6 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
+import 'package:a_wallet/app_configs/a_wallet_config.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
 import 'package:a_wallet/src/core/constants/app_local_constant.dart';
@@ -217,7 +217,7 @@ final class HomePageTokensWidget extends StatelessWidget {
                     return _HomePageTokenInfoWidget(
                       avatar: AppLocalConstant.auraLogo,
                       symbol: config.config.evmInfo.symbol,
-                      tokenName: config.config.cosmosInfo.chainName,
+                      tokenName: config.config.evmInfo.chainName,
                       percentChange24h: 0,
                       amount: 0,
                       value: 0,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:a_wallet/app_configs/di.dart';
-import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
+import 'package:a_wallet/app_configs/a_wallet_config.dart';
 import 'package:a_wallet/src/application/global/app_global_state/app_global_cubit.dart';
 import 'package:a_wallet/src/application/global/app_global_state/app_global_state.dart';
 import 'package:a_wallet/src/application/global/app_theme/cubit/app_theme_cubit.dart';

@@ -20,6 +20,7 @@ import 'package:a_wallet/src/presentation/screens/scan/scanner_screen.dart';
 import 'package:a_wallet/src/presentation/screens/send/send_screen.dart';
 import 'package:a_wallet/src/presentation/screens/setting_change_passcode/setting_change_passcode_screen.dart';
 import 'package:a_wallet/src/presentation/screens/setting_passcode_and_biometric/setting_passcode_and_biometric_screen.dart';
+import 'package:a_wallet/src/presentation/screens/signed_import_wallet/signed_import_wallet_screen.dart';
 import 'package:a_wallet/src/presentation/screens/social_login_yeti_bot/social_login_yeti_bot_screen.dart';
 import 'package:a_wallet/src/presentation/screens/splash/spash_screen.dart';
 import 'package:a_wallet/src/presentation/screens/transaction_result/transaction_result_screen.dart';
@@ -71,6 +72,10 @@ sealed class RoutePath {
 
   static const String nftTransfer = '$nftDetail/transfer';
   static const String confirmTransferNft = '$nftTransfer/confirm';
+
+  static const String _wallet = '$home/wallet';
+
+  static const String signedImportWallet = '$_wallet/import';
 }
 
 // This class handles navigation within the application.
@@ -254,6 +259,11 @@ sealed class AppNavigator {
       case RoutePath.settingPassCodeAndBioMetric:
         return _defaultRoute(
           const SettingPasscodeAndBiometricScreen(),
+          settings,
+        );
+      case RoutePath.signedImportWallet:
+        return _defaultRoute(
+          const SignedImportWalletScreen(),
           settings,
         );
       default:

@@ -4,19 +4,6 @@
     "name" : "Aura serenity testnet",
     "symbol" : "AURA"
   },
-  "COSMOS_INFO": {
-    "symbol": "AURA",
-    "denom": "uaura",
-    "chainId": "auradev_1236-2",
-    "decimals" : 6,
-    "chainName": "Aura COSMOS Serenity",
-    "rpc" : "http://grpc.serenity.aura.network:9092",
-    "gasPrice": {
-      "low": 0.001,
-      "average": 0.0025,
-      "high": 0.004
-    }
-  },
   "EVM_INFO" : {
     "symbol" : "AURA",
     "denom" : "uaura",

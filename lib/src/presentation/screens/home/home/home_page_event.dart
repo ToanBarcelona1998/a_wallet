@@ -1,4 +1,3 @@
-import 'package:domain/core/core.dart';
 import 'package:domain/domain.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -28,4 +27,8 @@ class HomePageEvent with _$HomePageEvent {
   const factory HomePageEvent.refreshTokenBalance({
     required TokenType tokenType,
   }) = HomePageOnRefreshTokenBalanceEvent;
+
+  const factory HomePageEvent.onChangeAccount({
+    required Account account,
+  }) = HomePageOnChangeAccountEvent;
 }

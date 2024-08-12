@@ -15,5 +15,6 @@ class WalletState with _$WalletState {
   const factory WalletState({
     @Default(WalletStatus.none) WalletStatus status,
     @Default([]) List<Account> accounts,
+    String ?error,
   }) = _WalletState;
 }

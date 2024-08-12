@@ -2,8 +2,12 @@ import 'package:a_wallet/app_configs/di.dart';
 import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
+import 'package:a_wallet/src/core/observer/wallet_page_observer.dart';
 import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
+import 'package:a_wallet/src/core/utils/toast.dart';
+import 'package:a_wallet/src/navigator.dart';
+import 'widgets/social_option.dart';
 import 'widgets/add.dart';
 import 'package:domain/domain.dart';
 import 'widgets/select_create_option.dart';
@@ -29,8 +33,28 @@ class WalletPage extends StatefulWidget {
   State<WalletPage> createState() => _WalletPageState();
 }
 
-class _WalletPageState extends State<WalletPage> with StateFulBaseScreen {
+class _WalletPageState extends State<WalletPage>
+    with StateFulBaseScreen, CustomFlutterToast {
   final WalletCubit _cubit = getIt.get();
+  final WalletPageObserver _walletPageObserver =
+      getIt.get<WalletPageObserver>();
+
+  @override
+  void initState() {
+    _walletPageObserver.addListener(_onListenWalletEvent);
+    super.initState();
+  }
+
+  void _onListenWalletEvent(String event) {
+    LogProvider.log('Wallet page listener\n Receive event: $event');
+    switch (event) {
+      case WalletPageObserver.onImportedAccount:
+        _cubit.refresh();
+        break;
+      default:
+        break;
+    }
+  }
 
   @override
   Widget child(BuildContext context, AppTheme appTheme,
@@ -61,9 +85,7 @@ class _WalletPageState extends State<WalletPage> with StateFulBaseScreen {
                         bottom: Spacing.spacing07,
                       ),
                       child: GestureDetector(
-                        onTap: () {
-
-                        },
+                        onTap: () {},
                         behavior: HitTestBehavior.opaque,
                         child: DefaultWalletInfoWidget(
                           avatarAsset: randomAvatar(),
@@ -88,31 +110,46 @@ class _WalletPageState extends State<WalletPage> with StateFulBaseScreen {
       AppLocalizationManager localization) {
     return BlocProvider.value(
       value: _cubit,
-      child: Scaffold(
-        backgroundColor: appTheme.bgPrimary,
-        appBar: AppBarDefault(
-          appTheme: appTheme,
-          localization: localization,
-          isLeftActionActive: false,
-          titleKey: LanguageKey.walletPageAppBarTitle,
-          actions: [
-            GestureDetector(
-              onTap: () {
-                _onAddClick(appTheme, localization);
-              },
-              behavior: HitTestBehavior.opaque,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Spacing.spacing04,
-                ),
-                child: SvgPicture.asset(
-                  AssetIconPath.icCommonAdd,
+      child: BlocListener<WalletCubit, WalletState>(
+        listener: (context, state) {
+          switch (state.status) {
+            case WalletStatus.none:
+              break;
+            case WalletStatus.loading:
+              break;
+            case WalletStatus.loaded:
+              break;
+            case WalletStatus.error:
+              showToast(state.error ?? '');
+              break;
+          }
+        },
+        child: Scaffold(
+          backgroundColor: appTheme.bgPrimary,
+          appBar: AppBarDefault(
+            appTheme: appTheme,
+            localization: localization,
+            isLeftActionActive: false,
+            titleKey: LanguageKey.walletPageAppBarTitle,
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  _onAddClick(appTheme, localization);
+                },
+                behavior: HitTestBehavior.opaque,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Spacing.spacing04,
+                  ),
+                  child: SvgPicture.asset(
+                    AssetIconPath.icCommonAdd,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
+          body: child,
         ),
-        body: child,
       ),
     );
   }
@@ -158,8 +195,24 @@ class _WalletPageState extends State<WalletPage> with StateFulBaseScreen {
         );
         break;
       case AccountCreateType.import:
+        AppNavigator.push(
+          RoutePath.signedImportWallet,
+        );
         break;
       case AccountCreateType.social:
+        final provider = await AppBottomSheetProvider.showFullScreenDialog<
+            Web3AuthLoginProvider?>(
+          context,
+          child: WalletSelectSocialOptionWidget(
+            appTheme: appTheme,
+            localization: localization,
+          ),
+          appTheme: appTheme,
+        );
+
+        if (provider != null) {
+          _cubit.onSocialLogin(provider);
+        }
         break;
       default:
         break;

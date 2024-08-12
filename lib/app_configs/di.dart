@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:a_wallet/src/application/provider/local/address_book/address_book_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/local/book_mark/book_mark_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/local/browser/browser_database_service_impl.dart';
+import 'package:a_wallet/src/core/observer/wallet_page_observer.dart';
 import 'package:a_wallet/src/presentation/screens/address_book/address_book_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/browser/browser_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/browser_search/browser_search_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:a_wallet/src/presentation/screens/nft/nft_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/nft_transfer/nft_transfer_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/setting_change_passcode/setting_change_passcode_cubit.dart';
 import 'package:a_wallet/src/presentation/screens/setting_passcode_and_biometric/setting_passcode_and_biometric_cubit.dart';
+import 'package:a_wallet/src/presentation/screens/signed_import_wallet/signed_import_wallet_bloc.dart';
 import 'package:data/data.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
@@ -54,7 +56,7 @@ import 'package:web3auth_flutter/enums.dart';
 import 'package:web3auth_flutter/input.dart';
 import 'package:web3auth_flutter/web3auth_flutter.dart';
 
-import 'pyxis_mobile_config.dart';
+import 'a_wallet_config.dart';
 
 final getIt = GetIt.instance;
 
@@ -123,6 +125,10 @@ Future<void> initDependency(
   // Register observers
   getIt.registerLazySingleton<HomePageObserver>(
     () => HomePageObserver(),
+  );
+
+  getIt.registerLazySingleton<WalletPageObserver>(
+    () => WalletPageObserver(),
   );
 
   // Register generator
@@ -550,6 +556,14 @@ Future<void> initDependency(
 
   getIt.registerFactory<WalletCubit>(
     () => WalletCubit(
+      getIt.get<AccountUseCase>(),
+      getIt.get<KeyStoreUseCase>(),
+      getIt.get<Web3AuthUseCase>(),
+    ),
+  );
+
+  getIt.registerFactory<SignedImportWalletBloc>(
+    () => SignedImportWalletBloc(
       getIt.get<AccountUseCase>(),
       getIt.get<KeyStoreUseCase>(),
     ),

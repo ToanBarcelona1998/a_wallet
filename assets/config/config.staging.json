@@ -4,19 +4,6 @@
     "name" : "Aura Euphoria testnet",
     "symbol" : "EAURA"
   },
-  "COSMOS_INFO": {
-    "symbol": "EAURA",
-    "denom": "ueaura",
-    "chainId": "aura_6321-3",
-    "decimals" : 6,
-    "chainName": "Aura COSMOS Euphoria",
-    "rpc" : "http://grpc.euphoria.aura.network:9090",
-    "gasPrice": {
-      "low": 0.001,
-      "average": 0.0025,
-      "high": 0.004
-    }
-  },
   "EVM_INFO" : {
     "symbol" : "EAURA",
     "denom" : "ueaura",

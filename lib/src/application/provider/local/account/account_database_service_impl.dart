@@ -36,17 +36,21 @@ final class AccountDatabaseServiceImpl implements AccountDatabaseService {
   }
 
   @override
-  Future<AccountDto?> get(int id) async{
+  Future<AccountDto?> get(int id) async {
     final aDb = await _database.accountDbs.get(id);
 
     return aDb?.toDto;
   }
 
   @override
-  Future<List<AccountDto>> getAll() async{
+  Future<List<AccountDto>> getAll() async {
     final aDbs = await _database.accountDbs.where().findAll();
 
-    return aDbs.map((e) => e.toDto,).toList();
+    return aDbs
+        .map(
+          (e) => e.toDto,
+        )
+        .toList();
   }
 
   @override
@@ -85,7 +89,7 @@ final class AccountDatabaseServiceImpl implements AccountDatabaseService {
   }
 
   @override
-  Future<AccountDto?> getFirstAccount() async{
+  Future<AccountDto?> getFirstAccount() async {
     final aDb = await _database.accountDbs.filter().indexEqualTo(0).findFirst();
 
     return aDb?.toDto;
@@ -93,33 +97,44 @@ final class AccountDatabaseServiceImpl implements AccountDatabaseService {
 
   @override
   Future<void> deleteAll() {
-    return _database.writeTxn(() async{
-      await _database.accountDbs.where().deleteAll();
-    },);
+    return _database.writeTxn(
+      () async {
+        await _database.accountDbs.where().deleteAll();
+      },
+    );
   }
 
   @override
-  Future<void> updateChangeIndex({
+  Future<AccountDto> updateChangeIndex({
     required int id,
   }) async {
     AccountDb? account = await _database.accountDbs.get(id);
 
     final AccountDb? currentAccount =
-    await _database.accountDbs.filter().indexEqualTo(0).findFirst();
+        await _database.accountDbs.filter().indexEqualTo(0).findFirst();
 
-    if (account == null || currentAccount == null) return;
+    if (account == null || currentAccount == null){
+      throw Exception('Account not found');
+    }
 
-    await _database.writeTxn(() async {
-      await _database.accountDbs.put(
-        currentAccount.copyWith(
-          index: 1,
-        ),
-      );
-      await _database.accountDbs.put(
-        account.copyWith(
+    await _database.writeTxn(
+      () async {
+        await _database.accountDbs.put(
+          currentAccount.copyWith(
+            index: 1,
+          ),
+        );
+
+        account = account!.copyWith(
           index: 0,
-        ),
-      );
-    });
+        );
+
+        await _database.accountDbs.put(
+          account!,
+        );
+      },
+    );
+
+    return account!.toDto;
   }
 }
