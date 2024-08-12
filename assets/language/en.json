@@ -111,6 +111,7 @@
   "wallet_page_add_title": "Add new wallet",
   "wallet_page_wallet_name": "Wallet name",
   "wallet_page_wallet_name_hint": "Enter wallet name",
+  "wallet_page_wallet_address": "Wallet address",
   "wallet_page_wallet_already": "Wallet name was exists",
 
   "send_screen_app_bar_title" : "Send",

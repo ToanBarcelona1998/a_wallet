@@ -1,6 +1,14 @@
 import 'package:a_wallet/app_configs/di.dart';
+import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
+import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/utils/aura_util.dart';
+import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
+import 'widgets/add.dart';
+import 'package:domain/domain.dart';
+import 'widgets/select_create_option.dart';
+import 'package:a_wallet/src/presentation/widgets/bottom_sheet_base/app_bottom_sheet_provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'wallet_cubit.dart';
 import 'wallet_selector.dart';
 import 'wallet_state.dart';
@@ -48,11 +56,22 @@ class _WalletPageState extends State<WalletPage> with StateFulBaseScreen {
                   },
                   data: accounts,
                   builder: (account, _) {
-                    return DefaultWalletInfoWidget(
-                      avatarAsset: randomAvatar(),
-                      appTheme: appTheme,
-                      title: account.name,
-                      address: account.evmAddress,
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: Spacing.spacing07,
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+
+                        },
+                        behavior: HitTestBehavior.opaque,
+                        child: DefaultWalletInfoWidget(
+                          avatarAsset: randomAvatar(),
+                          appTheme: appTheme,
+                          title: account.name,
+                          address: account.evmAddress,
+                        ),
+                      ),
                     );
                   },
                   canLoadMore: false,
@@ -76,9 +95,74 @@ class _WalletPageState extends State<WalletPage> with StateFulBaseScreen {
           localization: localization,
           isLeftActionActive: false,
           titleKey: LanguageKey.walletPageAppBarTitle,
+          actions: [
+            GestureDetector(
+              onTap: () {
+                _onAddClick(appTheme, localization);
+              },
+              behavior: HitTestBehavior.opaque,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Spacing.spacing04,
+                ),
+                child: SvgPicture.asset(
+                  AssetIconPath.icCommonAdd,
+                ),
+              ),
+            ),
+          ],
         ),
         body: child,
       ),
     );
+  }
+
+  void _onAddClick(
+    AppTheme appTheme,
+    AppLocalizationManager localization,
+  ) async {
+    final type =
+        await AppBottomSheetProvider.showFullScreenDialog<AccountCreateType?>(
+      context,
+      child: WalletSelectCreateOptionWidget(
+        appTheme: appTheme,
+        localization: localization,
+      ),
+      appTheme: appTheme,
+    );
+
+    switch (type) {
+      case AccountCreateType.normal:
+        final wallet = _cubit.createRandom();
+
+        AppBottomSheetProvider.showFullScreenDialog(
+          context,
+          child: WalletAddNewWidget(
+            appTheme: appTheme,
+            localization: localization,
+            address: wallet.address,
+            onAdd: (name) {
+              _cubit.onAdd(
+                name,
+                wallet,
+              );
+            },
+            validator: (name) {
+              return _cubit.state.accounts.firstWhereOrNull(
+                    (a) => a.name == name,
+                  ) ==
+                  null;
+            },
+          ),
+          appTheme: appTheme,
+        );
+        break;
+      case AccountCreateType.import:
+        break;
+      case AccountCreateType.social:
+        break;
+      default:
+        break;
+    }
   }
 }

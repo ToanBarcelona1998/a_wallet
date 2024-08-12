@@ -125,6 +125,7 @@ sealed class LanguageKey {
   static const String walletPageAddTitle = 'wallet_page_add_title';
   static const String walletPageWalletName = 'wallet_page_wallet_name';
   static const String walletPageWalletNameHint = 'wallet_page_wallet_name_hint';
+  static const String walletPageWalletAddress = 'wallet_page_wallet_address';
   static const String walletPageWalletAlready = 'wallet_page_wallet_already';
 
   
