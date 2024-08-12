@@ -2,8 +2,10 @@ import 'package:a_wallet/app_configs/di.dart';
 import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
+import 'package:a_wallet/src/core/observer/wallet_page_observer.dart';
 import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
+import 'package:a_wallet/src/navigator.dart';
 import 'widgets/add.dart';
 import 'package:domain/domain.dart';
 import 'widgets/select_create_option.dart';
@@ -31,6 +33,25 @@ class WalletPage extends StatefulWidget {
 
 class _WalletPageState extends State<WalletPage> with StateFulBaseScreen {
   final WalletCubit _cubit = getIt.get();
+  final WalletPageObserver _walletPageObserver =
+      getIt.get<WalletPageObserver>();
+
+  @override
+  void initState() {
+    _walletPageObserver.addListener(_onListenWalletEvent);
+    super.initState();
+  }
+
+  void _onListenWalletEvent(String event) {
+    LogProvider.log('Wallet page listener\n Receive event: $event');
+    switch (event) {
+      case WalletPageObserver.onImportedAccount:
+        _cubit.refresh();
+        break;
+      default:
+        break;
+    }
+  }
 
   @override
   Widget child(BuildContext context, AppTheme appTheme,
@@ -61,9 +82,7 @@ class _WalletPageState extends State<WalletPage> with StateFulBaseScreen {
                         bottom: Spacing.spacing07,
                       ),
                       child: GestureDetector(
-                        onTap: () {
-
-                        },
+                        onTap: () {},
                         behavior: HitTestBehavior.opaque,
                         child: DefaultWalletInfoWidget(
                           avatarAsset: randomAvatar(),
@@ -158,6 +177,9 @@ class _WalletPageState extends State<WalletPage> with StateFulBaseScreen {
         );
         break;
       case AccountCreateType.import:
+        AppNavigator.push(
+          RoutePath.signedImportWallet,
+        );
         break;
       case AccountCreateType.social:
         break;

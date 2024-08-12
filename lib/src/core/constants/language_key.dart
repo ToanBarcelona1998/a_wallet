@@ -295,4 +295,20 @@ sealed class LanguageKey {
   static const settingChangePasscodeScreenCreateNewPasscodeContent = 'setting_change_passcode_screen_create_new_pass_code_content';
   static const settingChangePasscodeScreenConfirmPasscode = 'setting_change_passcode_screen_confirm_passcode';
   static const settingChangePasscodeScreenConfirmPasscodeInvalid = 'setting_change_passcode_screen_confirm_passcode_invalid';
+
+  // Signed import wallet screen
+  static const String signedImportWalletScreenAppBarTitle = "signed_import_wallet_screen_app_bar_title";
+  static const String signedImportWalletScreenSeedPhrase = "signed_import_wallet_screen_seed_phrase";
+  static const String signedImportWalletScreenPrivateKey = "signed_import_wallet_screen_private_key";
+  static const String signedImportWalletScreenSeedPhraseTitle = "signed_import_wallet_screen_seed_phrase_title";
+  static const String signedImportWalletScreenSeedPhraseWords = "signed_import_wallet_screen_seed_phrase_words";
+  static const String signedImportWalletScreenPrivateKeyHint = "signed_import_wallet_screen_private_key_hint";
+  static const String signedImportWalletScreenInValidPrivateKey = "signed_import_wallet_screen_in_valid_private_key";
+  static const String signedImportWalletScreenInvalidPassPhrase = "signed_import_wallet_screen_in_valid_pass_phrase";
+  static const String signedImportWalletScreenNext = "signed_import_wallet_screen_next";
+  static const String signedImportWalletScreenPaste = "signed_import_wallet_screen_paste";
+  static const String signedImportWalletScreenSelectWordNumberTitle = "signed_import_wallet_screen_select_word_number_title";
+  static const String signedImportWalletScreenWalletName = "signed_import_wallet_screen_wallet_name";
+  static const String signedImportWalletScreenWalletNameHint = "signed_import_wallet_screen_wallet_name_hint";
+  static const String signedImportWalletScreenWalletNameAlready = "signed_import_wallet_screen_wallet_name_already";
 }

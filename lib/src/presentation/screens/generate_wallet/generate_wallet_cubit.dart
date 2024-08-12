@@ -1,6 +1,6 @@
+import 'package:a_wallet/src/core/constants/app_local_constant.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:a_wallet/src/core/constants/pyxis_account_constant.dart';
 import 'package:wallet_core/wallet_core.dart';
 import 'generate_wallet_state.dart';
 
@@ -36,7 +36,7 @@ final class GenerateWalletCubit extends Cubit<GenerateWalletState> {
     );
 
     final String? key = WalletCore.storedManagement.saveWallet(
-      PyxisAccountConstant.defaultNormalWalletName,
+      AppLocalConstant.defaultNormalWalletName,
       '',
       state.wallet!,
     );
@@ -51,7 +51,7 @@ final class GenerateWalletCubit extends Cubit<GenerateWalletState> {
 
     await _accountUseCase.add(
       AddAccountRequest(
-        name: PyxisAccountConstant.defaultNormalWalletName,
+        name: AppLocalConstant.defaultNormalWalletName,
         evmAddress: evmAddress,
         createType: AccountCreateType.normal,
         type: AccountType.normal,

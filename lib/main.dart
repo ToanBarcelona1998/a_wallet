@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import 'package:a_wallet/app_configs/di.dart' as di;
-import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
+import 'package:a_wallet/app_configs/a_wallet_config.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
 import 'package:a_wallet/src/application/provider/local/account/account_db.dart';
 import 'package:a_wallet/src/application/provider/local/balance/balance_db.dart';

@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:isar/isar.dart';
-import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
+import 'package:a_wallet/app_configs/a_wallet_config.dart';
 import 'package:a_wallet/src/core/constants/app_local_constant.dart';
 import 'package:a_wallet/src/core/factory_creator/account_balance.dart';
 import 'package:a_wallet/src/core/factory_creator/dio.dart';

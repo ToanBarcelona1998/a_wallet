@@ -1,7 +1,8 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:a_wallet/app_configs/di.dart';
-import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
+import 'package:a_wallet/app_configs/a_wallet_config.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
@@ -172,6 +173,8 @@ class _HomePageState extends State<HomePage>
   void _homePageListener(HomePageEmitParam param) {
     final String event = param.event;
     final data = param.data;
+
+    LogProvider.log('Home page\n Receive event: $event');
 
     switch (event) {
       case HomePageObserver.onSendTokenDone:

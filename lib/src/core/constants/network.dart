@@ -1,5 +1,5 @@
 import 'package:domain/domain.dart';
-import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
+import 'package:a_wallet/app_configs/a_wallet_config.dart';
 
 AppNetwork createNetwork(AWalletConfig config){
   return AppNetwork(

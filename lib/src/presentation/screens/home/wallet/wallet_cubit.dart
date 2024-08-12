@@ -40,6 +40,10 @@ final class WalletCubit extends Cubit<WalletState> {
     }
   }
 
+  void refresh() async {
+    return init();
+  }
+
   void onAdd(
     String walletName,
     AWallet aWallet,

@@ -7,14 +7,14 @@ import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
 
-final class ImportSelectWordWidget extends StatelessWidget {
+final class SignedImportSelectWordWidget extends StatelessWidget {
   final int word;
   final int currentWord;
   final AppTheme appTheme;
   final AppLocalizationManager localization;
   final void Function(int) onSelected;
 
-  const ImportSelectWordWidget({
+  const SignedImportSelectWordWidget({
     required this.word,
     required this.currentWord,
     required this.appTheme,
@@ -45,7 +45,7 @@ final class ImportSelectWordWidget extends StatelessWidget {
             Expanded(
               child: Text(
                 localization.translateWithParam(
-                  LanguageKey.importWalletScreenSeedPhraseWords,
+                  LanguageKey.signedImportWalletScreenSeedPhraseWords,
                   {
                     'words': word,
                   },

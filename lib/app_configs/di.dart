@@ -54,7 +54,7 @@ import 'package:web3auth_flutter/enums.dart';
 import 'package:web3auth_flutter/input.dart';
 import 'package:web3auth_flutter/web3auth_flutter.dart';
 
-import 'pyxis_mobile_config.dart';
+import 'a_wallet_config.dart';
 
 final getIt = GetIt.instance;
 

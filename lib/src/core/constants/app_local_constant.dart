@@ -19,6 +19,8 @@ sealed class AppLocalConstant {
   static const String googleSearchUrl = 'https://www.google.com/search';
   static const String googleSearchName = 'Google search';
 
+  static const String defaultNormalWalletName = 'Wallet 1';
+
   static const List<String> avatars = [
     AssetImagePath.defaultAvatar1,
     AssetImagePath.defaultAvatar2,

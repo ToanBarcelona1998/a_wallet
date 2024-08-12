@@ -254,5 +254,20 @@
   "setting_change_passcode_screen_create_new_pass_code" : "Create a new passcode",
   "setting_change_passcode_screen_create_new_pass_code_content" : "Set an app passcode to protects your data and funds",
   "setting_change_passcode_screen_confirm_passcode" : "Confirm the passcode",
-  "setting_change_passcode_screen_confirm_passcode_invalid" : "Passcode does not match"
+  "setting_change_passcode_screen_confirm_passcode_invalid" : "Passcode does not match",
+
+  "signed_import_wallet_screen_app_bar_title": "Add Existing Wallet",
+  "signed_import_wallet_screen_seed_phrase": "Seed Phrase",
+  "signed_import_wallet_screen_private_key": "Private Key",
+  "signed_import_wallet_screen_seed_phrase_title": "My seed phrase has",
+  "signed_import_wallet_screen_seed_phrase_words": "${words} Words",
+  "signed_import_wallet_screen_private_key_hint": "Enter your private key...",
+  "signed_import_wallet_screen_in_valid_private_key": "Invalid private key",
+  "signed_import_wallet_screen_in_valid_pass_phrase": "Invalid passphrase",
+  "signed_import_wallet_screen_next": "Next",
+  "signed_import_wallet_screen_paste": "Paste",
+  "signed_import_wallet_screen_select_word_number_title": "Select Words Number",
+  "signed_import_wallet_screen_wallet_name": "Wallet name",
+  "signed_import_wallet_screen_wallet_name_hint": "Enter wallet name",
+  "signed_import_wallet_screen_wallet_name_already": "Wallet name was exists"
 }

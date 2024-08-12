@@ -3,13 +3,13 @@ import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
 import 'package:a_wallet/src/navigator.dart';
-import 'package:a_wallet/src/presentation/screens/import_wallet/widgets/select_word_widget.dart';
+import 'select_word_widget.dart';
 import 'package:a_wallet/src/presentation/widgets/bottom_sheet_base/app_bottom_sheet_base.dart';
 
-final class ImportWalletSelectWordDropdownWidget extends AppBottomSheetBase {
+final class SignedImportWalletSelectWordDropdownWidget extends AppBottomSheetBase {
   final int currentWord;
   final void Function(int) onSelected;
-  const ImportWalletSelectWordDropdownWidget({
+  const SignedImportWalletSelectWordDropdownWidget({
     required super.appTheme,
     super.key,
     super.onClose,
@@ -20,16 +20,16 @@ final class ImportWalletSelectWordDropdownWidget extends AppBottomSheetBase {
 
   @override
   State<StatefulWidget> createState() =>
-      _ImportWalletSelectWordDropdownWidgetState();
+      _SignedImportWalletSelectWordDropdownWidgetState();
 }
 
-final class _ImportWalletSelectWordDropdownWidgetState
-    extends AppBottomSheetBaseState<ImportWalletSelectWordDropdownWidget> {
+final class _SignedImportWalletSelectWordDropdownWidgetState
+    extends AppBottomSheetBaseState<SignedImportWalletSelectWordDropdownWidget> {
   @override
   Widget titleBuilder(BuildContext context) {
     return Text(
       localization.translate(
-        LanguageKey.importWalletScreenSelectWordNumberTitle,
+        LanguageKey.signedImportWalletScreenSelectWordNumberTitle,
       ),
       style: AppTypoGraPhy.textMdSemiBold.copyWith(
         color: appTheme.textPrimary,
@@ -45,7 +45,7 @@ final class _ImportWalletSelectWordDropdownWidgetState
         const SizedBox(
           height: BoxSize.boxSize07,
         ),
-        ImportSelectWordWidget(
+        SignedImportSelectWordWidget(
           word: 12,
           currentWord: widget.currentWord,
           appTheme: appTheme,
@@ -55,7 +55,7 @@ final class _ImportWalletSelectWordDropdownWidgetState
         const SizedBox(
           height: BoxSize.boxSize05,
         ),
-        ImportSelectWordWidget(
+        SignedImportSelectWordWidget(
           word: 24,
           currentWord: widget.currentWord,
           appTheme: appTheme,

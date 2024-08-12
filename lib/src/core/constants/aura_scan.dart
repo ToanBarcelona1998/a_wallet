@@ -1,6 +1,6 @@
 
 
-import 'package:a_wallet/app_configs/pyxis_mobile_config.dart';
+import 'package:a_wallet/app_configs/a_wallet_config.dart';
 
 sealed class AuraScan{
  static String _domain = _domainSerenity;
