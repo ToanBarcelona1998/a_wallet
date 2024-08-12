@@ -44,6 +44,7 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     on(_onChangeEnableToken);
     on(_onRefreshTokenBalance);
     on(_onChangeSelectedAccount);
+    on(_onManagedToken);
   }
 
   // Isolates and SendPorts for handling concurrent tasks
@@ -350,7 +351,11 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       emit(
         state.copyWith(
           activeAccount: activeAccount,
-          tokens: tokens,
+          tokens: tokens
+              .where(
+                (e) => e.isEnable,
+              )
+              .toList(),
         ),
       );
 
@@ -379,7 +384,7 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         ),
       );
     } catch (e) {
-      LogProvider.log(e.toString());
+      LogProvider.log('Home page bloc on load storage error ${e.toString()}');
     }
   }
 
@@ -637,6 +642,23 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
     _sendMessageFetchAccountBalance(
       event.account,
+    );
+  }
+
+  void _onManagedToken(
+    HomePageOnManagedTokenEvent event,
+    Emitter<HomePageState> emit,
+  ) async {
+    final tokens = await _tokenUseCase.getAll();
+
+    emit(
+      state.copyWith(
+        tokens: tokens
+            .where(
+              (element) => element.isEnable,
+            )
+            .toList(),
+      ),
     );
   }
 }

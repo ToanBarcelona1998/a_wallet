@@ -200,6 +200,11 @@ class _HomePageState extends State<HomePage>
           ),
         );
         break;
+      case HomePageObserver.onMangedToken:
+        _bloc.add(
+          const HomePageOnManagedTokenEvent(),
+        );
+        break;
       default:
         break;
     }

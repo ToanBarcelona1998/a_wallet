@@ -1,16 +1,18 @@
 import 'package:data/src/dto/request/add_token_request_dto.dart';
+import 'package:data/src/dto/request/update_token_request_dto.dart';
 import 'package:data/src/dto/token_dto.dart';
 import 'package:data/src/resource/local/token_database_service.dart';
 import 'package:domain/domain.dart';
 
-final class TokenRepositoryImpl implements TokenRepository{
+final class TokenRepositoryImpl implements TokenRepository {
   final TokenDatabaseService _tokenDatabaseService;
 
   const TokenRepositoryImpl(this._tokenDatabaseService);
 
   @override
-  Future<Token> add<P>(P param) async{
-    final tokenDto = await _tokenDatabaseService.add((param as AddTokenRequest).mapRequest);
+  Future<Token> add<P>(P param) async {
+    final tokenDto =
+        await _tokenDatabaseService.add((param as AddTokenRequest).mapRequest);
 
     return tokenDto.toEntity;
   }
@@ -26,32 +28,38 @@ final class TokenRepositoryImpl implements TokenRepository{
   }
 
   @override
-  Future<Token?> get(int id) async{
+  Future<Token?> get(int id) async {
     final tokenDto = await _tokenDatabaseService.get(id);
 
     return tokenDto?.toEntity;
   }
 
   @override
-  Future<List<Token>> getAll() async{
+  Future<List<Token>> getAll() async {
     final tokensDto = await _tokenDatabaseService.getAll();
 
-    return tokensDto.map((e) => e.toEntity,).toList();
+    return tokensDto
+        .map(
+          (e) => e.toEntity,
+        )
+        .toList();
   }
 
   @override
-  Future<Token> update<P>(P param) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<Token> update<P>(P param) async {
+    final tokenDto = await _tokenDatabaseService.update(
+      (param as UpdateTokenRequest).mapRequest,
+    );
+
+    return tokenDto.toEntity;
   }
 
   @override
   Future<Token?> getByName({
     required String name,
-  }) async{
+  }) async {
     final tokenDto = await _tokenDatabaseService.getByName(name: name);
 
     return tokenDto?.toEntity;
   }
-
 }

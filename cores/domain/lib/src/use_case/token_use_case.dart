@@ -2,6 +2,8 @@ import 'package:domain/src/entities/request/add_token_request.dart';
 import 'package:domain/src/entities/token.dart';
 import 'package:domain/src/repository/token_repository.dart';
 
+import '../entities/request/update_token_request.dart';
+
 final class TokenUseCase {
   final TokenRepository _tokenRepository;
 
@@ -31,5 +33,9 @@ final class TokenUseCase {
     required String name,
   }) {
     return _tokenRepository.getByName(name: name);
+  }
+
+  Future<Token> update(UpdateTokenRequest param){
+    return _tokenRepository.update(param);
   }
 }

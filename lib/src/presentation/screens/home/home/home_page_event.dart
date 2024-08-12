@@ -31,4 +31,6 @@ class HomePageEvent with _$HomePageEvent {
   const factory HomePageEvent.onChangeAccount({
     required Account account,
   }) = HomePageOnChangeAccountEvent;
+
+  const factory HomePageEvent.onManagedToken() = HomePageOnManagedTokenEvent;
 }

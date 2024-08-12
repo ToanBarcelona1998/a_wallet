@@ -18,6 +18,7 @@ final class HomePageObserver
   static const String onSendTokenDone = 'HOME_PAGE_ON_SEND_TOKEN_DONE';
   static const String onSendNFTDone = 'HOME_PAGE_ON_SEND_ERC721_DONE';
   static const String onChangeAccount = 'HOME_PAGE_ON_CHANGE_ACCOUNT';
+  static const String onMangedToken = 'HOME_PAGE_ON_MANAGED_TOKEN';
 
   @override
   void emit({

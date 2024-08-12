@@ -47,6 +47,12 @@ class _WalletPageState extends State<WalletPage>
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _walletPageObserver.removeListener(_onListenWalletEvent);
+    super.dispose();
+  }
+
   void _onListenWalletEvent(String event) {
     LogProvider.log('Wallet page listener\n Receive event: $event');
     switch (event) {
