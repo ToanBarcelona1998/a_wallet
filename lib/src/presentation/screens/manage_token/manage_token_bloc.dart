@@ -1,3 +1,4 @@
+import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'manage_token_event.dart';
@@ -112,15 +113,19 @@ final class ManageTokenBloc extends Bloc<ManageTokenEvent, ManageTokenState> {
       Emitter<ManageTokenState> emit) async {
     final token = event.token;
 
+    final t = state.tokens.firstWhereOrNull(
+      (t) => t.id == token.id,
+    );
+
     await _tokenUseCase.update(
       UpdateTokenRequest(
         id: token.id,
-        logo: token.logo,
-        tokenName: token.tokenName,
-        type: token.type,
-        symbol: token.symbol,
-        contractAddress: token.contractAddress,
-        isEnable: token.isEnable,
+        logo: t?.logo,
+        tokenName: t?.tokenName,
+        type: t?.type,
+        symbol: t?.symbol,
+        contractAddress: t?.contractAddress,
+        isEnable: t?.isEnable,
       ),
     );
 

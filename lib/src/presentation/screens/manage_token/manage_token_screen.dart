@@ -37,7 +37,7 @@ class _ManageTokenScreenState extends State<ManageTokenScreen>
   @override
   void initState() {
     _denounce = Denounce(const Duration(
-      seconds: 2,
+      milliseconds: 900,
     ));
 
     _denounce.addObserver(_onTokenChange);
