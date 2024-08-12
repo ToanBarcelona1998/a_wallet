@@ -32,6 +32,7 @@ class TextInputWidgetBase extends StatefulWidget {
   final bool enableClear;
   final BoxConstraints? boxConstraints;
   final AppTheme appTheme;
+  final String ?initText;
 
   const TextInputWidgetBase({
     super.key,
@@ -56,6 +57,7 @@ class TextInputWidgetBase extends StatefulWidget {
     this.keyBoardType,
     this.boxConstraints,
     required this.appTheme,
+    this.initText,
   });
 
   @override
@@ -321,6 +323,10 @@ class TextInputWidgetBaseState<T extends TextInputWidgetBase> extends State<T> {
     super.initState();
     _controller = widget.controller ?? TextEditingController();
 
+    if(widget.initText != null){
+      _controller.text = widget.initText ?? '';
+    }
+
     _controller.addListener(_onTextInputChange);
 
     _focusNode = widget.focusNode ?? FocusNode(canRequestFocus: true);
@@ -400,6 +406,8 @@ final class TextInputNormalWidget extends TextInputWidgetBase {
     super.boxConstraints,
     super.enableClear,
     super.key,
+    super.initText,
+    super.onClear,
     required super.appTheme,
   });
 
@@ -479,6 +487,8 @@ final class TextInputNormalSuffixWidget extends TextInputWidgetBase {
     super.boxConstraints,
     super.enableClear,
     super.key,
+    super.initText,
+    super.onClear,
     required super.appTheme,
   });
 
@@ -573,6 +583,7 @@ final class TextInputOnlyTextFieldWidget extends TextInputWidgetBase {
     super.enableClear,
     super.onClear,
     super.boxConstraints,
+    super.initText,
     required super.appTheme,
   });
 
@@ -628,6 +639,7 @@ final class RoundBorderTextInputWidget extends TextInputWidgetBase {
     super.enableClear,
     super.onClear,
     super.boxConstraints,
+    super.initText,
     required super.appTheme,
   });
 

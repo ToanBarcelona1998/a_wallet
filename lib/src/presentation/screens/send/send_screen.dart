@@ -1,3 +1,5 @@
+import 'package:a_wallet/src/core/helpers/scan_validator.dart';
+import 'package:a_wallet/src/presentation/screens/send/widgets/select_contact.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,8 +96,10 @@ class _SendScreenState extends State<SendScreen>
                               SendScreenToWidget(
                                 appTheme: appTheme,
                                 localization: localization,
-                                onContactTap: () {},
-                                onScanTap: () {},
+                                onContactTap: (addressBooks) {
+                                  _onOpenContact(appTheme, localization,addressBooks);
+                                },
+                                onScanTap: _onScan,
                                 onChangeSaved: _onChangeSaved,
                                 onAddressChanged: _onAddressChanged,
                                 recipientController: _recipientController,
@@ -108,7 +112,8 @@ class _SendScreenState extends State<SendScreen>
                                 appTheme: appTheme,
                                 localization: localization,
                                 onChanged: _onChangeAmount,
-                                onSelectToken: (balances, selectedBalance,  tokenMarkets, tokens) {
+                                onSelectToken: (balances, selectedBalance,
+                                    tokenMarkets, tokens) {
                                   _onSelectTokens(
                                     balances,
                                     selectedBalance,
@@ -213,6 +218,27 @@ class _SendScreenState extends State<SendScreen>
     );
   }
 
+  void _onOpenContact(
+    AppTheme appTheme,
+    AppLocalizationManager localization,
+    List<AddressBook> addressBooks,
+  ) async {
+    final selectedContact =
+        await AppBottomSheetProvider.showFullScreenDialog<AddressBook?>(
+      context,
+      child: SendSelectContractWidget(
+        appTheme: appTheme,
+        localization: localization,
+        addressBooks: addressBooks,
+      ),
+      appTheme: appTheme,
+    );
+
+    if(selectedContact != null){
+      _recipientController.text = selectedContact.address;
+    }
+  }
+
   void _onSelectTokens(
     List<Balance> balances,
     Balance balance,
@@ -244,7 +270,15 @@ class _SendScreenState extends State<SendScreen>
     }
   }
 
-  void _onSubmit(){
+  void _onScan()async{
+    final ScanResult ? scanResult = await AppNavigator.push(RoutePath.scan);
+
+    if(scanResult != null){
+      _recipientController.text = scanResult.raw;
+    }
+  }
+
+  void _onSubmit() {
     final state = _bloc.state;
 
     AppNavigator.push(RoutePath.confirmSend, {
@@ -253,7 +287,7 @@ class _SendScreenState extends State<SendScreen>
       'amount': state.amountToSend,
       'recipient': state.toAddress,
       'balance': state.selectedToken,
-      'tokens' : state.tokens,
+      'tokens': state.tokens,
     });
   }
 }

@@ -113,7 +113,7 @@ extension AuraNumberFormatter on num {
 }
 
 String randomAvatar() {
-  Random random = Random(128);
+  Random random = Random();
 
   int index = random.nextInt(2);
 

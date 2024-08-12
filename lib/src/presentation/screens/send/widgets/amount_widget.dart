@@ -197,16 +197,14 @@ class _TextInputAmountWidgetState
                                   builder: (tokens) {
                                     return SendSelectedBalanceSelector(
                                       builder: (balance) {
-                                        final token =
-                                        tokens.firstWhereOrNull(
-                                              (t) => t.id == balance?.tokenId,
+                                        final token = tokens.firstWhereOrNull(
+                                          (t) => t.id == balance?.tokenId,
                                         );
                                         return GestureDetector(
                                           behavior: HitTestBehavior.opaque,
                                           onTap: () {
                                             widget.onSelectToken(
-                                              accountBalance?.balances ??
-                                                  [],
+                                              accountBalance?.balances ?? [],
                                               balance!,
                                               tokenMarkets,
                                               tokens,
@@ -219,8 +217,7 @@ class _TextInputAmountWidgetState
                                               ),
                                               NetworkImageWidget(
                                                 url: token?.logo ??
-                                                    AppLocalConstant
-                                                        .auraLogo,
+                                                    AppLocalConstant.auraLogo,
                                                 appTheme: theme,
                                                 width: BoxSize.boxSize05,
                                                 height: BoxSize.boxSize05,
@@ -240,8 +237,7 @@ class _TextInputAmountWidgetState
                                                 width: BoxSize.boxSize03,
                                               ),
                                               SvgPicture.asset(
-                                                AssetIconPath
-                                                    .icCommonArrowDown,
+                                                AssetIconPath.icCommonArrowDown,
                                                 width: BoxSize.boxSize05,
                                                 height: BoxSize.boxSize05,
                                               ),
@@ -261,14 +257,43 @@ class _TextInputAmountWidgetState
                     const SizedBox(
                       height: BoxSize.boxSize05,
                     ),
-                    Text(
-                      '~${localization.translate(
-                        LanguageKey.commonBalancePrefix,
-                      )}0',
-                      style: AppTypoGraPhy.textXsRegular.copyWith(
-                        color: theme.textTertiary,
-                      ),
-                    ),
+                    SendTokenMarketsSelector(builder: (tokenMarkets) {
+                      return SendTokenTokensSelector(builder: (tokens) {
+                        return SendSelectedBalanceSelector(builder: (balance) {
+                          final token = tokens.firstWhereOrNull(
+                            (t) => t.id == balance?.tokenId,
+                          );
+
+                          final tokenMarket = tokenMarkets.firstWhereOrNull(
+                            (m) => m.name == token?.tokenName,
+                          );
+
+                          final amount = double.tryParse(
+                            value(),
+                          ) ?? 0;
+
+                          double currentPrice = double.tryParse(
+                                  tokenMarket?.currentPrice ?? '0') ??
+                              0;
+
+                          double sendValue = 0;
+                          if (amount == 0 && currentPrice == 0) {
+                            sendValue = 0;
+                          } else {
+                            sendValue = amount * currentPrice;
+                          }
+
+                          return Text(
+                            '~${localization.translate(
+                              LanguageKey.commonBalancePrefix,
+                            )}$sendValue',
+                            style: AppTypoGraPhy.textXsRegular.copyWith(
+                              color: theme.textTertiary,
+                            ),
+                          );
+                        });
+                      });
+                    }),
                     const SizedBox(
                       height: BoxSize.boxSize05,
                     ),
@@ -291,59 +316,62 @@ class _TextInputAmountWidgetState
                     ),
                   ),
                 ),
-                child: SendTokenTokensSelector(builder: (tokens) {
-                  return SendSelectedBalanceSelector(
-                    builder: (balance) {
-                      final token = tokens.firstWhereOrNull(
-                        (t) => t.id == balance?.tokenId,
-                      );
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () => widget.onMaxTap(
-                              token?.type.formatBalance(
-                                    balance?.balance ?? '',
-                                    customDecimal: token.decimal,
-                                  ) ??
-                                  '0',
-                            ),
-                            child: Text(
-                              localization.translate(
-                                LanguageKey.sendScreenMax,
-                              ),
-                              style: AppTypoGraPhy.textSmSemiBold.copyWith(
-                                color: theme.textBrandPrimary,
-                              ),
-                            ),
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: '${localization.translate(
-                                    LanguageKey.sendScreenBalance,
-                                  )}: ',
-                                  style: AppTypoGraPhy.textXsRegular.copyWith(
-                                    color: theme.textSecondary,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: token?.type.formatBalance(
+                child: SendTokenTokensSelector(
+                  builder: (tokens) {
+                    return SendSelectedBalanceSelector(
+                      builder: (balance) {
+                        final token = tokens.firstWhereOrNull(
+                          (t) => t.id == balance?.tokenId,
+                        );
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () => widget.onMaxTap(
+                                token?.type.formatBalance(
                                       balance?.balance ?? '',
-                                      customDecimal: token.decimal),
-                                  style: AppTypoGraPhy.textXsSemiBold.copyWith(
-                                    color: theme.textPrimary,
-                                  ),
+                                      customDecimal: token.decimal,
+                                    ) ??
+                                    '0',
+                              ),
+                              child: Text(
+                                localization.translate(
+                                  LanguageKey.sendScreenMax,
                                 ),
-                              ],
+                                style: AppTypoGraPhy.textSmSemiBold.copyWith(
+                                  color: theme.textBrandPrimary,
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: '${localization.translate(
+                                      LanguageKey.sendScreenBalance,
+                                    )}: ',
+                                    style: AppTypoGraPhy.textXsRegular.copyWith(
+                                      color: theme.textSecondary,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: token?.type.formatBalance(
+                                        balance?.balance ?? '',
+                                        customDecimal: token.decimal),
+                                    style:
+                                        AppTypoGraPhy.textXsSemiBold.copyWith(
+                                      color: theme.textPrimary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ],
           ),

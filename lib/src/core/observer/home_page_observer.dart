@@ -16,6 +16,8 @@ final class HomePageObserver
     extends ObserverBase<HomePageListener, HomePageEmitParam> {
 
   static const String onSendTokenDone = 'HOME_PAGE_ON_SEND_TOKEN_DONE';
+  static const String onSendNFTDone = 'HOME_PAGE_ON_SEND_ERC721_DONE';
+  static const String onChangeAccount = 'HOME_PAGE_ON_CHANGE_ACCOUNT';
 
   @override
   void emit({

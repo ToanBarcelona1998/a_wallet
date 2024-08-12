@@ -1,3 +1,4 @@
+import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/core/helpers/address_validator.dart';
 import 'package:a_wallet/src/navigator.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:a_wallet/src/presentation/widgets/app_button.dart';
 import 'package:a_wallet/src/presentation/widgets/bottom_sheet_base/app_bottom_sheet_base.dart';
 import 'package:a_wallet/src/presentation/widgets/text_input_base/text_input_base.dart';
 import 'package:a_wallet/src/presentation/widgets/text_input_base/text_input_manager.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AddressBookUpdateWidget extends AppBottomSheetBase {
   final void Function(String address, String name) onConfirm;
@@ -140,5 +142,69 @@ class _AddressBookUpdateWidgetState
   @override
   Widget subTitleBuilder(BuildContext context) {
     return const SizedBox.shrink();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Spacing.spacing06,
+        vertical: Spacing.spacing05,
+      ),
+      constraints: const BoxConstraints(
+        minHeight: BoxSize.boxSize14,
+        maxHeight: BoxSize.boxSize18 * 1.5,
+      ),
+      decoration: BoxDecoration(
+        color: appTheme.bgPrimary,
+        borderRadius: BorderRadius.circular(
+          BorderRadiusSize.borderRadius06,
+        ),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: titleBuilder(
+                      context,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    if (widget.onClose != null) {
+                      widget.onClose!();
+                    } else {
+                      AppNavigator.pop();
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(
+                      Spacing.spacing03,
+                    ),
+                    child: SvgPicture.asset(
+                      AssetIconPath.icCommonClose,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            subTitleBuilder(
+              context,
+            ),
+            contentBuilder(
+              context,
+            ),
+            bottomBuilder(
+              context,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

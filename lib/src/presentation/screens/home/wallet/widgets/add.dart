@@ -2,7 +2,7 @@ import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
-import 'package:a_wallet/src/core/helpers/address_validator.dart';
+import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:a_wallet/src/navigator.dart';
 import 'package:a_wallet/src/presentation/widgets/app_button.dart';
 import 'package:a_wallet/src/presentation/widgets/bottom_sheet_base/app_bottom_sheet_base.dart';
@@ -11,40 +11,35 @@ import 'package:a_wallet/src/presentation/widgets/text_input_base/text_input_man
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AddressBookAddWidget extends AppBottomSheetBase {
-  final void Function(String address, String name) onConfirm;
+final class WalletAddNewWidget extends AppBottomSheetBase {
+  final String address;
+  final void Function(String) onAdd;
+  final bool Function(String) validator;
 
-  const AddressBookAddWidget({
-    required this.onConfirm,
+  const WalletAddNewWidget({
     super.key,
     required super.appTheme,
     required super.localization,
+    required this.address,
+    required this.onAdd,
+    required this.validator,
   });
 
   @override
-  State<StatefulWidget> createState() => _AddressBookAddWidgetState();
+  State<StatefulWidget> createState() => _WalletAddNewWidgetState();
 }
 
-class _AddressBookAddWidgetState
-    extends AppBottomSheetBaseState<AddressBookAddWidget> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
+final class _WalletAddNewWidgetState
+    extends AppBottomSheetBaseState<WalletAddNewWidget> {
+  bool _isValid = false;
+
+  String name = '';
 
   @override
-  void dispose() {
-    _nameController.dispose();
-    _addressController.dispose();
-    super.dispose();
-  }
-
-  bool isValidName = false;
-  bool isValidAddress = false;
-
-  @override
-  Widget titleBuilder(BuildContext context,) {
+  Widget titleBuilder(BuildContext context) {
     return Text(
       localization.translate(
-        LanguageKey.addressBookScreenAddContactTitle,
+        LanguageKey.walletPageAddTitle,
       ),
       style: AppTypoGraPhy.textLgBold.copyWith(
         color: appTheme.textPrimary,
@@ -53,75 +48,50 @@ class _AddressBookAddWidgetState
   }
 
   @override
-  Widget bottomBuilder(BuildContext context,) {
-    bool isValid = isValidAddress && isValidName;
-    return PrimaryAppButton(
-      text: localization.translate(
-        LanguageKey.addressBookScreenAddContactConfirm,
-      ),
-      isDisable: !isValid,
-      onPress: () {
-        AppNavigator.pop();
-        widget.onConfirm(
-          _addressController.text.trim(),
-          _nameController.text.trim(),
-        );
-      },
-    );
-  }
-
-  @override
   Widget contentBuilder(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(
+          height: BoxSize.boxSize07,
+        ),
         RoundBorderTextInputWidget(
+          appTheme: appTheme,
           label: localization.translate(
-            LanguageKey.addressBookScreenAddContactName,
+            LanguageKey.walletPageWalletName,
           ),
-          isRequired: true,
-          onChanged: (_, isValid) {
+          hintText: localization.translate(
+            LanguageKey.walletPageWalletNameHint,
+          ),
+          onChanged: (name, isValid) {
+            this.name = name;
+
+            _isValid = isValid;
+
             setState(() {
-              isValidName = isValid;
+
             });
           },
-          controller: _nameController,
-          maxLength: 255,
           constraintManager: ConstraintManager()
-            ..notEmpty(
+            ..custom(
               errorMessage: localization.translate(
-                LanguageKey.addressBookScreenInvalidName,
+                LanguageKey.walletPageWalletAlready,
               ),
-            ), appTheme: appTheme,
+              customValid: widget.validator,
+            ),
         ),
         const SizedBox(
           height: BoxSize.boxSize05,
         ),
         RoundBorderTextInputWidget(
-          label: localization.translate(
-            LanguageKey.addressBookScreenAddContactAddress,
-          ),
           appTheme: appTheme,
-          onChanged: (_, isValid) {
-            setState(() {
-              isValidAddress = isValid;
-            });
-          },
-          controller: _addressController,
-          isRequired: true,
-          constraintManager: ConstraintManager()
-            ..custom(
-              customValid: (value) {
-                return addressInValid(
-                  address: value,
-                );
-              },
-              errorMessage: localization.translate(
-                LanguageKey.addressBookScreenInvalidAddress,
-              ),
-            ),
+          label: localization.translate(
+            LanguageKey.walletPageWalletAddress,
+          ),
+          enable: false,
+          initText: widget.address.addressView,
         ),
         const SizedBox(
-          height: BoxSize.boxSize07,
+          height: BoxSize.boxSize08,
         ),
       ],
     );
@@ -133,6 +103,29 @@ class _AddressBookAddWidgetState
   }
 
   @override
+  Widget bottomBuilder(BuildContext context) {
+    return Column(
+      children: [
+        PrimaryAppButton(
+          text: localization.translate(
+            LanguageKey.walletPageAdd,
+          ),
+          onPress: () {
+            AppNavigator.pop();
+            widget.onAdd(
+              name,
+            );
+          },
+          isDisable: !_isValid,
+        ),
+        const SizedBox(
+          height: BoxSize.boxSize05,
+        ),
+      ],
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -141,7 +134,7 @@ class _AddressBookAddWidgetState
       ),
       constraints: const BoxConstraints(
         minHeight: BoxSize.boxSize14,
-        maxHeight: BoxSize.boxSize18 * 1.5,
+        maxHeight: BoxSize.boxSize18 * 1.7,
       ),
       decoration: BoxDecoration(
         color: appTheme.bgPrimary,
