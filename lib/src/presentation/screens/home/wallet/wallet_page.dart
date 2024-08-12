@@ -2,6 +2,7 @@ import 'package:a_wallet/app_configs/di.dart';
 import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
+import 'package:a_wallet/src/core/observer/home_page_observer.dart';
 import 'package:a_wallet/src/core/observer/wallet_page_observer.dart';
 import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
@@ -38,6 +39,7 @@ class _WalletPageState extends State<WalletPage>
   final WalletCubit _cubit = getIt.get();
   final WalletPageObserver _walletPageObserver =
       getIt.get<WalletPageObserver>();
+  final HomePageObserver _homePageObserver = getIt.get<HomePageObserver>();
 
   @override
   void initState() {
@@ -79,13 +81,21 @@ class _WalletPageState extends State<WalletPage>
                     //
                   },
                   data: accounts,
-                  builder: (account, _) {
+                  builder: (account, index) {
                     return Padding(
                       padding: const EdgeInsets.only(
                         bottom: Spacing.spacing07,
                       ),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          _cubit.selectAccount(account, index);
+                          _homePageObserver.emit(
+                            emitParam: HomePageEmitParam(
+                              event: HomePageObserver.onChangeAccount,
+                              data: account,
+                            ),
+                          );
+                        },
                         behavior: HitTestBehavior.opaque,
                         child: DefaultWalletInfoWidget(
                           avatarAsset: randomAvatar(),

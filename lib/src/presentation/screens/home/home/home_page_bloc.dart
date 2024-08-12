@@ -626,12 +626,17 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   void _onChangeSelectedAccount(
     HomePageOnChangeAccountEvent event,
     Emitter<HomePageState> emit,
-  ) {
+  ) async {
     emit(
-      state.copyWith(
-        activeAccount: event.account,
-      ),
+      state.copyWithNull(event.account),
     );
-    _sendMessageFetchAccountBalance(event.account);
+
+    _sendMessageFetchNFTs(
+      event.account,
+    );
+
+    _sendMessageFetchAccountBalance(
+      event.account,
+    );
   }
 }

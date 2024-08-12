@@ -44,14 +44,14 @@ class _SettingPageState extends State<SettingPage> with StateFulBaseScreen {
             },
             appTheme: appTheme,
             localization: localization,
-            iconPath: AssetIconPath.icCommonLock,
+            iconPath: AssetIconPath.icCommonAddressBook,
             labelPath: LanguageKey.settingsPageAddressBook,
           ),
           SettingPageOptionWidget(
             onTap: () {},
             appTheme: appTheme,
             localization: localization,
-            iconPath: AssetIconPath.icCommonLock,
+            iconPath: AssetIconPath.icCommonLanguage,
             labelPath: LanguageKey.settingsPageLanguage,
           ),
           const SizedBox(
