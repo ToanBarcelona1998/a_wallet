@@ -177,6 +177,11 @@ class _HomePageState extends State<HomePage>
       case HomePageObserver.onSendTokenDone:
         // Refresh balance home page
         break;
+      case HomePageObserver.onSendNFTDone:
+        // Refresh balance home page
+        break;
+      case HomePageObserver.onChangeAccount:
+        break;
       default:
         break;
     }

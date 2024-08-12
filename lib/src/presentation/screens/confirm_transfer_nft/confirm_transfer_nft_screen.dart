@@ -138,7 +138,7 @@ class _ConfirmTransferNftScreenState extends State<ConfirmTransferNftScreen>
               case ConfirmTransferNftStatus.sent:
                 _homePageObserver.emit(
                   emitParam: const HomePageEmitParam(
-                    event: HomePageObserver.onSendTokenDone,
+                    event: HomePageObserver.onSendNFTDone,
                     data: TokenType.native,
                   ),
                 );

@@ -17,7 +17,7 @@ class SendState with _$SendState {
     @Default(SendStatus.loading) SendStatus status,
     @Default(false) bool already,
     Account ?account,
-    @Default([]) List<dynamic> addressBooks,
+    @Default([]) List<AddressBook> addressBooks,
     AccountBalance ?accountBalance,
     Balance ?selectedToken,
     @Default([]) List<TokenMarket> tokenMarkets,

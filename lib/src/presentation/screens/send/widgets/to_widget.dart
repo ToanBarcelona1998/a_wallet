@@ -17,7 +17,7 @@ import 'package:a_wallet/src/presentation/widgets/text_input_base/text_input_man
 
 final class SendScreenToWidget extends StatelessWidget {
   final AppLocalizationManager localization;
-  final VoidCallback onContactTap;
+  final void Function(List<AddressBook>) onContactTap;
   final VoidCallback onScanTap;
   final AppTheme appTheme;
   final void Function(bool) onChangeSaved;
@@ -120,7 +120,7 @@ final class SendScreenToWidget extends StatelessWidget {
 
 final class _TextInputSendToWidget extends TextInputWidgetBase {
   final AppLocalizationManager localization;
-  final VoidCallback onContactTap;
+  final void Function(List<AddressBook>) onContactTap;
   final VoidCallback onScanTap;
 
   const _TextInputSendToWidget({
@@ -235,31 +235,41 @@ class _TextInputSendToState
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Spacing.spacing04,
-                  vertical: Spacing.spacing02,
-                ),
-                decoration: BoxDecoration(
-                  color: theme.bgSecondary,
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(
-                      BorderRadiusSize.borderRadius03M,
+              SendTokenAddressBooksSelector(
+                builder: (addressBook) {
+                  return GestureDetector(
+                    onTap: () {
+                      widget.onContactTap(addressBook);
+                    },
+                    behavior: HitTestBehavior.opaque,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Spacing.spacing04,
+                        vertical: Spacing.spacing02,
+                      ),
+                      decoration: BoxDecoration(
+                        color: theme.bgSecondary,
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(
+                            BorderRadiusSize.borderRadius03M,
+                          ),
+                          bottomRight: Radius.circular(
+                            BorderRadiusSize.borderRadius03M,
+                          ),
+                        ),
+                        border: Border.all(
+                          color: theme.borderPrimary,
+                          width: BorderSize.border01,
+                        ),
+                      ),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          AssetIconPath.icCommonContact,
+                        ),
+                      ),
                     ),
-                    bottomRight: Radius.circular(
-                      BorderRadiusSize.borderRadius03M,
-                    ),
-                  ),
-                  border: Border.all(
-                    color: theme.borderPrimary,
-                    width: BorderSize.border01,
-                  ),
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    AssetIconPath.icCommonContact,
-                  ),
-                ),
+                  );
+                }
               ),
             ],
           ),

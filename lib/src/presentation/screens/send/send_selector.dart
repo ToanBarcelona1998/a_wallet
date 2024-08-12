@@ -92,3 +92,14 @@ final class SendTokenTokensSelector
     builder: (context, tokens) => builder(tokens),
   );
 }
+
+final class SendTokenAddressBooksSelector
+    extends BlocSelector<SendBloc, SendState, List<AddressBook>> {
+  SendTokenAddressBooksSelector({
+    super.key,
+    required Widget Function(List<AddressBook>) builder,
+  }) : super(
+    selector: (state) => state.addressBooks,
+    builder: (context, addressBooks) => builder(addressBooks),
+  );
+}

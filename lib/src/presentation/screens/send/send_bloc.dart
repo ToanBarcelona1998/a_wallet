@@ -12,12 +12,14 @@ final class SendBloc extends Bloc<SendEvent, SendState> {
   final TokenMarketUseCase _tokenMarketUseCase;
   final BalanceUseCase _balanceUseCase;
   final AccountUseCase _accountUseCase;
+  final AddressBookUseCase _addressBookUseCase;
 
   SendBloc(
     this._tokenUseCase,
     this._accountUseCase,
     this._balanceUseCase,
     this._tokenMarketUseCase,
+    this._addressBookUseCase,
   ) : super(
           const SendState(),
         ) {
@@ -85,6 +87,15 @@ final class SendBloc extends Bloc<SendEvent, SendState> {
         state.copyWith(
           status: SendStatus.loaded,
           tokenMarkets: tokenMarkets,
+        ),
+      );
+
+      final addressBooks = await _addressBookUseCase.getAll();
+
+      emit(
+        state.copyWith(
+          status: SendStatus.loaded,
+          addressBooks: addressBooks,
         ),
       );
     } catch (e) {

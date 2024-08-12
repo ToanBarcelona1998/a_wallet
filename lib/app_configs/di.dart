@@ -455,6 +455,7 @@ Future<void> initDependency(
       getIt.get<AccountUseCase>(),
       getIt.get<BalanceUseCase>(),
       getIt.get<TokenMarketUseCase>(),
+      getIt.get<AddressBookUseCase>(),
     ),
   );
 

@@ -128,10 +128,13 @@ class _SendSelectTokenWidget extends StatelessWidget {
 final class SendSelectTokensWidget extends AppBottomSheetBase {
   // List token. It can provide token info.
   final List<Token> tokens;
+
   // List token market. Display price
   final List<TokenMarket> tokenMarkets;
+
   // Selected balance
   final Balance currentToken;
+
   // Display balance with account type
   final List<Balance> balances;
 
@@ -153,11 +156,13 @@ final class _SendSelectTokensWidgetState
     extends AppBottomSheetBaseState<SendSelectTokensWidget> {
   List<Balance> displayTokens = List.empty(growable: true);
 
-  Token ? _selectedToken;
+  Token? _selectedToken;
 
   @override
   void initState() {
-    _selectedToken = widget.tokens.firstWhereOrNull((e) => e.id == widget.currentToken.tokenId,);
+    _selectedToken = widget.tokens.firstWhereOrNull(
+      (e) => e.id == widget.currentToken.tokenId,
+    );
     displayTokens.addAll(
       widget.balances,
     );
@@ -188,12 +193,31 @@ final class _SendSelectTokensWidgetState
         onLoadMore: () {},
         data: displayTokens,
         builder: (balance, _) {
+          final token = widget.tokens
+              .firstWhereOrNull((token) => token.id == balance.tokenId);
 
-          final token = widget.tokens.firstWhereOrNull((token) => token.id == balance.tokenId);
+          final tokenMarket = widget.tokenMarkets.firstWhereOrNull(
+            (m) => m.name == token?.tokenName,
+          );
 
-          // final tokenMarket = widget.tokenMarkets.firstWhereOrNull(
-          //   (m) => m.name == token.tokenName,
-          // );
+          final amount = double.tryParse(
+                token?.type.formatBalance(
+                      balance.balance,
+                      customDecimal: token.decimal,
+                    ) ??
+                    '0',
+              ) ??
+              0;
+
+          double currentPrice =
+              double.tryParse(tokenMarket?.currentPrice ?? '0') ?? 0;
+
+          double value = 0;
+          if (amount == 0 && currentPrice == 0) {
+            value = 0;
+          } else {
+            value = amount * currentPrice;
+          }
 
           bool isSelected = _selectedToken?.id == token?.id;
 
@@ -207,12 +231,9 @@ final class _SendSelectTokensWidgetState
               isSelected: isSelected,
               appTheme: appTheme,
               localization: localization,
-              amount: token?.type.formatBalance(
-                balance.balance,
-                customDecimal: token.decimal,
-              ) ?? '0',
+              amount: amount.toString(),
               avatar: token?.logo ?? '',
-              value: 0,
+              value: value,
               tokenName: token?.tokenName ?? '',
               symbol: token?.symbol ?? '',
             ),
@@ -261,8 +282,6 @@ final class _SendSelectTokensWidgetState
       // displayTokens.addAll(filterList);
     }
 
-    setState(() {
-
-    });
+    setState(() {});
   }
 }
