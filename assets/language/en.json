@@ -113,6 +113,9 @@
   "wallet_page_wallet_name_hint": "Enter wallet name",
   "wallet_page_wallet_address": "Wallet address",
   "wallet_page_wallet_already": "Wallet name was exists",
+  "wallet_page_wallet_google": "Google",
+  "wallet_page_wallet_twitter": "Twitter",
+  "wallet_page_wallet_apple": "Apple",
 
   "send_screen_app_bar_title" : "Send",
   "send_screen_from" : "From",

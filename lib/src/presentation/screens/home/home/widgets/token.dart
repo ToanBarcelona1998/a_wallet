@@ -217,7 +217,7 @@ final class HomePageTokensWidget extends StatelessWidget {
                     return _HomePageTokenInfoWidget(
                       avatar: AppLocalConstant.auraLogo,
                       symbol: config.config.evmInfo.symbol,
-                      tokenName: config.config.cosmosInfo.chainName,
+                      tokenName: config.config.evmInfo.chainName,
                       percentChange24h: 0,
                       amount: 0,
                       value: 0,

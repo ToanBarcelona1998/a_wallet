@@ -62,9 +62,7 @@ final class DefaultWalletInfoWidget extends WalletInfoWidget {
 
   @override
   Widget actions(BuildContext context) {
-    return SvgPicture.asset(
-      AssetIconPath.icCommonArrowDown,
-    );
+    return const SizedBox.shrink();
   }
 
   @override

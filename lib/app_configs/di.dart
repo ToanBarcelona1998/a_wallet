@@ -558,6 +558,7 @@ Future<void> initDependency(
     () => WalletCubit(
       getIt.get<AccountUseCase>(),
       getIt.get<KeyStoreUseCase>(),
+      getIt.get<Web3AuthUseCase>(),
     ),
   );
 
