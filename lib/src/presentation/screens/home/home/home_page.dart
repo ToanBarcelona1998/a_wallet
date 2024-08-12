@@ -179,11 +179,26 @@ class _HomePageState extends State<HomePage>
     switch (event) {
       case HomePageObserver.onSendTokenDone:
         // Refresh balance home page
+        _bloc.add(
+          HomePageOnRefreshTokenBalanceEvent(
+            tokenType: data,
+          ),
+        );
         break;
       case HomePageObserver.onSendNFTDone:
         // Refresh balance home page
+        _bloc.add(
+          HomePageOnRefreshTokenBalanceEvent(
+            tokenType: data,
+          ),
+        );
         break;
       case HomePageObserver.onChangeAccount:
+        _bloc.add(
+          HomePageOnChangeAccountEvent(
+            account: data,
+          ),
+        );
         break;
       default:
         break;

@@ -43,6 +43,7 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     on(_onUpdateNFTs);
     on(_onChangeEnableToken);
     on(_onRefreshTokenBalance);
+    on(_onChangeSelectedAccount);
   }
 
   // Isolates and SendPorts for handling concurrent tasks
@@ -619,11 +620,18 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     HomePageOnRefreshTokenBalanceEvent event,
     Emitter<HomePageState> emit,
   ) {
-    switch (event.tokenType) {
-      case TokenType.native:
-        break;
-      case TokenType.erc20:
-        break;
-    }
+    _sendMessageFetchAccountBalance(state.activeAccount);
+  }
+
+  void _onChangeSelectedAccount(
+    HomePageOnChangeAccountEvent event,
+    Emitter<HomePageState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        activeAccount: event.account,
+      ),
+    );
+    _sendMessageFetchAccountBalance(event.account);
   }
 }

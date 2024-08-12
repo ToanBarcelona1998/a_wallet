@@ -9,7 +9,7 @@ abstract interface class AccountDatabaseService extends LocalDatabaseService<Acc
 
   Future<AccountDto?> getFirstAccount();
 
-  Future<void> updateChangeIndex({
+  Future<AccountDto> updateChangeIndex({
     required int id,
   });
 }

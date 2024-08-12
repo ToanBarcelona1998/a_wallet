@@ -65,7 +65,9 @@ final class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  Future<void> updateChangeIndex({required int id}) {
-    return _accountDatabaseService.updateChangeIndex(id: id);
+  Future<Account> updateChangeIndex({required int id}) async{
+    final accountDto = await  _accountDatabaseService.updateChangeIndex(id: id);
+
+    return accountDto.toEntity;
   }
 }
