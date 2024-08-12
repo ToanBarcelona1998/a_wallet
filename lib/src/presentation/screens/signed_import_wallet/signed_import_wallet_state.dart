@@ -19,6 +19,5 @@ class SignedImportWalletState with _$SignedImportWalletState {
     @Default(12) int wordCount,
     @Default('') String walletName,
     @Default([]) List<Account> accounts,
-    @Default(false) bool isReady,
   }) = _SignedImportWalletState;
 }

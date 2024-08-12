@@ -1,4 +1,6 @@
 import 'package:a_wallet/src/core/observer/wallet_page_observer.dart';
+import 'package:a_wallet/src/presentation/widgets/text_input_base/text_input_base.dart';
+import 'package:a_wallet/src/presentation/widgets/text_input_base/text_input_manager.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,6 +40,7 @@ class _SignedImportWalletScreenState extends State<SignedImportWalletScreen>
   late SignedImportWalletBloc _bloc;
 
   final TextEditingController _privateKeyController = TextEditingController();
+  final TextEditingController _walletNameController = TextEditingController();
 
   final GlobalKey<FillWordsWidgetState> _passPhraseFormKey = GlobalKey();
 
@@ -53,6 +56,7 @@ class _SignedImportWalletScreenState extends State<SignedImportWalletScreen>
   @override
   void dispose() {
     _privateKeyController.dispose();
+    _walletNameController.dispose();
     super.dispose();
   }
 
@@ -68,46 +72,76 @@ class _SignedImportWalletScreenState extends State<SignedImportWalletScreen>
                 builder: (type) {
                   return Column(
                     children: [
-                      SignedImportWalletTabWidget(
-                        appTheme: appTheme,
-                        localization: localization,
-                        selectedIndex: type.index,
-                        onChanged: _onChangeType,
-                      ),
-                      const SizedBox(
-                        height: BoxSize.boxSize07,
-                      ),
                       Expanded(
                         child: SingleChildScrollView(
-                          child: type == ControllerKeyType.passPhrase
-                              ? SignedImportWalletWordCountSelector(
-                                  builder: (count) {
-                                    return SignedImportWalletSeedPhraseWidget(
+                          child: Column(
+                            children: [
+                              SignedImportWalletTabWidget(
+                                appTheme: appTheme,
+                                localization: localization,
+                                selectedIndex: type.index,
+                                onChanged: _onChangeType,
+                              ),
+                              const SizedBox(
+                                height: BoxSize.boxSize07,
+                              ),
+                              RoundBorderTextInputWidget(
+                                appTheme: appTheme,
+                                hintText: localization.translate(
+                                  LanguageKey
+                                      .signedImportWalletScreenWalletNameHint,
+                                ),
+                                label: localization.translate(
+                                  LanguageKey
+                                      .signedImportWalletScreenWalletName,
+                                ),
+                                isRequired: true,
+                                controller: _walletNameController,
+                                maxLine: 1,
+                                onChanged: _onWalletNameChanged,
+                                constraintManager: ConstraintManager()
+                                  ..custom(
+                                    errorMessage: localization.translate(
+                                      LanguageKey
+                                          .signedImportWalletScreenWalletNameAlready,
+                                    ),
+                                    customValid: _bloc.isValidWalletName,
+                                  ),
+                              ),
+                              const SizedBox(
+                                height: BoxSize.boxSize05,
+                              ),
+                              type == ControllerKeyType.passPhrase
+                                  ? SignedImportWalletWordCountSelector(
+                                      builder: (count) {
+                                        return SignedImportWalletSeedPhraseWidget(
+                                          appTheme: appTheme,
+                                          localization: localization,
+                                          onPaste: _onPastePassPhrase,
+                                          fillWordKey: _passPhraseFormKey,
+                                          isValid: _bloc.isValidControllerKey,
+                                          wordCount: count,
+                                          onChangeWordClick: () =>
+                                              _onChangeWordClick(
+                                            appTheme,
+                                            localization,
+                                            count,
+                                          ),
+                                          onWordChanged: (key, _) =>
+                                              _onControllerKeyChange(key),
+                                        );
+                                      },
+                                    )
+                                  : SignedImportWalletPrivateKeyWidget(
                                       appTheme: appTheme,
                                       localization: localization,
-                                      onPaste: _onPastePassPhrase,
-                                      fillWordKey: _passPhraseFormKey,
+                                      controller: _privateKeyController,
                                       isValid: _bloc.isValidControllerKey,
-                                      wordCount: count,
-                                      onChangeWordClick: () =>
-                                          _onChangeWordClick(
-                                        appTheme,
-                                        localization,
-                                        count,
-                                      ),
-                                      onWordChanged: (key, _) =>
+                                      onChanged: (key, _) =>
                                           _onControllerKeyChange(key),
-                                    );
-                                  },
-                                )
-                              : SignedImportWalletPrivateKeyWidget(
-                                  appTheme: appTheme,
-                                  localization: localization,
-                                  controller: _privateKeyController,
-                                  isValid: _bloc.isValidControllerKey,
-                                  onChanged: (key, _) =>
-                                      _onControllerKeyChange(key),
-                                ),
+                                    ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -219,6 +253,14 @@ class _SignedImportWalletScreenState extends State<SignedImportWalletScreen>
     _bloc.add(
       SignedImportWalletOnChangeWordCountEvent(
         wordCount: wordCount,
+      ),
+    );
+  }
+
+  void _onWalletNameChanged(String name, bool isValid) {
+    _bloc.add(
+      SignedImportWalletOnWalletNameChangeEvent(
+        walletName: name,
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet_core/wallet_core.dart';
@@ -19,6 +20,10 @@ final class SignedImportWalletBloc
     on(_onChangeControllerKey);
     on(_onSubmit);
     on(_onWalletNameChange);
+
+    add(
+      const SignedImportWalletOnInitEvent(),
+    );
   }
 
   void _onInit(
@@ -70,7 +75,8 @@ final class SignedImportWalletBloc
   ) {
     SignedImportWalletStatus status = state.status;
 
-    if (isValidControllerKey(event.controllerKey)) {
+    if (isValidControllerKey(event.controllerKey) &&
+        isValidWalletName(state.walletName)) {
       status = SignedImportWalletStatus.isReadySubmit;
     } else {
       status = SignedImportWalletStatus.none;
@@ -125,6 +131,9 @@ final class SignedImportWalletBloc
         name: state.walletName,
         keyStoreId: keyStore.id,
         evmAddress: wallet.address,
+        controllerKeyType: state.controllerType,
+        type: AccountType.normal,
+        createType: AccountCreateType.import,
       ),
     );
 
@@ -142,8 +151,32 @@ final class SignedImportWalletBloc
     );
   }
 
-  void _onWalletNameChange(SignedImportWalletOnWalletNameChangeEvent event,Emitter<SignedImportWalletState> emit,){
+  void _onWalletNameChange(
+    SignedImportWalletOnWalletNameChangeEvent event,
+    Emitter<SignedImportWalletState> emit,
+  ) {
+    SignedImportWalletStatus status = state.status;
 
+    if (isValidControllerKey(state.controllerKey) &&
+        isValidWalletName(event.walletName)) {
+      status = SignedImportWalletStatus.isReadySubmit;
+    } else {
+      status = SignedImportWalletStatus.none;
+    }
+    emit(
+      state.copyWith(
+        walletName: event.walletName,
+        status: status,
+      ),
+    );
+  }
+
+  bool isValidWalletName(String name) {
+    if (name.isEmpty) return false;
+    return state.accounts.firstWhereOrNull(
+          (a) => a.name == name,
+        ) ==
+        null;
   }
 
   bool isValidControllerKey(String key) {
