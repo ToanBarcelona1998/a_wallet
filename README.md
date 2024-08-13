@@ -16,6 +16,10 @@
 - Manage wallets
 - In app browser
 
+## Future showcase
+- Staking
+- Swap (Coming soon)
+
 ## Getting Started
 
 To run the application locally on your development machine, follow these steps:
