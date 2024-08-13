@@ -113,6 +113,7 @@ sealed class LanguageKey {
   // Settings page
   static const String settingsPageTitle = 'settings_page_title';
   static const String settingsPageLanguage = 'settings_page_language';
+  static const String settingsPageSelectLanguage = 'settings_page_select_language';
   static const String settingsPageAddressBook = 'setting_page_address_book';
   static const String settingsPagePasscode= 'setting_page_passcode';
   static const String settingsPageLogout = 'settings_page_logout';

@@ -100,6 +100,7 @@
 
   "settings_page_title": "Cài đặt",
   "settings_page_language": "Ngôn ngữ",
+  "settings_page_select_language": "Chọn ngôn ngữ",
   "setting_page_address_book" : "Sách địa chỉ",
   "setting_page_passcode" : "Mật khẩu và xác thực",
   "settings_page_logout": "Đăng xuất",
