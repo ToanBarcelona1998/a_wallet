@@ -6,6 +6,8 @@ import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
+import 'dart:ui' as ui;
+
 class BottomNavigatorBarWidget extends StatefulWidget {
   final AppTheme appTheme; // The app theme
   final AppLocalizationManager localization; // The app localization
@@ -61,8 +63,8 @@ class _BottomNavigatorBarWidgetState extends State<BottomNavigatorBarWidget> {
           Expanded(
             flex: 19,
             child: _buildItem(
-              AssetIconPath
-                  .icHomeScreenBottomNavigationBarWallet, // Icon path for home tab
+              AssetIconPath.icHomeScreenBottomNavigationBarWallet,
+              // Icon path for home tab
               AssetIconPath.icHomeScreenBottomNavigationBarWallet,
               // Active icon path for home tab
               LanguageKey.homeScreenBottomNavigationBarWallet,
@@ -95,13 +97,13 @@ class _BottomNavigatorBarWidgetState extends State<BottomNavigatorBarWidget> {
           Expanded(
             flex: 19,
             child: _buildItem(
-              AssetIconPath
-                  .icHomeScreenBottomNavigationBarHome, // Icon path for home tab
+              AssetIconPath.icHomeScreenBottomNavigationBarHome,
+              // Icon path for home tab
               AssetIconPath.icHomeScreenBottomNavigationBarHome,
               // Active icon path for home tab
               LanguageKey.homeScreenBottomNavigationBarHome,
               // Localization key for home tab label
-                  () {
+              () {
                 widget.onTabSelect(
                     2); // Callback function when home tab is selected
               },
@@ -112,8 +114,8 @@ class _BottomNavigatorBarWidgetState extends State<BottomNavigatorBarWidget> {
           Expanded(
             flex: 19,
             child: _buildItem(
-              AssetIconPath
-                  .icHomeScreenBottomNavigationBarHistory, // Icon path for history tab
+              AssetIconPath.icHomeScreenBottomNavigationBarHistory,
+              // Icon path for history tab
               AssetIconPath.icHomeScreenBottomNavigationBarHistory,
               // Active icon path for history tab
               LanguageKey.homeScreenBottomNavigationBarHistory,
@@ -129,8 +131,8 @@ class _BottomNavigatorBarWidgetState extends State<BottomNavigatorBarWidget> {
           Expanded(
             flex: 19,
             child: _buildItem(
-              AssetIconPath
-                  .icHomeScreenBottomNavigationBarSetting, // Icon path for setting tab
+              AssetIconPath.icHomeScreenBottomNavigationBarSetting,
+              // Icon path for setting tab
               AssetIconPath.icHomeScreenBottomNavigationBarSetting,
               // Active icon path for setting tab
               LanguageKey.homeScreenBottomNavigationBarSetting,
@@ -164,9 +166,14 @@ class _BottomNavigatorBarWidgetState extends State<BottomNavigatorBarWidget> {
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
-            isSelected
-                ? activeIconPath
-                : iconPath, // Display active icon if the item is selected, otherwise display normal icon
+            iconPath,
+            // Display active icon if the item is selected, otherwise display normal icon
+            colorFilter: isSelected
+                ? ColorFilter.mode(
+                    widget.appTheme.utilityBrand300,
+                    ui.BlendMode.srcIn,
+                  )
+                : null,
           ),
           const SizedBox(
             height: BoxSize.boxSize04, // Spacer height
@@ -175,13 +182,15 @@ class _BottomNavigatorBarWidgetState extends State<BottomNavigatorBarWidget> {
             widget.localization.translate(
               labelPath, // Translate the label using localization provider
             ),
-            style: AppTypoGraPhy.textXsSemiBold.copyWith(
-              color: isSelected
-                  ? widget.appTheme
-                  .textTertiary // Text color for selected item
-                  : widget.appTheme
-                  .textTertiary, // Text color for normal item
-            ),
+            style: isSelected
+                ? AppTypoGraPhy.textXsSemiBold.copyWith(
+                    color: widget
+                        .appTheme.textPrimary // Text color for selected item
+                    , // Text color for normal item
+                  )
+                : AppTypoGraPhy.textXsSemiBold.copyWith(
+                    color: widget.appTheme.textTertiary,
+                  ),
           ),
         ],
       ),

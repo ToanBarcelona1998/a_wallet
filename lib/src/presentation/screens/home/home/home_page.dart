@@ -230,42 +230,54 @@ class _HomePageState extends State<HomePage>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        HomePageStoryWidget(
-                          thumbnail:
-                              'https://cdn.pixabay.com/photo/2022/11/30/20/48/turtle-7627773_1280.jpg',
-                          title: 'Create passcode',
-                          appTheme: appTheme,
-                        ),
-                        const SizedBox(
-                          width: BoxSize.boxSize05,
-                        ),
-                        HomePageStoryWidget(
-                          thumbnail:
-                              'https://cdn.pixabay.com/photo/2022/11/30/20/48/turtle-7627773_1280.jpg',
-                          title: 'Punka event',
-                          appTheme: appTheme,
-                        ),
-                        const SizedBox(
-                          width: BoxSize.boxSize05,
-                        ),
-                        HomePageStoryWidget(
-                          thumbnail:
-                              'https://cdn.pixabay.com/photo/2022/11/30/20/48/turtle-7627773_1280.jpg',
-                          title: 'Create passcode',
-                          appTheme: appTheme,
-                        ),
-                        const SizedBox(
-                          width: BoxSize.boxSize05,
-                        ),
-                        HomePageStoryWidget(
-                          thumbnail:
-                              'https://cdn.pixabay.com/photo/2022/11/30/20/48/turtle-7627773_1280.jpg',
-                          title: 'Punka event',
-                          appTheme: appTheme,
-                        ),
-                      ],
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          HomePageStoryWidget(
+                            thumbnail:
+                                'https://punkga.me/_next/static/media/desktop-banner.6e2ab617.png',
+                            title: 'Kaia-island',
+                            appTheme: appTheme,
+                          ),
+                          const SizedBox(
+                            width: BoxSize.boxSize05,
+                          ),
+                          HomePageStoryWidget(
+                            thumbnail:
+                                'https://punkga.me/_next/static/media/banner-desktop-v3.e60e54fe.png',
+                            title: 'Wow-yourself',
+                            appTheme: appTheme,
+                          ),
+                          const SizedBox(
+                            width: BoxSize.boxSize05,
+                          ),
+                          HomePageStoryWidget(
+                            thumbnail:
+                                'https://insight.aura.network/content/images/size/w1200/2024/06/aura-evm.jpg',
+                            title: 'Aura EVM',
+                            appTheme: appTheme,
+                          ),
+                          const SizedBox(
+                            width: BoxSize.boxSize05,
+                          ),
+                          HomePageStoryWidget(
+                            thumbnail:
+                                'https://link3-image.cyberconnect.dev/684ddcd4-9d1e-40c7-aa2b-92b7277b5b96/dc4dc55ed2851c09',
+                            title: 'WEB3 IP',
+                            appTheme: appTheme,
+                          ),
+                          const SizedBox(
+                            width: BoxSize.boxSize05,
+                          ),
+                          HomePageStoryWidget(
+                            thumbnail:
+                                'https://link3-image.cyberconnect.dev/684ddcd4-9d1e-40c7-aa2b-92b7277b5b96/c3fc7723258d6e38',
+                            title: 'HG Society Tanuki',
+                            appTheme: appTheme,
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: BoxSize.boxSize07,
