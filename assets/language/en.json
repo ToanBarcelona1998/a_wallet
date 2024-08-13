@@ -100,6 +100,7 @@
 
   "settings_page_title": "Settings",
   "settings_page_language": "Language",
+  "settings_page_select_language": "Select language",
   "setting_page_address_book" : "Address book",
   "setting_page_passcode" : "Passcode and Biometrics",
   "settings_page_logout": "Logout",

@@ -44,6 +44,7 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     on(_onChangeEnableToken);
     on(_onRefreshTokenBalance);
     on(_onChangeSelectedAccount);
+    on(_onManagedToken);
   }
 
   // Isolates and SendPorts for handling concurrent tasks
@@ -345,12 +346,18 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     try {
       final tokens = await _tokenUseCase.getAll();
 
+      final displayToken = tokens
+          .where(
+            (e) => e.isEnable,
+          )
+          .toList();
+
       final activeAccount = await _accountUseCase.getFirstAccount();
 
       emit(
         state.copyWith(
           activeAccount: activeAccount,
-          tokens: tokens,
+          tokens: displayToken,
         ),
       );
 
@@ -373,13 +380,22 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       emit(
         state.copyWith(
           accountBalance: accountBalance,
-          totalTokenValue: _calculateBalance(accountBalance)[0],
-          totalValue: _calculateBalance(accountBalance)[0],
-          totalValueYesterday: _calculateBalance(accountBalance)[1],
+          totalTokenValue: _calculateBalance(
+            accountBalance,
+            displayToken,
+          )[0],
+          totalValue: _calculateBalance(
+            accountBalance,
+            displayToken,
+          )[0],
+          totalValueYesterday: _calculateBalance(
+            accountBalance,
+            displayToken,
+          )[1],
         ),
       );
     } catch (e) {
-      LogProvider.log(e.toString());
+      LogProvider.log('Home page bloc on load storage error ${e.toString()}');
     }
   }
 
@@ -476,13 +492,28 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
       final tokens = await _tokenUseCase.getAll();
 
+      final displayTokens = tokens
+          .where(
+            (element) => element.isEnable,
+          )
+          .toList();
+
       emit(
         state.copyWith(
           accountBalance: accountBalance,
-          totalTokenValue: _calculateBalance(accountBalance)[0],
-          totalValue: _calculateBalance(accountBalance)[0],
-          totalValueYesterday: _calculateBalance(accountBalance)[1],
-          tokens: tokens,
+          totalTokenValue: _calculateBalance(
+            accountBalance,
+            displayTokens,
+          )[0],
+          totalValue: _calculateBalance(
+            accountBalance,
+            displayTokens,
+          )[0],
+          totalValueYesterday: _calculateBalance(
+            accountBalance,
+            displayTokens,
+          )[1],
+          tokens: displayTokens,
         ),
       );
     } catch (e) {
@@ -562,7 +593,8 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     return super.close();
   }
 
-  List<double> _calculateBalance(AccountBalance? accountBalance) {
+  List<double> _calculateBalance(
+      AccountBalance? accountBalance, List<Token> tokens) {
     // If accountBalance is null, return [0, 0] indicating no balance or previous value.
     if (accountBalance == null) return [0, 0];
 
@@ -572,7 +604,7 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     // Iterate over each balance in the accountBalance.
     for (final balance in accountBalance.balances) {
       // Find the corresponding token information using tokenId.
-      final token = state.tokens.firstWhereOrNull(
+      final token = tokens.firstWhereOrNull(
         (e) => e.id == balance.tokenId,
       );
 
@@ -626,12 +658,48 @@ final class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   void _onChangeSelectedAccount(
     HomePageOnChangeAccountEvent event,
     Emitter<HomePageState> emit,
-  ) {
+  ) async {
+    emit(
+      state.copyWithNull(event.account),
+    );
+
+    _sendMessageFetchNFTs(
+      event.account,
+    );
+
+    _sendMessageFetchAccountBalance(
+      event.account,
+    );
+  }
+
+  void _onManagedToken(
+    HomePageOnManagedTokenEvent event,
+    Emitter<HomePageState> emit,
+  ) async {
+    final tokens = await _tokenUseCase.getAll();
+
+    final displayTokens = tokens
+        .where(
+          (element) => element.isEnable,
+        )
+        .toList();
+
     emit(
       state.copyWith(
-        activeAccount: event.account,
+        tokens: displayTokens,
+        totalTokenValue: _calculateBalance(
+          state.accountBalance,
+          displayTokens,
+        )[0],
+        totalValue: _calculateBalance(
+          state.accountBalance,
+          displayTokens,
+        )[0],
+        totalValueYesterday: _calculateBalance(
+          state.accountBalance,
+          displayTokens,
+        )[1],
       ),
     );
-    _sendMessageFetchAccountBalance(event.account);
   }
 }

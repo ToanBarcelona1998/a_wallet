@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 
-const double _kMinCircularProgressIndicatorSize = BoxSize.boxSize05;
+const double _kMinCircularProgressIndicatorSize = BoxSize.boxSize04;
 const int _kIndeterminateCircularDuration = 1333 * 2222;
 
 class AppLoadingWidget extends StatefulWidget {

@@ -1,3 +1,4 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
@@ -98,10 +99,12 @@ final class _ManageTokenScreenTokenWidget extends StatelessWidget {
 class ManageTokenScreenTokensWidget extends StatelessWidget {
   final AppTheme appTheme;
   final AppLocalizationManager localization;
+  final void Function(Token) onChanged;
 
   const ManageTokenScreenTokensWidget({
     required this.appTheme,
     required this.localization,
+    required this.onChanged,
     super.key,
   });
 
@@ -139,8 +142,10 @@ class ManageTokenScreenTokensWidget extends StatelessWidget {
                   return _ManageTokenScreenTokenWidget(
                     name: token.tokenName,
                     logo: token.logo,
-                    networkName: 'networkName',
-                    onChanged: (value) {},
+                    networkName: token.symbol,
+                    onChanged: (value) {
+                      onChanged(token);
+                    },
                     isEnable: token.isEnable,
                     appTheme: appTheme,
                   );

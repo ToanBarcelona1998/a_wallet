@@ -12,6 +12,7 @@ class SettingPageOptionWidget extends StatelessWidget {
   final AppTheme appTheme;
   final AppLocalizationManager localization;
   final VoidCallback onTap;
+  final String? value;
 
   const SettingPageOptionWidget({
     required this.iconPath,
@@ -19,6 +20,7 @@ class SettingPageOptionWidget extends StatelessWidget {
     required this.appTheme,
     required this.localization,
     required this.onTap,
+    this.value,
     super.key,
   });
 
@@ -50,6 +52,13 @@ class SettingPageOptionWidget extends StatelessWidget {
                 ),
               ),
             ),
+            if (value != null)
+              Text(
+                value ?? '',
+                style: AppTypoGraPhy.textSmMedium.copyWith(
+                  color: appTheme.textPrimary,
+                ),
+              ),
             const SizedBox(
               width: BoxSize.boxSize05,
             ),

@@ -14,11 +14,13 @@ final class ManageTokenScreenHideSmallBalanceWidget extends StatelessWidget {
   final AppTheme appTheme;
   final AppLocalizationManager localization;
   final TextEditingController searchController;
+  final void Function(String, bool) onChanged;
 
   const ManageTokenScreenHideSmallBalanceWidget({
     required this.appTheme,
     required this.localization,
     required this.searchController,
+    required this.onChanged,
     super.key,
   });
 
@@ -70,6 +72,7 @@ final class ManageTokenScreenHideSmallBalanceWidget extends StatelessWidget {
           hintText: localization.translate(
             LanguageKey.manageTokenScreenSearchHint,
           ),
+          onChanged: onChanged,
         ),
         const SizedBox(
           height: BoxSize.boxSize05,

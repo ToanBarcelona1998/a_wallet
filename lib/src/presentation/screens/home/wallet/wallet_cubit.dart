@@ -159,4 +159,25 @@ final class WalletCubit extends Cubit<WalletState> {
       mnemonic,
     );
   }
+
+  void selectAccount(Account account,int index) async {
+
+    if(index == 0) return;
+
+    final List<Account> accounts = List.empty(growable: true)..addAll(state.accounts);
+
+    accounts.removeAt(index);
+
+    final newAccount = await _accountUseCase.updateChangeIndex(
+      id: account.id,
+    );
+
+    accounts.insert(0, newAccount);
+
+    emit(
+      state.copyWith(
+        accounts: accounts,
+      ),
+    );
+  }
 }

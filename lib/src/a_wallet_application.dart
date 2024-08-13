@@ -11,17 +11,16 @@ import 'package:a_wallet/src/application/global/localization/localization_manage
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
 import 'package:a_wallet/src/navigator.dart';
-import 'dart:ui' as ui;
 
 // Define the AuraWalletApplication widget
 final class AWalletApplication extends StatefulWidget {
   const AWalletApplication({super.key});
 
   @override
-  State<AWalletApplication> createState() => _AWalletApplicationState();
+  State<AWalletApplication> createState() => AWalletApplicationState();
 }
 
-class _AWalletApplicationState extends State<AWalletApplication>
+class AWalletApplicationState extends State<AWalletApplication>
     with WidgetsBindingObserver {
   final AWalletConfig _config = getIt.get<AWalletConfig>();
 
@@ -63,9 +62,6 @@ class _AWalletApplicationState extends State<AWalletApplication>
 
   @override
   Widget build(BuildContext context) {
-    Locale systemLocale = ui.PlatformDispatcher.instance.locale;
-    AppLocalizationManager.instance
-        .updateDeviceLocale(systemLocale.languageCode);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -154,5 +150,11 @@ class _AWalletApplicationState extends State<AWalletApplication>
         },
       ),
     );
+  }
+
+  void rebuild(){
+    setState(() {
+
+    });
   }
 }

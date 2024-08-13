@@ -9,6 +9,7 @@ import 'package:a_wallet/src/presentation/screens/browser_search/browser_search_
 import 'package:a_wallet/src/presentation/screens/browser_tab_management/browser_tab_management_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/confirm_transfer_nft/confirm_send_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/home/browser/browser_page_bloc.dart';
+import 'package:a_wallet/src/presentation/screens/home/setting/setting_cubit.dart';
 import 'package:a_wallet/src/presentation/screens/home/wallet/wallet_cubit.dart';
 import 'package:a_wallet/src/presentation/screens/nft/nft_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/nft_transfer/nft_transfer_bloc.dart';
@@ -153,7 +154,9 @@ Future<void> initDependency(
 
   // Register service
   getIt.registerLazySingleton<LocalizationService>(
-    () => LocalizationServiceImpl(),
+    () => LocalizationServiceImpl(
+      sharedPreferences,
+    ),
   );
 
   getIt.registerLazySingleton<BiometricProvider>(
@@ -566,6 +569,18 @@ Future<void> initDependency(
     () => SignedImportWalletBloc(
       getIt.get<AccountUseCase>(),
       getIt.get<KeyStoreUseCase>(),
+    ),
+  );
+
+  getIt.registerFactory<SettingCubit>(
+    () => SettingCubit(
+      getIt.get<AccountUseCase>(),
+      getIt.get<KeyStoreUseCase>(),
+      getIt.get<TokenUseCase>(),
+      getIt.get<BookMarkUseCase>(),
+      getIt.get<BrowserManagementUseCase>(),
+      getIt.get<AddressBookUseCase>(),
+      getIt.get<BalanceUseCase>(),
     ),
   );
 }

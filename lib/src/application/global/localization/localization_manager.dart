@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:a_wallet/app_configs/di.dart';
+import 'dart:ui' as ui;
 
 class AppLocalizationManager {
   final LocalizationUseCase _localizationUseCase =
@@ -30,9 +31,6 @@ class AppLocalizationManager {
 
   Locale _locale = const Locale('en');
 
-  /// Biến kiểm tra xem người dùng đã chọn ngôn ngữ chưa
-  bool isUserSettingLocale = false;
-
   Map<String, String> get _currentLocalize =>
       _supportedLocale[_locale.languageCode] ?? <String, String>{};
 
@@ -46,15 +44,12 @@ class AppLocalizationManager {
     return _supportedLocale.containsKey(locale.languageCode);
   }
 
-  bool setCurrentLocale(String localeCode) {
+  void setCurrentLocale(String localeCode) {
     if (_supportedLocale.containsKey(localeCode)) {
       _locale = Locale(localeCode);
-
-      return true;
+    }else{
+      _locale = const Locale('en');
     }
-    _locale = const Locale('en');
-
-    return false;
   }
 
   List<String> get supportedLang =>
@@ -77,23 +72,21 @@ class AppLocalizationManager {
 
     /// Check if user selected locale is not null
     if (userSelectedLocale != null) {
-      isUserSettingLocale = setCurrentLocale(userSelectedLocale);
-
-      return;
+      setCurrentLocale(userSelectedLocale);
+    }else{
+      Locale systemLocale = ui.PlatformDispatcher.instance.locale;
+      await updateDeviceLocale(systemLocale.languageCode);
     }
-    isUserSettingLocale = false;
   }
 
   ///
   /// Load selected locale from device setting
   ///
   Future<void> updateDeviceLocale(String deviceLocale) async {
-    if (isUserSettingLocale) return;
-    if (setCurrentLocale(deviceLocale)) {
-      await _localizationUseCase.saveSelectedLocale(
-        locale: deviceLocale,
-      );
-    }
+    setCurrentLocale(deviceLocale);
+    await _localizationUseCase.saveSelectedLocale(
+      locale: deviceLocale,
+    );
   }
 
   ///region translate
