@@ -3,7 +3,7 @@
 ## Overview
 
 - This mobile application is a specific Blockchain wallet for Aura Network chain, that allows users to securely manage their cryptocurrencies. The app is built using Flutter framework and follows Uncle Bob's Clean Architecture principles, ensuring a scalable and maintainable codebase.
-- See more about [Aura Network]('https://docs.aura.network/')
+- See more about [Aura Network](https://docs.aura.network/)
 
 ## Features
 
@@ -38,9 +38,9 @@ To run the application locally on your development machine, follow these steps:
 
 - Clean Architecture: A software design pattern that separates concerns and enforces separation of concerns.
 
-- Trust Wallet Core : Trust Wallet Core is an open-source, cross-platform, mobile-focused library implementing low-level cryptographic wallet functionality for a high number of blockchains. It is a core part of the popular [Trust Wallet]('https://trustwallet.com/'), and some other projects. Most of the code is C++ with a set of strict C interfaces, and idiomatic interfaces for supported languages: Swift for iOS and Java (Kotlin) for Android.
+- Trust Wallet Core : Trust Wallet Core is an open-source, cross-platform, mobile-focused library implementing low-level cryptographic wallet functionality for a high number of blockchains. It is a core part of the popular [Trust Wallet](https://trustwallet.com/), and some other projects. Most of the code is C++ with a set of strict C interfaces, and idiomatic interfaces for supported languages: Swift for iOS and Java (Kotlin) for Android.
 
-- Web3 dart : A dart library that connects to interact with the Ethereum blockchain. It connects to an Ethereum node to send transactions, interact with smart contracts and much more!
+- Web3 dart : A dart library that connects to interact with the Ethereum blockchain. It connects to an Ethereum node to send transactions, interact with smart contracts and much more! [Web3 dart](https://pub.dev/packages/web3dart)
   
 
 ## License
