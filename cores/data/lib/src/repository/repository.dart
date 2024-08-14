@@ -10,3 +10,4 @@ export 'token_repository_impl.dart';
 export 'address_book_repository_impl.dart';
 export 'book_mark_repository_impl.dart';
 export 'browser_management_repository_impl.dart';
+export 'transaction_repository_impl.dart';

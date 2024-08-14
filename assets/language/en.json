@@ -118,6 +118,12 @@
   "wallet_page_wallet_twitter": "Twitter",
   "wallet_page_wallet_apple": "Apple",
 
+  "history_page_app_bar_title" : "Transaction history",
+  "history_page_no_tx_found" : "No transaction found",
+  "history_page_amount" : "Amount",
+  "history_page_hash" : "Hash",
+  "history_page_to" : "To",
+
   "send_screen_app_bar_title" : "Send",
   "send_screen_from" : "From",
   "send_screen_to" : "To address",

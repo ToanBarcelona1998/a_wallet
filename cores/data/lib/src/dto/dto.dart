@@ -9,3 +9,5 @@ export 'web3_auth_info_dto.dart';
 export 'browser_dto.dart';
 export 'bookmark_dto.dart';
 export 'address_book_dto.dart';
+export 'transaction_dto.dart';
+export 'function_mapping_dto.dart';

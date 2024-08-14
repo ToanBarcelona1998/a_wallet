@@ -2,6 +2,7 @@ import 'package:a_wallet/app_configs/di.dart';
 import 'package:a_wallet/src/core/constants/asset_path.dart';
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
+import 'package:a_wallet/src/core/observer/history_page_observer.dart';
 import 'package:a_wallet/src/core/observer/home_page_observer.dart';
 import 'package:a_wallet/src/core/observer/wallet_page_observer.dart';
 import 'package:a_wallet/src/core/utils/aura_util.dart';
@@ -40,6 +41,8 @@ class _WalletPageState extends State<WalletPage>
   final WalletPageObserver _walletPageObserver =
       getIt.get<WalletPageObserver>();
   final HomePageObserver _homePageObserver = getIt.get<HomePageObserver>();
+
+  final HistoryPageObserver _historyPageObserver = getIt.get<HistoryPageObserver>();
 
   @override
   void initState() {
@@ -98,6 +101,12 @@ class _WalletPageState extends State<WalletPage>
                           _homePageObserver.emit(
                             emitParam: HomePageEmitParam(
                               event: HomePageObserver.onChangeAccount,
+                              data: account,
+                            ),
+                          );
+                          _historyPageObserver.emit(
+                            emitParam: HistoryPageEmitParam(
+                              event: HistoryPageObserver.onChangeAccount,
                               data: account,
                             ),
                           );

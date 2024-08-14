@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:a_wallet/src/application/provider/local/address_book/address_book_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/local/book_mark/book_mark_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/local/browser/browser_database_service_impl.dart';
+import 'package:a_wallet/src/application/provider/service/transaction/transaction_service_impl.dart';
+import 'package:a_wallet/src/core/observer/history_page_observer.dart';
 import 'package:a_wallet/src/core/observer/wallet_page_observer.dart';
 import 'package:a_wallet/src/presentation/screens/address_book/address_book_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/browser/browser_bloc.dart';
@@ -9,6 +11,7 @@ import 'package:a_wallet/src/presentation/screens/browser_search/browser_search_
 import 'package:a_wallet/src/presentation/screens/browser_tab_management/browser_tab_management_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/confirm_transfer_nft/confirm_send_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/home/browser/browser_page_bloc.dart';
+import 'package:a_wallet/src/presentation/screens/home/history/history_bloc.dart';
 import 'package:a_wallet/src/presentation/screens/home/setting/setting_cubit.dart';
 import 'package:a_wallet/src/presentation/screens/home/wallet/wallet_cubit.dart';
 import 'package:a_wallet/src/presentation/screens/nft/nft_bloc.dart';
@@ -132,6 +135,10 @@ Future<void> initDependency(
     () => WalletPageObserver(),
   );
 
+  getIt.registerLazySingleton<HistoryPageObserver>(
+    () => HistoryPageObserver(),
+  );
+
   // Register generator
   getIt.registerLazySingleton<RemoteTokenMarketServiceGenerator>(
     () => RemoteTokenMarketServiceGenerator(
@@ -148,6 +155,12 @@ Future<void> initDependency(
 
   getIt.registerLazySingleton<NFTServiceGenerator>(
     () => NFTServiceGenerator(
+      getIt.get<Dio>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<TransactionServiceGenerator>(
+    () => TransactionServiceGenerator(
       getIt.get<Dio>(),
     ),
   );
@@ -239,6 +252,12 @@ Future<void> initDependency(
     ),
   );
 
+  getIt.registerLazySingleton<TransactionService>(
+    () => TransactionServiceImpl(
+      getIt.get<TransactionServiceGenerator>(),
+    ),
+  );
+
   // Register repository
   getIt.registerLazySingleton<LocalizationRepository>(
     () => LocalizationRepositoryImpl(
@@ -315,6 +334,12 @@ Future<void> initDependency(
     ),
   );
 
+  getIt.registerLazySingleton<TransactionRepository>(
+    () => TransactionRepositoryImpl(
+      getIt.get<TransactionService>(),
+    ),
+  );
+
   // Register use case
   getIt.registerLazySingleton<LocalizationUseCase>(
     () => LocalizationUseCase(
@@ -385,6 +410,12 @@ Future<void> initDependency(
   getIt.registerLazySingleton<AddressBookUseCase>(
     () => AddressBookUseCase(
       getIt.get<AddressBookRepository>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<TransactionUseCase>(
+    () => TransactionUseCase(
+      getIt.get<TransactionRepository>(),
     ),
   );
 
@@ -581,6 +612,14 @@ Future<void> initDependency(
       getIt.get<BrowserManagementUseCase>(),
       getIt.get<AddressBookUseCase>(),
       getIt.get<BalanceUseCase>(),
+    ),
+  );
+
+  getIt.registerFactoryParam<HistoryBloc,AWalletConfig, dynamic>(
+    (config, _) => HistoryBloc(
+      getIt.get<AccountUseCase>(),
+      getIt.get<TransactionUseCase>(),
+      config: config,
     ),
   );
 }
