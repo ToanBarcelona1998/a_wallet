@@ -123,9 +123,9 @@ class ManageTokenScreenTokensWidget extends StatelessWidget {
                 color: appTheme.textPrimary,
               ),
             ),
-            SvgPicture.asset(
-              AssetIconPath.icCommonFilter,
-            ),
+            // SvgPicture.asset(
+            //   AssetIconPath.icCommonFilter,
+            // ),
           ],
         ),
         const SizedBox(

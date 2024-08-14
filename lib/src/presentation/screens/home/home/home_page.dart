@@ -1,3 +1,4 @@
+import 'package:a_wallet/src/core/utils/toast.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +38,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with StateFulBaseScreen, SingleTickerProviderStateMixin {
+    with StateFulBaseScreen, SingleTickerProviderStateMixin  , CustomFlutterToast{
   final HomePageObserver _homePageObserver = getIt.get<HomePageObserver>();
 
   late HomePageBloc _bloc;
@@ -420,7 +421,11 @@ class _HomePageState extends State<HomePage>
     widget.onReceivedTap();
   }
 
-  void _onSwapTap() {}
+  void _onSwapTap() {
+    showToast('This feature will be supported in the future soon.');
+  }
 
-  void _onStakingTap() {}
+  void _onStakingTap() {
+    showToast('This feature will be supported in the future soon');
+  }
 }
