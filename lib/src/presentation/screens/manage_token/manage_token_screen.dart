@@ -128,25 +128,25 @@ class _ManageTokenScreenState extends State<ManageTokenScreen>
             appTheme: appTheme,
             localization: localization,
             titleKey: LanguageKey.manageTokenScreenAppBarTitle,
-            actions: [
-              Container(
-                padding: const EdgeInsets.all(
-                  Spacing.spacing04,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    BorderRadiusSize.borderRadiusRound,
-                  ),
-                  color: appTheme.utilityGray200,
-                ),
-                child: SvgPicture.asset(
-                  AssetIconPath.icCommonAdd,
-                ),
-              ),
-              const SizedBox(
-                width: BoxSize.boxSize04,
-              ),
-            ],
+            // actions: [
+            //   Container(
+            //     padding: const EdgeInsets.all(
+            //       Spacing.spacing04,
+            //     ),
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(
+            //         BorderRadiusSize.borderRadiusRound,
+            //       ),
+            //       color: appTheme.utilityGray200,
+            //     ),
+            //     child: SvgPicture.asset(
+            //       AssetIconPath.icCommonAdd,
+            //     ),
+            //   ),
+            //   const SizedBox(
+            //     width: BoxSize.boxSize04,
+            //   ),
+            // ],
           ),
           body: child,
         ),

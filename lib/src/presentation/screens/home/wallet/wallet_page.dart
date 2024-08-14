@@ -9,6 +9,7 @@ import 'package:a_wallet/src/core/utils/aura_util.dart';
 import 'package:a_wallet/src/core/utils/dart_core_extension.dart';
 import 'package:a_wallet/src/core/utils/toast.dart';
 import 'package:a_wallet/src/navigator.dart';
+import 'package:a_wallet/src/presentation/widgets/divider_widget.dart';
 import 'widgets/social_option.dart';
 import 'widgets/add.dart';
 import 'package:domain/domain.dart';
@@ -42,7 +43,8 @@ class _WalletPageState extends State<WalletPage>
       getIt.get<WalletPageObserver>();
   final HomePageObserver _homePageObserver = getIt.get<HomePageObserver>();
 
-  final HistoryPageObserver _historyPageObserver = getIt.get<HistoryPageObserver>();
+  final HistoryPageObserver _historyPageObserver =
+      getIt.get<HistoryPageObserver>();
 
   @override
   void initState() {
@@ -91,33 +93,41 @@ class _WalletPageState extends State<WalletPage>
                   },
                   data: accounts,
                   builder: (account, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: Spacing.spacing07,
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          _cubit.selectAccount(account, index);
-                          _homePageObserver.emit(
-                            emitParam: HomePageEmitParam(
-                              event: HomePageObserver.onChangeAccount,
-                              data: account,
-                            ),
-                          );
-                          _historyPageObserver.emit(
-                            emitParam: HistoryPageEmitParam(
-                              event: HistoryPageObserver.onChangeAccount,
-                              data: account,
-                            ),
-                          );
-                        },
-                        behavior: HitTestBehavior.opaque,
-                        child: DefaultWalletInfoWidget(
-                          avatarAsset: randomAvatar(),
-                          appTheme: appTheme,
-                          title: account.name,
-                          address: account.evmAddress,
-                        ),
+                    return GestureDetector(
+                      onTap: () {
+                        _cubit.selectAccount(account, index);
+                        _homePageObserver.emit(
+                          emitParam: HomePageEmitParam(
+                            event: HomePageObserver.onChangeAccount,
+                            data: account,
+                          ),
+                        );
+                        _historyPageObserver.emit(
+                          emitParam: HistoryPageEmitParam(
+                            event: HistoryPageObserver.onChangeAccount,
+                            data: account,
+                          ),
+                        );
+                      },
+                      behavior: HitTestBehavior.opaque,
+                      child: Column(
+                        children: [
+                          DefaultWalletInfoWidget(
+                            avatarAsset: randomAvatar(),
+                            appTheme: appTheme,
+                            title: account.name,
+                            address: account.evmAddress,
+                          ),
+                          const SizedBox(
+                            height: BoxSize.boxSize05,
+                          ),
+                          HoLiZonTalDividerWidget(
+                            appTheme: appTheme,
+                          ),
+                          const SizedBox(
+                            height: BoxSize.boxSize05,
+                          ),
+                        ],
                       ),
                     );
                   },
