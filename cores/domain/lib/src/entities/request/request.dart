@@ -13,3 +13,5 @@ export 'add_browser_parameter.dart';
 export 'update_address_book_request.dart';
 export 'update_browser_parameter.dart';
 export 'update_token_request.dart';
+export 'query_transaction_request.dart';
+export 'query_function_mapping_request.dart';

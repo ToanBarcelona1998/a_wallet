@@ -10,3 +10,5 @@ export 'token.dart';
 export 'address_book.dart';
 export 'bookmark.dart';
 export 'browser.dart';
+export 'transaction.dart';
+export 'function_mapping.dart';

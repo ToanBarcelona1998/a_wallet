@@ -118,6 +118,12 @@
   "wallet_page_wallet_twitter": "Twitter",
   "wallet_page_wallet_apple": "Apple",
 
+  "history_page_app_bar_title" : "Lịch sử giao dịch",
+  "history_page_no_tx_found" : "Không tìm thấy giao dịch nào",
+  "history_page_amount" : "Số tiền",
+  "history_page_hash" : "Mã băm",
+  "history_page_to" : "Đến",
+
   "send_screen_app_bar_title": "Gửi",
   "send_screen_from": "Từ",
   "send_screen_to": "Địa chỉ đến",

@@ -132,6 +132,13 @@ sealed class LanguageKey {
   static const String walletPageWalletTwitter = 'wallet_page_wallet_twitter';
   static const String walletPageWalletApple = 'wallet_page_wallet_apple';
 
+  // Transaction page
+  static const String historyPageAppBarTitle = 'history_page_app_bar_title';
+  static const String historyPageNoTxFound = 'history_page_no_tx_found';
+  static const String historyPageAmount = 'history_page_amount';
+  static const String historyPageHash = 'history_page_hash';
+  static const String historyPageTo = 'history_page_to';
+
   
   // Send screen
   static const String sendScreenAppBarTitle = 'send_screen_app_bar_title';
