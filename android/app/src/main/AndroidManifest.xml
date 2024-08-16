@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
     <application
-        android:label="a_wallet"
+        android:label="AWallet"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -41,7 +41,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="app" android:host="com.work.wallet" />
+                <data android:scheme="app" android:host="com.example.a_wallet" />
                 <!-- Accept URIs: w3a://com.example.w3aflutter/auth -->
             </intent-filter>
         </activity>

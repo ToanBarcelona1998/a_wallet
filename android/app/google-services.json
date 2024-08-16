@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "57894897170",
+    "project_id": "awallet-e6052",
+    "storage_bucket": "awallet-e6052.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57894897170:android:5fd0230eb807d2294bbacb",
+        "android_client_info": {
+          "package_name": "com.example.a_wallet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjaZWem6Og1uj5JEufeJizWMH3g65Ao6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
