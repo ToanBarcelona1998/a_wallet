@@ -154,8 +154,16 @@ class _ImportWalletYetiBotScreenState extends State<ImportWalletYetiBotScreen>
       value: _cubit,
       child: BlocListener<ImportWalletYetiBotCubit, ImportWalletYetiBotState>(
         listener: (context, state) {
-          if (state.status == ImportWalletYetiBotStatus.stored) {
-            AppGlobalCubit.of(context).changeStatus(AppGlobalStatus.authorized);
+          switch(state.status){
+            case ImportWalletYetiBotStatus.none:
+              break;
+            case ImportWalletYetiBotStatus.storing:
+              showLoading();
+              break;
+            case ImportWalletYetiBotStatus.stored:
+              hideLoading();
+              AppGlobalCubit.of(context).changeStatus(AppGlobalStatus.authorized);
+              break;
           }
         },
         child: Scaffold(

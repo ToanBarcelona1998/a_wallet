@@ -144,8 +144,16 @@ class _SocialLoginYetiBotScreenState extends State<SocialLoginYetiBotScreen>
       value: _cubit,
       child: BlocListener<SocialLoginYetiBotCubit, SocialLoginYetiBotState>(
         listener: (context, state) {
-          if (state.status == SocialLoginYetiBotStatus.stored) {
-            AppGlobalCubit.of(context).changeStatus(AppGlobalStatus.authorized);
+          switch(state.status){
+            case SocialLoginYetiBotStatus.none:
+              break;
+            case SocialLoginYetiBotStatus.storing:
+              showLoading();
+              break;
+            case SocialLoginYetiBotStatus.stored:
+              hideLoading();
+              AppGlobalCubit.of(context).changeStatus(AppGlobalStatus.authorized);
+              break;
           }
         },
         child: Scaffold(

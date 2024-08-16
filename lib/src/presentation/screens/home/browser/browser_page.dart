@@ -4,6 +4,7 @@ import 'package:a_wallet/src/application/global/localization/localization_manage
 import 'package:a_wallet/src/core/constants/language_key.dart';
 import 'package:a_wallet/src/core/constants/size_constant.dart';
 import 'package:a_wallet/src/core/constants/typography.dart';
+import 'package:a_wallet/src/core/observer/browser_page_observer.dart';
 import 'package:a_wallet/src/navigator.dart';
 import 'package:a_wallet/src/presentation/widgets/base_screen.dart';
 import 'package:a_wallet/src/presentation/widgets/combine_list_view.dart';
@@ -28,31 +29,31 @@ class BrowserPage extends StatefulWidget {
 class _BrowserPageState extends State<BrowserPage> with StateFulBaseScreen {
   final BrowserPageBloc _bloc = getIt.get<BrowserPageBloc>();
 
-  // final HomeScreenObserver _homeScreenObserver =
-  //     getIt.get<HomeScreenObserver>();
-  //
-  // void _registerEvent(HomeScreenEmitParam param) {
-  //   if (param.event == HomeScreenObserver.onbrowserRefreshBookMarkEvent) {
-  //     _bloc.add(
-  //       const BrowserPageOnRefreshBookMarkEvent(),
-  //     );
-  //   } else if (param.event ==
-  //       HomeScreenObserver.onbrowserRefreshBrowserEvent) {
-  //     _bloc.add(
-  //       const BrowserPageOnRefreshTabEvent(),
-  //     );
-  //   }
-  // }
+  final BrowserPageObserver _browserPageObserver =
+      getIt.get<BrowserPageObserver>();
+
+  void _registerEvent(BrowserPageEmitParam param) {
+    if (param.event == BrowserPageObserver.onInAppBrowserRefreshBookMarkEvent) {
+      _bloc.add(
+        const BrowserPageOnRefreshBookMarkEvent(),
+      );
+    } else if (param.event ==
+        BrowserPageObserver.onInAppBrowserRefreshBrowserEvent) {
+      _bloc.add(
+        const BrowserPageOnRefreshTabEvent(),
+      );
+    }
+  }
 
   @override
   void initState() {
-    // _homeScreenObserver.addListener(_registerEvent);
+    _browserPageObserver.addListener(_registerEvent);
     super.initState();
   }
 
   @override
   void dispose() {
-    // _homeScreenObserver.removeListener(_registerEvent);
+    _browserPageObserver.removeListener(_registerEvent);
     super.dispose();
   }
 

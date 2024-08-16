@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "57894897170",
-    "project_id": "awallet-e6052",
-    "storage_bucket": "awallet-e6052.appspot.com"
+    "project_number": "991082355098",
+    "project_id": "pyxis-effb6",
+    "storage_bucket": "pyxis-effb6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:57894897170:android:5fd0230eb807d2294bbacb",
+        "mobilesdk_app_id": "1:991082355098:android:66ffc879c166725f330223",
         "android_client_info": {
-          "package_name": "com.example.a_wallet"
+          "package_name": "com.aura.network.pyxis_mobile"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "991082355098-f4ed0njl43da9ofa3u8b9be059cui231.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aura.network.pyxis_mobile",
+            "certificate_hash": "11a9e7104a77a2b8c8d39467c895d986589f463b"
+          }
+        },
+        {
+          "client_id": "991082355098-8gsjdusqqepn8dm7lqu5dm7vh0blfl9k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyBjaZWem6Og1uj5JEufeJizWMH3g65Ao6I"
+          "current_key": "AIzaSyC4hOI6gPStyaC6pmuvOP_TIqC1rkc6svo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991082355098-8gsjdusqqepn8dm7lqu5dm7vh0blfl9k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

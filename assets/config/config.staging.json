@@ -36,8 +36,8 @@
     }
   },
   "WEB_3_AUTH" : {
-    "client_id": "BNjRNXqwCSYzCqc_Q9uxzxmzhzAbUWA5x_2Nf-h4Xx0Y_EvcM5xU0n18gx-Kdd0etLwvmhaYwtQ09yoxAyL_9YE",
-    "ios_redirect_url": "",
-    "android_redirect_url": "app://com.example.a_wallet"
+    "client_id": "BCz90RUtKV5gkiwCJYQY6oeGeyEnsMjPhzShWFs_j82F5iwlt0fhUiQsBMHeV_96VACY00YtCwfwCWL9zv-jV7c",
+    "ios_redirect_url": "app://aura.pyxis.mobile",
+    "android_redirect_url": "app://com.aura.network.pyxis_mobile"
   }
 }

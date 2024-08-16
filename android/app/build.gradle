@@ -26,7 +26,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.example.a_wallet"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -36,11 +36,11 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.a_wallet"
+        applicationId = "com.aura.network.pyxis_mobile"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdk = 24
-        targetSdk = flutter.targetSdkVersion
+        minSdk = 25
+        targetSdk = 34
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }

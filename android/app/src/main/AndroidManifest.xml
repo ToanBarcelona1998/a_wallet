@@ -41,7 +41,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="app" android:host="com.example.a_wallet" />
+                <data android:scheme="app" android:host="com.aura.network.pyxis_mobile" />
                 <!-- Accept URIs: w3a://com.example.w3aflutter/auth -->
             </intent-filter>
         </activity>
