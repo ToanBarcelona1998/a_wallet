@@ -3,6 +3,7 @@ import 'package:a_wallet/src/application/provider/local/address_book/address_boo
 import 'package:a_wallet/src/application/provider/local/book_mark/book_mark_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/local/browser/browser_database_service_impl.dart';
 import 'package:a_wallet/src/application/provider/service/transaction/transaction_service_impl.dart';
+import 'package:a_wallet/src/core/observer/browser_page_observer.dart';
 import 'package:a_wallet/src/core/observer/history_page_observer.dart';
 import 'package:a_wallet/src/core/observer/wallet_page_observer.dart';
 import 'package:a_wallet/src/presentation/screens/address_book/address_book_bloc.dart';
@@ -137,6 +138,10 @@ Future<void> initDependency(
 
   getIt.registerLazySingleton<HistoryPageObserver>(
     () => HistoryPageObserver(),
+  );
+
+  getIt.registerLazySingleton<BrowserPageObserver>(
+    () => BrowserPageObserver(),
   );
 
   // Register generator

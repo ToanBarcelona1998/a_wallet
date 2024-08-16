@@ -151,9 +151,10 @@ class _GenerateWalletScreenState extends State<GenerateWalletScreen>
             case GenerateWalletStatus.generated:
               break;
             case GenerateWalletStatus.storing:
-              // Show loading
+              showLoading();
               break;
             case GenerateWalletStatus.stored:
+              hideLoading();
               AppGlobalCubit.of(context)
                   .changeStatus(AppGlobalStatus.authorized);
               break;

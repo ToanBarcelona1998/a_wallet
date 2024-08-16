@@ -3,6 +3,7 @@ import 'package:a_wallet/app_configs/di.dart';
 import 'package:a_wallet/src/application/global/app_theme/app_theme.dart';
 import 'package:a_wallet/src/application/global/localization/localization_manager.dart';
 import 'package:a_wallet/src/core/helpers/share_network.dart';
+import 'package:a_wallet/src/core/observer/browser_page_observer.dart';
 import 'package:a_wallet/src/core/utils/context_extension.dart';
 import 'package:a_wallet/src/core/utils/debounce.dart';
 import 'package:a_wallet/src/navigator.dart';
@@ -64,9 +65,9 @@ class _BrowserScreenState extends State<BrowserScreen> with StateFulBaseScreen {
   /// Declare a Browser bloc
   late BrowserBloc _bloc;
 
-  /// Get home screen observer instance
-  // final HomeScreenObserver _homeScreenObserver =
-  //     getIt.get<HomeScreenObserver>();
+  /// Get browser page observer instance
+  final BrowserPageObserver _browserPageObserver =
+      getIt.get<BrowserPageObserver>();
 
   /// Run script method. It includes the script to get the favicon of website.
   Future<void> _runJavaScript() async {
@@ -260,47 +261,6 @@ class _BrowserScreenState extends State<BrowserScreen> with StateFulBaseScreen {
     _denounce.disPose();
     super.dispose();
   }
-
-  /// Show choosing dialog account
-  // void _showChoosingAccount(
-  //   AppTheme appTheme,
-  //   List<AuraAccount> accounts,
-  //   AuraAccount? selectedAccount,
-  // ) async {
-  //   // Show dialog. It can receive an account or null.
-  //   final account = await DialogProvider.showCustomDialog<AuraAccount>(
-  //     context,
-  //     appTheme: appTheme,
-  //     widget: ChangeAccountFormWidget(
-  //       accounts: accounts,
-  //       appTheme: appTheme,
-  //       isSelected: (account) {
-  //         return selectedAccount?.id == account.id;
-  //       },
-  //     ),
-  //     canBack: true,
-  //   );
-  //
-  //   if (account != null) {
-  //     if (account.id == _bloc.state.selectedAccount?.id) return;
-  //
-  //     // Update account in home page.
-  //     _homeScreenObserver.emit(
-  //       emitParam: HomeScreenEmitParam(
-  //         event: HomeScreenObserver.onInAppBrowserChooseAccountEvent,
-  //         data: account,
-  //       ),
-  //     );
-  //
-  //     // Call refresh account
-  //     _bloc.add(
-  //       BrowserOnRefreshAccountEvent(
-  //         selectedAccount: account,
-  //       ),
-  //     );
-  //   }
-  // }
-
   /// On users click book mark
   void _onBookMarkClick() async {
     // Get current site url
@@ -457,20 +417,20 @@ class _BrowserScreenState extends State<BrowserScreen> with StateFulBaseScreen {
 
   /// Call refresh book mark in browser page
   void _onRefreshBookMarkBrowserPage() {
-    // _homeScreenObserver.emit(
-    //   emitParam: HomeScreenEmitParam(
-    //     event: HomeScreenObserver.onInAppBrowserRefreshBookMarkEvent,
-    //   ),
-    // );
+    _browserPageObserver.emit(
+      emitParam: const BrowserPageEmitParam(
+        event: BrowserPageObserver.onInAppBrowserRefreshBookMarkEvent,
+      ),
+    );
   }
 
   /// Call refresh tab in browser page
   void _onRefreshTabBrowserPage() {
-    // _homeScreenObserver.emit(
-    //   emitParam: HomeScreenEmitParam(
-    //     event: HomeScreenObserver.onInAppBrowserRefreshBrowserEvent,
-    //   ),
-    // );
+    _browserPageObserver.emit(
+      emitParam: const BrowserPageEmitParam(
+        event: BrowserPageObserver.onInAppBrowserRefreshBrowserEvent,
+      ),
+    );
   }
 
   @override
@@ -516,11 +476,7 @@ class _BrowserScreenState extends State<BrowserScreen> with StateFulBaseScreen {
           onNext: _onNextClick,
           onHomeClick: _onHomeClick,
           onAccountClick: (accounts, selectedAccount) {
-            // _showChoosingAccount(
-            //   appTheme,
-            //   accounts,
-            //   selectedAccount,
-            // );
+
           },
         )
       ],
